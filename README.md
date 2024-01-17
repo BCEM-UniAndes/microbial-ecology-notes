@@ -2,30 +2,21 @@
 
 Este repositorio contiene los talleres del curso de Ecología microbiana de la Universidad de los Andes. A continuación se describe el contenido de cada uno de los talleres.
 
-1. [Taller 1](#chapters/01-cli-dbs.qmd)
-2. [Taller2 ](#chapters)
-3. [Taller3 ](#chapters)
-4. [Taller4 ](#chapters)
-5. [Taller5 ](#chapters)
-6. [Taller6 ](#chapters)
-7. [Taller7 ](#chapters)
-8. [Taller8 ](#chapters)
+### [Taller 1](https://github.com/BCEM-UniAndes/microbial-ecology-notes/blob/main/chapters/01-cli-dbs.qmd): Introducción a la línea de comandos y bases de datos
 
-### Taller 1: Introducción a la línea de comandos y bases de datos
+### [Taller 2](https://github.com/BCEM-UniAndes/microbial-ecology-notes/blob/main/chapters/02-read-processing.qmd): Procesamiento de lecturas de secuenciación masiva
 
-### Taller 2: Procesamiento de lecturas de secuenciación masiva
+### [Taller 3](https://github.com/BCEM-UniAndes/microbial-ecology-notes/blob/main/chapters/03-qiime.qmd): Análisis de secuencias con QIIME2
 
-### Taller 3: Análisis de secuencias con QIIME2
+### [Taller 4](https://github.com/BCEM-UniAndes/microbial-ecology-notes/blob/main/chapters/04-diversity-analisis.qmd): Análisis de diversidad microbiana
 
-### Taller 4: Análisis de diversidad microbiana
+### [Taller 5](https://github.com/BCEM-UniAndes/microbial-ecology-notes/blob/main/chapters/05-taxa-assignment.qmd): Asignación taxonómica de secuencias
 
-### Taller 5: Asignación taxonómica de secuencias
+### [Taller 6](https://github.com/BCEM-UniAndes/microbial-ecology-notes/blob/main/chapters/06-mag-assembly.qmd): Ensamble y análisis de metagenomas
 
-### Taller 6: Ensamble y análisis de metagenomas
+### [Taller 7](https://github.com/BCEM-UniAndes/microbial-ecology-notes/blob/main/chapters/07-binning.qmd): Binning y análisis de MAGs
 
-### Taller 7: Binning y análisis de MAGs
-
-### Taller 8: Genómica comparativa de MAGs
+### [Taller 8](https://github.com/BCEM-UniAndes/microbial-ecology-notes/blob/main/chapters/08-comparative-genomics.qmd): Genómica comparativa de MAGs
 
 ## Instrucciones para visualizar los talleres
 
@@ -34,7 +25,7 @@ Para visualizar los talleres, se recomienda seguir los siguientes pasos:
 1. Clonar el repositorio en su computador personal. Para esto, abra una terminal y ejecute el siguiente comando:
 
 ```
-git clone
+gh repo clone BCEM-UniAndes/microbial-ecology-notes
 ```
 
 2. Instalar Quarto. Para esto, siga las instrucciones de instalación de [Quarto](https://quarto.org/docs/getting-started/installation.html)
