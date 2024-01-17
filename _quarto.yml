@@ -1,9 +1,15 @@
 project:
   type: book
+  output-dir: docs
 
 book:
   title: "Ecología Microbiana y Herramientas bioinformáticas"
-  author: "Norah Jones"
+  author: 
+    name: "[BCEM](https://bcem-uniandes.github.io/people.html)"
+    affiliation: "[Universidad de los Andes](https://uniandes.edu.co)"
+  sidebar:
+    style: floating
+  date-format: "YYYY-MM-DD"
   date: "2024-01-01"
   chapters:
     - index.qmd
@@ -19,11 +25,24 @@ book:
 
 bibliography: references.bib
 
+fig-align: center
+df-print: paged
+code-link: true
+code-annotations: select
+freeze: auto
+execute:
+  cache: true
+lang: es
+
 format:
   html:
     theme: cosmo
-  pdf:
-    documentclass: scrreprt
+    code-link: true
+    code-copy: hover
+    df-print: paged
+    fig-align: center
+    highlight-style: ayu
+    embed-resources: true
 
 
 
