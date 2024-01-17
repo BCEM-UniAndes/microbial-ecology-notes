@@ -1,1 +1,1 @@
-{"options":{"chapters":true},"entries":[{"order":{"section":[0,1,0,0,0,0,0],"number":1},"caption":"Ingreso al cluster Hypatia","key":"sec-clusterlogin"}],"headings":["introducción","sec-clusterlogin","instrucciones-para-entrega-de-talleres"]}
+{"entries":[{"caption":"Ingreso al cluster Hypatia","order":{"section":[0,1,0,0,0,0,0],"number":1},"key":"sec-clusterlogin"}],"options":{"chapters":true},"headings":["introducción","sec-clusterlogin","instrucciones-para-entrega-de-talleres"]}
