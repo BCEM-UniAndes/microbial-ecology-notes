@@ -21,7 +21,7 @@ Este repositorio contiene los talleres del curso de Ecología microbiana de la U
 ## Instrucciones para visualizar los talleres
 
 > [!IMPORTANT]
-> Actualmente este repostorio es privado en la organización BCEM-UniAndes. Una vez se active como publico, se podrá activar al mismo tiempo la opción de visualizar los talleres en la web usando *GitHub pages*. Mientras tanto, se recomienda seguir las instrucciones a continuación.
+> Actualmente este repositorio es privado en la organización BCEM-UniAndes. Una vez se active como público, se podrá activar al mismo tiempo la opción de visualizar los talleres en la web usando *GitHub pages*. Mientras tanto, se recomienda seguir las instrucciones a continuación.
 
 Para visualizar los talleres, se recomienda seguir los siguientes pasos:
 
