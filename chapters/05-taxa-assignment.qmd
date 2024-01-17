@@ -1,0 +1,100 @@
+# Asignación taxonómica {.unnumbered}
+
+MetaPhlAn (Metagenomic Phylogenetic Analysis) es una herramienta para perfilar la composición taxonómica de comunidades microbianas a partir de datos de metagenoma obtenidos por secuenciación tipo *shotgun*. Consulte el manual de la versión más reciente lo largo del taller. MetaPhlAn se basa en genes marcadores específicos de clado únicos identificados a partir de genomas de referencia, lo que permite más eficiencia de uso computacional y asignaciones taxonómicas inequívocas.
+
+Para este taller usaremos secuencias obtenidas del artículo *The Alterations of Vaginal Microbiome in HPV16 Infection as Identified by Shotgun Metagenomic Sequencing*.En este estudio se realizó un perfilamiento metagenómico mediante  *Whole Genome Shotgun* (WGS) de microbiota vaginal positiva y negativa para  el virus del papiloma humano (VPH). Por lo tanto, tendremos 3 muestras de microbiota VPH-negativo (N) y 3 muestras para VPH-positivo (INF).
+
+Las muestras fueron secuenciadas con el equipo HiSeq X Ten de Illumina. Son secuencias pareadas con estrategia WGS y son un submuestreo de 200000 lecturas por muestra. Los datos se encuentran en la carpeta `Taller5` de `datasets`. Cópielos a su directorio de grupo en un directorio de nombre `Taller5`. Cuidado *no copie la carpeta* `database`.
+
+::: {.callout-important appearance="simple"}
+Inicie la sesión interactiva con 16G de memoria. Esto es necesario para el uso de Metaphlan ya que necesita una alta cantidad de recursos.
+:::
+
+::: {.callout-tip appearance="simple"}
+Aplicar el análisis metagenómico con MetaPhlAn a muestras de microbiota y aprender a utilizar datos de secuenciación shotgun para perfilar la composición taxonómica de comunidades microbianas.Comprender los pasos y aprender a visualizar los datos de perfilado taxonómico.
+:::
+
+## I. Limpieza de secuencias
+
+1. Primero es necesario limpiar las lecturas, lo haremos usando primero FastQC y Trimmomatic como ya lo han usado anteriormente. Recuerden los ambientes que deben activar (en serie) para esos dos programas. Para ejecutar Trimmomatic use unos parámetros para el *sliding window* de 4:20, un *Headcrop* de 4 y un tamaño mínimo de secuencia de 50.
+
+2. En ambos casos adjunte los comandos usados y los pantallazos de los cambios en la calidad de las secuencias antes y después de la limpieza. También indique el porcentaje de secuencias que NO pasaron los filtros de la limpieza (puntaje 20/100)
+
+3. Repita el proceso para cada conjunto de archivos.
+
+## II. Creación de un perfil taxonómico
+
+MetaPhlAn acepta como entrada lecturas cortas de un solo experimento de secuenciación metagenómica tipo *shotgun* y genera la lista de microorganismos detectados y sus abundancias relativas. Además de esto, recibe lecturas pareadas y no pareadas
+
+Active el módulo de MetaPhlAn con el comando: `source activate mpa`, luego familiarícese con la ejecución de MetaPhlAn con el siguiente comando `metaphlan -h` (esto puede tardar un poco)
+
+4. Ejecute MetaPhlAn sobre cada par de archivos FASTQ limpios teniendo en cuenta que son archivos pareados.
+IMPORTANTE! Además de los comandos que indica el manual, es **obligatorio** poner los siguientes parámetros:
+
+```bash
+--index mpa_vJan21_CHOCOPhlAnSGB_202103
+--bowtie2db /hpcfs/home/cursos/bcom4102/Datasets/Taller_5/database/
+```
+
+Asegúrese de utilizar las siguientes opciones en la ejecución:
+
+- `--bt2_ps very-sensitive`: 
+- `--tax_lev 's'`
+- `--t  rel_ab`
+
+Pruebe con un archivo primero y asegúrese que corre bien y envíe el resto como un job de bash. Para la corrida de múltiples archivos,consulte este recurso de ayuda y modifíquelo para que incluya los parámetros especificados arriba.
+
+a. ¿Cuál fue el comando que ejecutó? Explíquelo. (puntaje 15/100)
+
+b. ¿Qué archivos de salida obtiene por muestra? Descríbalos. (puntaje 15/100)
+
+## III. Fusionar salidas de MetaPhlAn
+
+5. Para visualizar los resultados, primero necesita fusionar las diferentes salidas en un solo archivo, para esto use el comando merge_metaphlan_tables.py, un script de MetaPhlAn que creará una única tabla delimitada por tabuladores a partir de esos múltiples perfiles.
+
+```bash
+merge_metaphlan_tables.py profiled_metagenome.txt profiled_metagenome_2.txt -o merge.txt
+```
+6. Cree un mapa de calor con hclust2. Un mapa de calor es una forma de visualizar resultados tabulares de abundancia como los de MetaPhlAn. La herramienta de trazado que usaremos aquí es `hclust2`, sirve para mostrar cualquiera, algunos o todos los microorganismos o muestras en una tabla MetaPhlAn. (puntaje 30/100)
+
+Active el módulo de `haclust2` con el comando `source activate hclust2`
+
+a. Genere un mapa de calor para todas las muestras.
+
+b. Descargue la imagen a su máquina local y examínela.
+
+c. ¿Cuántos y cuáles genomas diferentes se encontraron en las muestras? Adjunte la imagen del PDF.
+
+d. Discuta qué similitudes y/o diferencias encuentra entre las dos clases de microbiota vaginal.
+
+## IV. Otras visualizaciones
+
+Es posible crear otras visualizaciones usando *pie charts*, puede hacerlo usando la herramienta Krona.
+
+7. Utilice el script metaphlan2krona.py para convertir el archivo de salida de perfil de MetaPhlAn a Krona.
+
+8. Para construir el gráfico circular, use las herramientas de Krona, en particular ktImportText sobre el archivo que acaba de convertir. (puntaje 10/100)
+
+a. Descargue y explore los resultados con un navegador.
+
+b. ¿Qué comando usó para generar el gráfico?
+
+c. Adjunte el pantallazo de la imagen generada en el html.
+
+d. ¿Qué ventaja observa de usar este tipo de imágenes?
+
+9. Para ver un gráfico de Krona con todos los niveles taxonómicos, puede volver a ejecutar el comando MetaPhlAn sin necesidad de ejecutar `bowtie` nuevamente para esto es importante modificar los siguientes parámteros:
+
+- `tax_lev 'a'`
+- `input_type bowtie2out`
+
+No es necesario darle los parámetros específicos de `bowtie`, pero en este caso el archivo de entrada es el que guardaron como archivo de salida de `bowtie` la primera vez que lo corrieron.
+Ejecute con la nueva salida los comandos `metaphlan2krona.py` y `ktImportText` (puntaje 10/100)
+
+a. Descargue y explore los resultados con un navegador.
+
+b. ¿Qué comandos usó para generar este gráfico?
+
+c. Adjunte el pantallazo de la imagen generada en html.
+
+d. ¿Qué ventaja observa al usar todos los niveles taxonómicos?

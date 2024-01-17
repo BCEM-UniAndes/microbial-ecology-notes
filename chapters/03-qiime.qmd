@@ -1,0 +1,123 @@
+
+# Análisis de ASVs con QIIME2 {.unnumbered}
+
+El análisis microbiano centrado en amplicones ha sido extensivamente usado en la comprensión de la diversidad microbiana en entornos ambientales. En este contexto, un elemento crucial es el *Amplicon Sequence Variant* (ASV), considerado una entidad única en la secuenciación de amplicones, superando en especificidad a la convencional *Operative Taxonomic Unit* (OTU).
+
+Un proceso fundamental en este ámbito es la derreplicación, que implica la identificación y preservación de secuencias únicas durante el análisis, evitando repeticiones al eliminar copias idénticas. Este procedimiento eleva la precisión al describir la diversidad microbiana.
+
+La relevancia de la derreplicación radica en su capacidad para mitigar sesgos en la estimación de la diversidad y abundancia, proporcionando así una representación más precisa de la comunidad microbiana. En el campo de la ecología microbiana, la derreplicación se convierte en un componente crucial al reducir la sobreestimación de la diversidad, permitiendo interpretaciones más exactas sobre la estructura y composición de las comunidades microbianas. A lo largo de este taller, exploraremos cómo la derreplicación y otros procesos en QIIME2 contribuyen a la comprensión de la ecología microbiana a partir de datos de secuenciación de amplicones.
+
+:::{.callout-tip appearance="simple"}
+## Objetivos
+
+Conocer la metodología para importar datos y crear artefactos, integrar archivos *manifest* y *metadata* de manera efectiva, generar Amplicon Sequence Variants (ASVs) utilizando DADA2 con derreplicación y corrección de errores, explorar archivos de salida para obtener frecuencias de ASVs, construir árboles filogenéticos mediante la metodología de *insertion placement*
+:::
+
+## I. Preparación del ambiente de trabajo
+
+1. Ingrese a la cuenta del clúster.
+
+2. En su directorio, cree un nuevo directorio y nómbrelo `Taller3_Qiime2`.
+
+3. Copie todo el directorio `Taller_3` a su directorio `Taller3_qiime2`. La siguiente es la ruta donde encuentran el archivo a copiar: `/hpcfs/home/cursos/bcom4102/Datasets/Taller3/`
+
+4. Inicie una sesión interactiva preferiblemente con 10G de memoria y al menos 4 cpus per task.
+
+5. Cargue el módulo de QIIME2 disponible en el clúster.
+
+:::{.callout-important appearance="simple"}
+Qiime2 es un programa con mucho apoyo de los desarrolladores, muchas personas lo usan y cuando surgen errores estos se han reportado y solucionado en su [foro](https://forum.qiime2.org/). Si tienen problemas esta es su principal herramienta para solucionarlos, aun así, si el problema persiste pueden consultarlo con los monitores.
+:::
+
+# II. Importar datos a QIIME2
+
+6. Primero visualice aquellos archivos que no son secuencias, verá dos, un manifest y un metadata, como podrá observar el *manifest file* contiene la ruta absoluta de donde están los archivos, es necesario que modifique la ruta allí puesta de tal manera que sea la ruta de su carpeta (anexe imagen de la modificación), esto es
+necesario para poder importar los archivos a qiime2.
+
+7. En este paso, tomaremos el directorio que tiene exclusivamente las secuencias,Data/, primero observe los archivos y diga si son secuencias no pareadas o pareadas (esto es importante ya que Qiime2 trabaja con muchos formatos diferentes), después va a convertirlo al formato con el que trabaja `QIIME2(.qza)` *qiime ziped artifact* o artefacto de Qiime.
+
+```bash
+qiime tools import\
+    --type 'SampleData[SequencesWithQuality]'\
+    --input-path manifest-16s.csv\
+    --output-path\
+    --input-format SingleEndFastqManifestPhred33
+```
+
+7. Ahora crearemos un archivo de visualización, correspondiente a los datos
+importados.
+
+```bash
+qiime demux summarize\
+    --i-data 16s-data.qza\
+    --o-visualization summ-16s.qzv
+```
+8. Al descargar este artefacto visualizable usted puede ir al [modulo web de visualización](https://view.qiime2.org/) y si arrastra su archivo hasta allí podrá visualizar la información que contiene.
+
+→ Para entregar:
+
+- Con la información dada por el summary, reporte las muestras con mayor y menor número de secuencias respectivamente, así como número de secuencias promedio.
+
+- Describa las variables presentes en el metadata file
+
+- Revise el *mapping file* y describa qué variables se pueden utilizar para posteriores análisis que impliquen clusterizar los datos por categorías presentes en su metadata.
+
+## III. Generación de ASVs
+
+9. En este paso se realiza simultáneamente la derreplicación, el denoising y la generación de las ASVs. Esto se puede realizar con DADA2 en su modo de single end:
+
+```bash
+qiime dada2 denoise-single --i-demultiplexed-seqs 16s-data.qza\
+    --p-trunc-len X\
+    --p-trim-left X\
+    --o-table 16s-feat-table.qza --o-representative-sequences 16s-rep-seqs.qza\
+    --o-denoising-stats 16s-dada2-stats.qza\
+```
+
+:::{.callout-important appearance="simple"}
+usted deberá seleccionar los valores para las opciones `--p-trunc-len-f` y `--p-trunc-len-R` con base en la información disponible en la visualización de los datos importados en la pestaña de *interactive quality plot* esto se parece a algo que ya han visto antes.
+:::
+
+10. Ahora convertiremos la tabla y las estadísticas a archivos visualizables.
+
+```bash
+qiime feature-table summarize\
+    --i-table 16s-feat-table.qza\
+    --o-visualization 16s-feat-table.qzv\
+    --m-sample-metadata-file metadata-Taller3.tsv
+```
+
+```bash
+qiime metadata tabulate\
+    --m-input-file 16s-dada2-stats.qza\
+    --o-visualization 16s-dada2-stats.qzv
+```
+
+→ Para entregar:
+
+- Explique la función de los flags: `--p-trunc-len` y `--p-trim-left`. Averigüe por qué se consideran como requeridos para DADA2.
+
+- Proporcione los valores que utilizó para el proceso y la razón por la cual
+los escogió.
+
+- Visualice el archivo de estadísticas de DADA2 y describa qué filtro se hace en cada uno de los pasos del proceso.
+
+- Indique el número de features totales que obtuvo después del proceso y para que los podrá utilizar más adelante.
+
+## IV. Generación del árbol filogenético
+
+11. Con el fin de realizar métricas de diversidad filogenéticas, es necesario
+construir primero el árbol filogenético.
+
+```bash
+qiime phylogeny align-to-tree-mafft-fasttree\
+    --i-sequences 16s-feat-table.qza\
+    --o-alignment 16s-aligned-reps.qza\
+    --o-masked-alignment\
+    --o-tree 16s-unrooted-tree.qza\
+    --o-rooted-tree 16s-rooted-tree.qza
+```
+
+→ Para entregar:
+• Describa que representan estos tipos de árboles y que los diferencian
+• Además explique la diferencia entre metadata y manifest files.

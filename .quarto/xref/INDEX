@@ -1,0 +1,41 @@
+{
+  "intro.qmd": {
+    "intro.html": "e7ec851a"
+  },
+  "index.qmd": {
+    "index.html": "e90537f8"
+  },
+  "summary.qmd": {
+    "summary.html": "2cbb8b42"
+  },
+  "references.qmd": {
+    "references.html": "22fc9857"
+  },
+  "chapters/01-cli-dbs.qmd": {
+    "01-cli-dbs.html": "07a8c2ef"
+  },
+  "chapters/02-read-preprocessing.qmd": {
+    "02-read-preprocessing.html": "719c8be5"
+  },
+  "chapters/02-read-processing.qmd": {
+    "02-read-processing.html": "e614978c"
+  },
+  "chapters/03-qiime.qmd": {
+    "03-qiime.html": "9708b0c8"
+  },
+  "chapters/04-diversity-analisis.qmd": {
+    "04-diversity-analisis.html": "c0e92198"
+  },
+  "chapters/05-taxa-assignment.qmd": {
+    "05-taxa-assignment.html": "52d4aed2"
+  },
+  "chapters/06-mag-assembly.qmd": {
+    "06-mag-assembly.html": "64749dfd"
+  },
+  "chapters/07-binning.qmd": {
+    "07-binning.html": "c03d6b19"
+  },
+  "chapters/08-comparative-genomics.qmd": {
+    "08-comparative-genomics.html": "734096ef"
+  }
+}

@@ -1,0 +1,29 @@
+project:
+  type: book
+
+book:
+  title: "Ecología Microbiana y Herramientas bioinformáticas"
+  author: "Norah Jones"
+  date: "2024-01-01"
+  chapters:
+    - index.qmd
+    - chapters/01-cli-dbs.qmd
+    - chapters/02-read-processing.qmd
+    - chapters/03-qiime.qmd
+    - chapters/04-diversity-analisis.qmd
+    - chapters/05-taxa-assignment.qmd
+    - chapters/06-mag-assembly.qmd
+    - chapters/07-binning.qmd
+    - chapters/08-comparative-genomics.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+
+

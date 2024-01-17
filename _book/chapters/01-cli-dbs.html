@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.543">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Ecología Microbiana y Herramientas bioinformáticas - Bases de datos y la terminal</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/02-read-processing.html" rel="next">
+<link href="../index.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/01-cli-dbs.html">Bases de datos y la terminal</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Ecología Microbiana y Herramientas bioinformáticas</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introducción</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/01-cli-dbs.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Bases de datos y la terminal</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/02-read-processing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preprocesamiento de lecturas</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/03-qiime.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Análisis de ASVs con QIIME2</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/04-diversity-analisis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Análisis de diversidad</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/05-taxa-assignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Asignación taxonómica</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/06-mag-assembly.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Análisis de MAGs</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/07-binning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Binning de metagenomas</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/08-comparative-genomics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Genómica comparativa</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#i.-búsqueda-en-bases-de-datos" id="toc-i.-búsqueda-en-bases-de-datos" class="nav-link active" data-scroll-target="#i.-búsqueda-en-bases-de-datos">I. Búsqueda en bases de datos</a></li>
+  <li><a href="#ii.-comandos-básicos-en-unix" id="toc-ii.-comandos-básicos-en-unix" class="nav-link" data-scroll-target="#ii.-comandos-básicos-en-unix">II. Comandos básicos en Unix</a></li>
+  <li><a href="#iii.-ejecutando-un-script-en-el-cluster" id="toc-iii.-ejecutando-un-script-en-el-cluster" class="nav-link" data-scroll-target="#iii.-ejecutando-un-script-en-el-cluster">III. Ejecutando un <em>script</em> en el cluster</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Bases de datos y la terminal</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>En el campo de la Ecología Microbiana, el acceso a bases de datos y el uso de la línea de comandos son habilidades fundamentales para realizar análisis e investigaciones. En este capítulo, exploraremos cómo realizar búsquedas en bases de datos como las del NCBI y EBI, así como el uso de comandos en la terminal del sistema operativo Unix.</p>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Objetivos
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Repasar comandos para realizar búsqueda en bases de datos como las del NCBI y EBI en búsquedas de utilidad en el contexto de análisis en Ecología Microbiana, así como también el uso de la línea de comandos en el sistema operativo Unix, combinando conceptos tanto informáticos como biológicos vistos en clase hasta ahora.</p>
+</div>
+</div>
+<section id="i.-búsqueda-en-bases-de-datos" class="level2">
+<h2 class="anchored" data-anchor-id="i.-búsqueda-en-bases-de-datos">I. Búsqueda en bases de datos</h2>
+<p>En primer lugar, realizaremos una búsqueda de literatura en la base de datos del NCBI a través de <a href="https://pubmed.ncbi.nlm.nih.gov/">PubMed</a>. Esta búsqueda nos permitirá obtener artículos relevantes relacionados con nuestro tema de interés en Ecología Microbiana.</p>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Especifique como realizó la búsqueda para cada punto. Solo si es necesario, adjunte pantallazos que acompañen la búsqueda.</p>
+</div>
+</div>
+</div>
+<ol type="1">
+<li><p>Busque artículos con Guankui Du como autor. ¿Cuántos encuentra?</p></li>
+<li><p>Ahora busque artículos por Guankui Du y Li Ying , cuantos obtiene?</p></li>
+<li><p>Seleccione el artículo <em>Effects of cat ownership on the gut microbiota of owners</em></p></li>
+<li><p>¿Cuantos individuos se analizaron en ese estudio?</p></li>
+<li><p>En Información relacionada, buscar <em>Data Availability</em>. ¿Cuál es el número de acceso de este proyecto? ¿A qué proyecto pertenecen los datos?</p></li>
+<li><p>¿Cuántas entradas hay en SRA?</p></li>
+<li><p>¿A que corresponden los datos que están en SRA?</p></li>
+<li><p>Busque el sample id ERR1072659. A que tipo de estrategia de secuenciación corresponde? ¿Qué instrumento se usó para generar estos datos? ¿Cuantas corridas hacen parte de este experimento? ¿Y cuantas secuencias en total se generaron?</p></li>
+<li><p>Si entra a la corrida ERR1072659 en la sección de análisis que información le da? Cuál es el phylum bacteriano más abundante?</p></li>
+<li><p>Que información le da la sección <em>reads</em> y la sección <em>Data Access</em>? En el <a href="http://europepmc.org/">EBI</a></p></li>
+<li><p>Realice la misma búsqueda de artículos escritos por Guankui Du y Li Ying entre 2017 y 2023. De esta búsqueda: ¿Cuantos resultados da? ¿Son los mismos?</p></li>
+<li><p>Seleccione nuevamente el mismo artículo. ¿Cuántas citas obtiene? De un pantallazo de las citas en función del tiempo. ¿Si es diferente a los resultados del NCBI a que cree que se debe la diferencia?</p></li>
+<li><p>En la sección de datos hay vínculos nuevamente a Bio-estudios, secuencias de nucleótidos y Magnify. ¿A que corresponde y a donde los lleva cada uno de estos links?</p></li>
+<li><p>Al entrar a <a href="https://www.ebi.ac.uk/metagenomics/search/studies">Magnify</a> ¿qué información pueden encontrar en esta base de datos? Con el número de accesión PRJEB11419 ¿a qué información puede acceder en los links correspondientes? (de ser necesario espere un poco a que cargue la información)</p></li>
+<li><p>En el link de nucleótidos que lleva al ENA, hay referencia a un estudio. El <em>Accession number</em> de este estudio es el mismo encontrado en el NCBI? ¿A dónde lleva ese vínculo?</p></li>
+<li><p>¿Es posible encontrar las mismas corridas? ¿El mismo experimento? ¿Como se reconocen los códigos de acceso de las corridas o los experimentos? ¿Permite ver los análisis o descargar los datos?</p></li>
+<li><p>En el link a <a href="https://www.ebi.ac.uk/metagenomics/search/studies">Magnify</a> ¿cuantos análisis están disponibles para este estudio? ¿Corresponden a los datos de secuenciación del gen 16S? o a <em>shotgun metagenomics</em>?</p></li>
+<li><p>Entrando al primer análisis, correspondiente al ERS1265399 (MGYA00608637). ¿Qué información le da cada una de las diferentes pestañas siguientes pestañas: <em>Quality Control, Taxonomic analysis, Functional analysis, Download</em>?.</p></li>
+<li><p>¿Considera más útiles los resultados obtenidos con el NCBI o con el EBI? Explique.</p></li>
+</ol>
+</section>
+<section id="ii.-comandos-básicos-en-unix" class="level2">
+<h2 class="anchored" data-anchor-id="ii.-comandos-básicos-en-unix">II. Comandos básicos en Unix</h2>
+<p>Inicie una sesión en el cluster vía <code>ssh</code> como se muestra en la introducción a los talleres.</p>
+<ol type="1">
+<li><p>Para guardar tanto los comandos que ejecuta como los resultados use el comando script (e.j. <code>script Resultados_Taller1_grupo01.txt</code>).</p></li>
+<li><p>Identifique en qué directorio y cuál es el path completo de donde se encuentra al iniciar la conexión.</p></li>
+<li><p>Liste los contenidos en el directorio actual.</p></li>
+<li><p>Cree su directorio de grupo con el nombre ejemplo: <code>Grupo_01</code></p></li>
+<li><p>Cambie de posición y entre al directorio de su grupo que acaba de crear. 6. ¿A dónde lo lleva el comando <code>cd ~</code> y el comando <code>cd ..</code>? Vuelva al directorio del grupo que creó.</p></li>
+<li><p>Cree un subdirectorio (en su directorio de grupo), llámelo <code>Taller_1</code> y muévase a ese subdirectorio.</p></li>
+<li><p>Liste los contenidos en el directorio <code>Datasets</code> usando la ruta relativa.</p></li>
+<li><p>Del directorio <code>Datasets/Taller_2</code> copie el archivo comprimido llamado <code>unix_class_file_samples.zip</code> al directorio en el que se encuentra en este momento.</p></li>
+<li><p>Liste los archivos en el directorio actual de modo que pueda observar los permisos de lectura, escritura y ejecución del mismo, la fecha, y el tamaño. ¿Qué tamaño tiene este archivo comprimido?</p></li>
+<li><p>Cámbiele el nombre al archivo que copió, de modo que el nuevo nombre sea <code>files-[GrupoX].zip</code>.</p></li>
+<li><p>Descomprima los archivos y revise nuevamente qué tamaño ocupan. ¿Hay algún archivo ejecutable?</p></li>
+<li><p>Visualice cada uno de los archivos descomprimidos, ¿reconoce los formatos en los que se encuentran? ¿qué le indican las extensiones? Describa a qué corresponde cada formato.</p></li>
+<li><p>Busque la expresión <code>product=16S ribosomal RNA</code> en el archivo <code>GCF_000005845.2_ASM584v2_genomic.gff</code> con el comando <code>grep</code>. ¿Cuántas copias encuentra? ¿A qué se debe?</p></li>
+</ol>
+</section>
+<section id="iii.-ejecutando-un-script-en-el-cluster" class="level2">
+<h2 class="anchored" data-anchor-id="iii.-ejecutando-un-script-en-el-cluster">III. Ejecutando un <em>script</em> en el cluster</h2>
+<p>Consulte la documentación de Hypatia en la ruta: <code>/hpcfs/shared/README/</code>. Lea, en su orden, los siguientes archivos: a. readme.txt</p>
+<ol start="2" type="a">
+<li><code>srun.txt</code></li>
+<li><code>partitions.txt</code></li>
+<li><code>testjob.sh</code></li>
+</ol>
+<!-- -->
+<ol type="1">
+<li>De acuerdo a su lectura, responda a las siguientes preguntas:</li>
+</ol>
+<ul>
+<li><p>¿Qué es SLURM, para que se usa y por qué es importante? Explore en línea cuáles son los comandos básicos para utilizar bajo este sistema. ¿Para qué se utilizan <code>sbatch</code>, <code>srun</code>, <code>scancel</code>, y <code>squeue</code>? También puede usar el comando man para determinar qué hacen y qué argumentos toman estos y otros comandos.</p></li>
+<li><p>Después de consultar los contenidos del archivo <code>srun.txt</code> en <code>/hpcfs/shared/README/</code>, explique cómo se especifican los recursos requeridos en una sesión interactiva. ¿Para qué sirve modificar estos valores de los argumentos?</p></li>
+<li><p>¿Qué particiones existen y qué límites de tiempo y capacidad de memoria RAM tiene cada una? ¿Para una corrida de prueba, qué partición usaría?</p></li>
+<li><p>Use el archivo <code>testjob.sh</code> que ya se encuentra en su directorio de grupo. ¿Qué parámetros de solicitud de recursos puede modificar?</p></li>
+</ul>
+<ol start="2" type="1">
+<li><p>Inicie un nodo interactivo (<code>srun --pty bash</code>) y asegúrese de estar en el subdirectorio <code>Taller01</code> del grupo que creó.</p></li>
+<li><p>Liste los módulos existentes en Hypatia y los que tiene cargados en este momento.</p></li>
+<li><p>Va a correr un <em>script</em> utilizando bash. Pero primero, identifique si bash está dentro de su <code>PATH</code> de ejecución. ¿Cómo lo hace?</p></li>
+<li><p>Verifique la dirección donde se encuentra bash con el commando <code>which</code>.</p></li>
+<li><p>Cambie los permisos del archivo (<code>testjob.sh</code>) para que sean ejecutables por el dueño del archivo pero no por el grupo.</p></li>
+<li><p>Ahora sí ejecute el script, ¿qué aparece impreso en la terminal? Consulte qué es <em>standard output</em> y el <em>standard error</em> en el contexto de ejecución de un programa.</p></li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../index.html" class="pagination-link  aria-label=" introducción"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Introducción</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/02-read-processing.html" class="pagination-link" aria-label="Preprocesamiento de lecturas">
+        <span class="nav-page-text">Preprocesamiento de lecturas</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

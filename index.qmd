@@ -1,0 +1,57 @@
+# Introducción {.unnumbered}
+
+En esta serie de talleres del curso de Ecología microbiana y Herramientas bioinformáticas exploraremos el uso de herramientas computacionales para el análisis de datos de secuenciación masiva. Abordaremos el uso de la línea de comando para realizar tareas de procesamiento y análisis de datos en bioinformática. Aprenderemos a utilizar comandos y herramientas esenciales para manipular archivos, ejecutar análisis de diversidad y realizar ensamblaje de metagenomas.
+
+En particular, nos adentraremos en el uso de QIIME (Quantitative Insights Into Microbial Ecology) para el análisis de datos de ecología microbiana, específicamente en el contexto del metabarcoding. Aprenderemos a realizar análisis de diversidad, identificación taxonómica y visualización de resultados utilizando esta poderosa herramienta.
+
+Por último, exploraremos el análisis de metagenomas y el ensamblaje de genomas metagenómicos (MAGs). Utilizaremos herramientas bioinformáticas especializadas para realizar el ensamblaje de secuencias metagenómicas y analizaremos la diversidad y funcionalidad de los microorganismos presentes en las muestras.
+
+¡Estos talleres te brindarán las habilidades necesarias para realizar análisis avanzados de datos de secuenciación masiva y comprender la diversidad microbiana en diferentes entornos!
+En la ecología microbiana, el análisis de datos de secuenciación masiva es fundamental para comprender la diversidad y función de los microorganismos en diferentes entornos. Además de utilizar herramientas de línea de comando para el procesamiento y análisis de datos, también es común realizar búsquedas en bases de datos para obtener información adicional sobre las secuencias obtenidas.
+
+Existen diversas bases de datos disponibles para la ecología microbiana, como la base de datos de secuencias del genoma completo NCBI RefSeq, la base de datos de secuencias ribosomales SILVA y la base de datos de secuencias de genes funcionales UniProt. Estas bases de datos contienen información sobre secuencias de ADN, ARN y proteínas de diferentes microorganismos.
+
+Para realizar búsquedas en estas bases de datos, se pueden utilizar herramientas como BLAST (Basic Local Alignment Search Tool) y HMMER (Hidden Markov Model based on profile search). Estas herramientas permiten comparar secuencias de interés con las secuencias almacenadas en las bases de datos y encontrar similitudes o identificar funciones específicas.
+
+El análisis de datos de secuenciación masiva en ecología microbiana tiene diversas aplicaciones. Algunas de ellas incluyen:
+
+1. Estudio de la diversidad microbiana: El análisis de datos de secuenciación masiva permite identificar y cuantificar la diversidad de microorganismos presentes en muestras ambientales, como suelos, aguas y sedimentos. Esto proporciona información sobre la composición de las comunidades microbianas y su distribución en diferentes hábitats.
+
+2. Análisis de interacciones microbianas: El estudio de las interacciones entre microorganismos es fundamental para comprender las relaciones ecológicas en los ecosistemas. El análisis de datos de secuenciación masiva puede revelar las interacciones entre diferentes especies microbianas, como la co-ocurrencia o la competencia, a través de la correlación de abundancias y la construcción de redes de co-ocurrencia.
+
+3. Funcionalidad microbiana: El análisis de datos de secuenciación masiva también permite investigar las funciones metabólicas de los microorganismos en los ecosistemas. Mediante la identificación de genes funcionales y vías metabólicas, es posible inferir las capacidades metabólicas de las comunidades microbianas y su contribución a los ciclos biogeoquímicos.
+
+En resumen, el análisis de datos de secuenciación masiva en ecología microbiana, combinado con la búsqueda de bases de datos y el uso de herramientas de línea de comando, proporciona una visión detallada de la diversidad y función de los microorganismos en diferentes entornos, lo que contribuye a nuestro conocimiento sobre los ecosistemas y su funcionamiento.
+
+## Ingreso al cluster Hypatia {#sec-clusterlogin}
+
+Para ingresar al cluster de computo de alto rendimiento de la universidad solo es necesario usar un protocolo de seguridad simple en el *Shell*. Esto consiste esencialmente en usar el comando `ssh` junto con el usuario y contraseña de la cuenta del curso. Para el curso tenemos la cuenta `bcom4102`, de este modo la dirección completa es **bcom4102@hypatia.uniandes.edu.co** y para ingresar entonces usamos el siguiente comando en cualquier terminal:
+
+```bash
+ssh bcom4102@hypatia.uniandes.edu.co
+```
+
+Al ejecutar este comando nos pedirá registrar un llave (*key*) de acceso e ingresar la contraseña seguidamente (esta se proveerá al inicio de la clase). Ahora aterrizamos en el nodo central del cluster. Recuerde que también existen interfaces gráficas para ingresar a una terminal como por ejemplo [PuTTY](https://www.putty.org/) para Windows o [MoBaXterm](https://mobaxterm.mobatek.net/download.html) para Linux y Mac.
+
+::: {.callout-important appearance="simple"}
+En esta practica algunos trabajos se realizaran de manera interactiva en el cluster, por lo que es importante que ejecutar cualquier comando en el nodo central del cluster, use en en su lugar un nodo interactivo. Para esto simplemente debe correr el siguiente comando:
+
+```bash
+srun --pty bash
+```
+
+Si quieres ser más especifico al pedir recursos puedes usar las siguientes opciones en el comando: `srun --pty -p <partition> -N <nodes> -n <tasks> -t <time> --mem=<XG> bash`
+
+:::
+
+## Instrucciones para entrega de talleres
+
+El taller resuelto debe mostrar el soporte de los comandos que ejecutaron y sus salidas correspondientes.
+
+El archivo de entrega debe ser en formato PDF y estar titulado con el número del taller y el grupo, (e.g. `taller01-grupo01.pdf`).
+
+Con respecto a la notación para los bloques de código en el documento, se recomienda usar una fuente monoespaciada, como *Console* o *Courier*. Sin embargo, una manera más sencilla y estética de generar PDF con bloques de código es usando *Markdown* y luego compilar (guardar) como PDF.
+
+::: {.callout-important appearance="simple"}
+De no seguir estas instrucciones se les bajará una unidad en el taller. (El uso de *Markdown* es opcional, pero la entrega en PDF es obligatoria).
+:::
