@@ -92,9 +92,8 @@ b.  `srun.txt`
 c.  `partitions.txt`
 d.  `testjob.sh`
 
-```{=html}
 <!-- -->
-```
+
 1.  De acuerdo a su lectura, responda a las siguientes preguntas:
 
 -   ¿Qué es SLURM, para que se usa y por qué es importante? Explore en línea cuáles son los comandos básicos para utilizar bajo este sistema. ¿Para qué se utilizan `sbatch`, `srun`, `scancel`, y `squeue`? También puede usar el comando man para determinar qué hacen y qué argumentos toman estos y otros comandos.
