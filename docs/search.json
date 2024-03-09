@@ -30,343 +30,43 @@
     ]
   },
   {
-    "objectID": "chapters/01-cli-dbs.html",
-    "href": "chapters/01-cli-dbs.html",
-    "title": "Bases de datos y la terminal",
-    "section": "",
-    "text": "I. Búsqueda en bases de datos\nEn primer lugar, realizaremos una búsqueda de literatura en la base de datos del NCBI a través de PubMed. Esta búsqueda nos permitirá obtener artículos relevantes relacionados con nuestro tema de interés en Ecología Microbiana.",
-    "crumbs": [
-      "Bases de datos y la terminal"
-    ]
-  },
-  {
-    "objectID": "chapters/01-cli-dbs.html#i.-búsqueda-en-bases-de-datos",
-    "href": "chapters/01-cli-dbs.html#i.-búsqueda-en-bases-de-datos",
-    "title": "Bases de datos y la terminal",
-    "section": "",
-    "text": "Especifique como realizó la búsqueda para cada punto. Solo si es necesario, adjunte pantallazos que acompañen la búsqueda.\n\n\n\n\nBusque artículos con Guankui Du como autor. ¿Cuántos encuentra?\nAhora busque artículos por Guankui Du y Li Ying , cuantos obtiene?\nSeleccione el artículo Effects of cat ownership on the gut microbiota of owners\n¿Cuantos individuos se analizaron en ese estudio?\nEn Información relacionada, buscar Data Availability. ¿Cuál es el número de acceso de este proyecto? ¿A qué proyecto pertenecen los datos?\n¿Cuántas entradas hay en SRA?\n¿A que corresponden los datos que están en SRA?\nBusque el sample id ERR1072659. A que tipo de estrategia de secuenciación corresponde? ¿Qué instrumento se usó para generar estos datos? ¿Cuantas corridas hacen parte de este experimento? ¿Y cuantas secuencias en total se generaron?\nSi entra a la corrida ERR1072659 en la sección de análisis que información le da? Cuál es el phylum bacteriano más abundante?\nQue información le da la sección reads y la sección Data Access? En el EBI\nRealice la misma búsqueda de artículos escritos por Guankui Du y Li Ying entre 2017 y 2023. De esta búsqueda: ¿Cuantos resultados da? ¿Son los mismos?\nSeleccione nuevamente el mismo artículo. ¿Cuántas citas obtiene? De un pantallazo de las citas en función del tiempo. ¿Si es diferente a los resultados del NCBI a que cree que se debe la diferencia?\nEn la sección de datos hay vínculos nuevamente a Bio-estudios, secuencias de nucleótidos y Magnify. ¿A que corresponde y a donde los lleva cada uno de estos links?\nAl entrar a Magnify ¿qué información pueden encontrar en esta base de datos? Con el número de accesión PRJEB11419 ¿a qué información puede acceder en los links correspondientes? (de ser necesario espere un poco a que cargue la información)\nEn el link de nucleótidos que lleva al ENA, hay referencia a un estudio. El Accession number de este estudio es el mismo encontrado en el NCBI? ¿A dónde lleva ese vínculo?\n¿Es posible encontrar las mismas corridas? ¿El mismo experimento? ¿Como se reconocen los códigos de acceso de las corridas o los experimentos? ¿Permite ver los análisis o descargar los datos?\nEn el link a Magnify ¿cuantos análisis están disponibles para este estudio? ¿Corresponden a los datos de secuenciación del gen 16S? o a shotgun metagenomics?\nEntrando al primer análisis, correspondiente al ERS1265399 (MGYA00608637). ¿Qué información le da cada una de las diferentes pestañas siguientes pestañas: Quality Control, Taxonomic analysis, Functional analysis, Download?.\n¿Considera más útiles los resultados obtenidos con el NCBI o con el EBI? Explique.",
-    "crumbs": [
-      "Bases de datos y la terminal"
-    ]
-  },
-  {
-    "objectID": "chapters/01-cli-dbs.html#ii.-comandos-básicos-en-unix",
-    "href": "chapters/01-cli-dbs.html#ii.-comandos-básicos-en-unix",
-    "title": "Bases de datos y la terminal",
-    "section": "II. Comandos básicos en Unix",
-    "text": "II. Comandos básicos en Unix\nInicie una sesión en el cluster vía ssh como se muestra en la introducción a los talleres.\n\nPara guardar tanto los comandos que ejecuta como los resultados use el comando script (e.j. script Resultados_Taller1_grupo01.txt).\nIdentifique en qué directorio y cuál es el path completo de donde se encuentra al iniciar la conexión.\nListe los contenidos en el directorio actual.\nCree su directorio de grupo con el nombre ejemplo: Grupo_01\nCambie de posición y entre al directorio de su grupo que acaba de crear. 6. ¿A dónde lo lleva el comando cd ~ y el comando cd ..? Vuelva al directorio del grupo que creó.\nCree un subdirectorio (en su directorio de grupo), llámelo Taller_1 y muévase a ese subdirectorio.\nListe los contenidos en el directorio Datasets usando la ruta relativa.\nDel directorio Datasets/Taller_2 copie el archivo comprimido llamado unix_class_file_samples.zip al directorio en el que se encuentra en este momento.\nListe los archivos en el directorio actual de modo que pueda observar los permisos de lectura, escritura y ejecución del mismo, la fecha, y el tamaño. ¿Qué tamaño tiene este archivo comprimido?\nCámbiele el nombre al archivo que copió, de modo que el nuevo nombre sea files-[GrupoX].zip.\nDescomprima los archivos y revise nuevamente qué tamaño ocupan. ¿Hay algún archivo ejecutable?\nVisualice cada uno de los archivos descomprimidos, ¿reconoce los formatos en los que se encuentran? ¿qué le indican las extensiones? Describa a qué corresponde cada formato.\nBusque la expresión product=16S ribosomal RNA en el archivo GCF_000005845.2_ASM584v2_genomic.gff con el comando grep. ¿Cuántas copias encuentra? ¿A qué se debe?",
-    "crumbs": [
-      "Bases de datos y la terminal"
-    ]
-  },
-  {
-    "objectID": "chapters/01-cli-dbs.html#iii.-ejecutando-un-script-en-el-cluster",
-    "href": "chapters/01-cli-dbs.html#iii.-ejecutando-un-script-en-el-cluster",
-    "title": "Bases de datos y la terminal",
-    "section": "III. Ejecutando un script en el cluster",
-    "text": "III. Ejecutando un script en el cluster\nConsulte la documentación de Hypatia en la ruta: /hpcfs/shared/README/. Lea, en su orden, los siguientes archivos: a. readme.txt\n\nsrun.txt\npartitions.txt\ntestjob.sh\n\n\n\nDe acuerdo a su lectura, responda a las siguientes preguntas:\n\n\n¿Qué es SLURM, para que se usa y por qué es importante? Explore en línea cuáles son los comandos básicos para utilizar bajo este sistema. ¿Para qué se utilizan sbatch, srun, scancel, y squeue? También puede usar el comando man para determinar qué hacen y qué argumentos toman estos y otros comandos.\nDespués de consultar los contenidos del archivo srun.txt en /hpcfs/shared/README/, explique cómo se especifican los recursos requeridos en una sesión interactiva. ¿Para qué sirve modificar estos valores de los argumentos?\n¿Qué particiones existen y qué límites de tiempo y capacidad de memoria RAM tiene cada una? ¿Para una corrida de prueba, qué partición usaría?\nUse el archivo testjob.sh que ya se encuentra en su directorio de grupo. ¿Qué parámetros de solicitud de recursos puede modificar?\n\n\nInicie un nodo interactivo (srun --pty bash) y asegúrese de estar en el subdirectorio Taller01 del grupo que creó.\nListe los módulos existentes en Hypatia y los que tiene cargados en este momento.\nVa a correr un script utilizando bash. Pero primero, identifique si bash está dentro de su PATH de ejecución. ¿Cómo lo hace?\nVerifique la dirección donde se encuentra bash con el commando which.\nCambie los permisos del archivo (testjob.sh) para que sean ejecutables por el dueño del archivo pero no por el grupo.\nAhora sí ejecute el script, ¿qué aparece impreso en la terminal? Consulte qué es standard output y el standard error en el contexto de ejecución de un programa.",
-    "crumbs": [
-      "Bases de datos y la terminal"
-    ]
-  },
-  {
-    "objectID": "chapters/02-read-processing.html",
-    "href": "chapters/02-read-processing.html",
-    "title": "Preprocesamiento de lecturas",
-    "section": "",
-    "text": "I. Control de calidad\nLos datos para usar en esta sección se depositaron en el European Nucleotide Archive (ENA). Puede ir al sitio web de ENA y buscar los archivos con el número de acceso SRR1776881.\nComo ha podido observar, estos archivos contienen alrededor de 2 millones de lecturas y, por lo tanto, son bastante grandes. Solo usaremos un subconjunto del conjunto de datos original para este taller.",
-    "crumbs": [
-      "Preprocesamiento de lecturas"
-    ]
-  },
-  {
-    "objectID": "chapters/02-read-processing.html#i.-control-de-calidad",
-    "href": "chapters/02-read-processing.html#i.-control-de-calidad",
-    "title": "Preprocesamiento de lecturas",
-    "section": "",
-    "text": "¿A qué experimento corresponden los datos? ¿Cuál fue el tipo de secuenciación ¿A qué experimento corresponden los datos? ¿Cuál fue el tipo de secuenciación utilizada para esta corrida? ¿A que organismo corresponden estos datos? ¿Qué estrategia y instrumento de secuenciación fue utilizada? ¿Los datos corresponden a ADN o ARN? (puntaje 5/100)\n\n\n\nCree un directorio de datos en su carpeta de grupo que tenga el nombre preprocesamiento\nCopie el script SRA_download_NCBI.sh del directorio ~/datasets/Taller2/ hacia su directorio de grupo.\nAbra el archivo que copió, realice una búsqueda y describa qué qué hace el comando fastq-dump y describa las opciones -I, --split-files, --gzip y --outdir del set de utilidades SRA Toolkit. (puntaje 5/100)\nCopie los archivos con la extensión fastq.gz que están presentes en el directorio de datasets en la carpeta Taller2 hacia el directorio preprocesamiento en su directorio de grupo.\n¿Cuántas lecturas hay por archivo? Realice el conteo tomando en cuenta las cuatro líneas por lectura, de acuerdo con lo visto en la sesión de preparación para el taller. Al revisar los nombres de las primeras 5 secuencias en ambos archivos. ¿Cómo distingue que son secuencias pareadas? puede usar comandos como zless o zcat (puntaje 10/100)\nInicie una sesión interactiva. (revisar: Ingreso al cluster Hypatia)\n\n\n\n\n\n\n\nImportante\n\n\n\nCargue el módulo de seqtk en Hypatia (module load seqtk). Esta es otra herramienta rápida para procesar secuencias en formato FASTA o FASTQ. Para realizar la práctica, vamos a trabajar con una muestra del 20% de las secuencias de estos archivos. Busque el comando en seqtk para realizar esta labor y nombre los archivos de salida como SRR1776881_untrimmed_0.1_R1.fastq ó R2 según corresponda.\n\n\n\nPara verificar la calidad de los datos de la secuencia usaremos una herramienta llamada fastqc. Para utilizar esta herramienta debemos cargar el módulo o programa mediante el comando: module load fastqc\nUse el comando de ayuda fastqc -h para obtener información sobre cómo correr este programa. Ejecútelo sobre los dos archivos submuestreados al 20% nombrados con el sufijo “_0.1_R*.fastq`. Describa los archivos que se han generado. (puntaje10/100)\nDescargue y abra los archivos de extensión .html con su navegador de preferencia.\n¿Basado en lo visto en clase, a qué indicadores debe prestar especial atención en los reportes obtenidos? Descripciones de los distintos campos indicadores de calidad están disponibles aquí. (puntaje 10/100)\nCompare su reporte con estos ejemplos de un juego de datos de buena calidad y otro de mala calidad. (puntaje 10/100)",
-    "crumbs": [
-      "Preprocesamiento de lecturas"
-    ]
-  },
-  {
-    "objectID": "chapters/02-read-processing.html#ii.-limpieza-de-secuencias",
-    "href": "chapters/02-read-processing.html#ii.-limpieza-de-secuencias",
-    "title": "Preprocesamiento de lecturas",
-    "section": "II. Limpieza de secuencias",
-    "text": "II. Limpieza de secuencias\nEn esta sección se realizarán tres pasos, se recortarán los adaptadores, se recortarán las lecturas de acuerdo a la calidad, y se realizará una nueva evaluación de la calidad de las secuencias.\n\nIdentifique en el reporte de FastQC la presencia de adaptador(es) y a qué tipo corresponde(n). La información en este enlace sobre los diferentes tipos de adaptadores que se usan en secuenciación con Illumina puede ser de utilidad.\nActive módulo o programa disponible para Trimmomatic, mediante el comando module load trimmomatic. Consulte el modo de uso de Trimmomatic de acuerdo con el tipo de datos que tiene. Busque los archivos de adaptadores que debe utilizar en el directorio de curso en la carpeta de Taller2 y cópielos a su directorio de grupo.\nEjecute el programa en modo pareado y asegúrese de retener ambas lecturas. Utilice un sliding window de 4 para remover las bases con Phred o puntaje promedio (en la ventana) inferior a 15. También elimine las lecturas que tengan menos de 40 bases después de este paso.\n¿Qué pasaría si utiliza un sliding window mayor? (puntaje 15/100)\nObtiene cuatro archivos de salida de Trimmomatic. ¿Puede explicar qué son? (puntaje 10/100)\nDe las lecturas “single” resultantes de Trimmomatic, ¿cuál tiene más lecturas? ¿Por qué? ¿Cuántos registros pareados se mantienen después de la limpieza? (puntaje 10/100)\nVuelva a correr fastqc en las secuencias después del trimado. ¿Qué observa? ¿Hubiera sido necesario incluir una remoción de las bases iniciales o finales de cada lectura? ¿Cómo debería modificarse el comando de trimado para incluir ese paso? (no es necesario ejecutarlo, solo mencionarlo) (puntaje 15/100)",
-    "crumbs": [
-      "Preprocesamiento de lecturas"
-    ]
-  },
-  {
-    "objectID": "chapters/03-qiime.html",
-    "href": "chapters/03-qiime.html",
-    "title": "Análisis de ASVs con QIIME2",
-    "section": "",
-    "text": "I. Preparación del ambiente de trabajo",
-    "crumbs": [
-      "Análisis de ASVs con QIIME2"
-    ]
-  },
-  {
-    "objectID": "chapters/03-qiime.html#i.-preparación-del-ambiente-de-trabajo",
-    "href": "chapters/03-qiime.html#i.-preparación-del-ambiente-de-trabajo",
-    "title": "Análisis de ASVs con QIIME2",
-    "section": "",
-    "text": "Ingrese a la cuenta del clúster.\nEn su directorio, cree un nuevo directorio y nómbrelo Taller3_Qiime2.\nCopie todo el directorio Taller_3 a su directorio Taller3_qiime2. La siguiente es la ruta donde encuentran el archivo a copiar: /hpcfs/home/cursos/bcom4102/Datasets/Taller3/\nInicie una sesión interactiva preferiblemente con 10G de memoria y al menos 4 cpus per task.\nCargue el módulo de QIIME2 disponible en el clúster.\n\n\n\n\n\n\n\nQiime2 es un programa con mucho apoyo de los desarrolladores, muchas personas lo usan y cuando surgen errores estos se han reportado y solucionado en su foro. Si tienen problemas esta es su principal herramienta para solucionarlos, aun así, si el problema persiste pueden consultarlo con los monitores.",
-    "crumbs": [
-      "Análisis de ASVs con QIIME2"
-    ]
-  },
-  {
-    "objectID": "chapters/03-qiime.html#iii.-generación-de-asvs",
-    "href": "chapters/03-qiime.html#iii.-generación-de-asvs",
-    "title": "Análisis de ASVs con QIIME2",
-    "section": "III. Generación de ASVs",
-    "text": "III. Generación de ASVs\n\nEn este paso se realiza simultáneamente la derreplicación, el denoising y la generación de las ASVs. Esto se puede realizar con DADA2 en su modo de single end:\n\nqiime dada2 denoise-single --i-demultiplexed-seqs 16s-data.qza\\\n    --p-trunc-len X\\\n    --p-trim-left X\\\n    --o-table 16s-feat-table.qza --o-representative-sequences 16s-rep-seqs.qza\\\n    --o-denoising-stats 16s-dada2-stats.qza\\\n\n\n\n\n\n\nusted deberá seleccionar los valores para las opciones --p-trunc-len-f y --p-trunc-len-R con base en la información disponible en la visualización de los datos importados en la pestaña de interactive quality plot esto se parece a algo que ya han visto antes.\n\n\n\n\nAhora convertiremos la tabla y las estadísticas a archivos visualizables.\n\nqiime feature-table summarize\\\n    --i-table 16s-feat-table.qza\\\n    --o-visualization 16s-feat-table.qzv\\\n    --m-sample-metadata-file metadata-Taller3.tsv\nqiime metadata tabulate\\\n    --m-input-file 16s-dada2-stats.qza\\\n    --o-visualization 16s-dada2-stats.qzv\n→ Para entregar:\n\nExplique la función de los flags: --p-trunc-len y --p-trim-left. Averigüe por qué se consideran como requeridos para DADA2.\nProporcione los valores que utilizó para el proceso y la razón por la cual los escogió.\nVisualice el archivo de estadísticas de DADA2 y describa qué filtro se hace en cada uno de los pasos del proceso.\nIndique el número de features totales que obtuvo después del proceso y para que los podrá utilizar más adelante.",
-    "crumbs": [
-      "Análisis de ASVs con QIIME2"
-    ]
-  },
-  {
-    "objectID": "chapters/03-qiime.html#iv.-generación-del-árbol-filogenético",
-    "href": "chapters/03-qiime.html#iv.-generación-del-árbol-filogenético",
-    "title": "Análisis de ASVs con QIIME2",
-    "section": "IV. Generación del árbol filogenético",
-    "text": "IV. Generación del árbol filogenético\n\nCon el fin de realizar métricas de diversidad filogenéticas, es necesario construir primero el árbol filogenético.\n\nqiime phylogeny align-to-tree-mafft-fasttree\\\n    --i-sequences 16s-feat-table.qza\\\n    --o-alignment 16s-aligned-reps.qza\\\n    --o-masked-alignment\\\n    --o-tree 16s-unrooted-tree.qza\\\n    --o-rooted-tree 16s-rooted-tree.qza\n→ Para entregar: • Describa que representan estos tipos de árboles y que los diferencian • Además explique la diferencia entre metadata y manifest files.",
-    "crumbs": [
-      "Análisis de ASVs con QIIME2"
-    ]
-  },
-  {
-    "objectID": "chapters/04-diversity-analisis.html",
-    "href": "chapters/04-diversity-analisis.html",
-    "title": "Análisis de diversidad",
-    "section": "",
-    "text": "I. Preparación de ambiente de trabajo",
-    "crumbs": [
-      "Análisis de diversidad"
-    ]
-  },
-  {
-    "objectID": "chapters/04-diversity-analisis.html#i.-preparación-de-ambiente-de-trabajo",
-    "href": "chapters/04-diversity-analisis.html#i.-preparación-de-ambiente-de-trabajo",
-    "title": "Análisis de diversidad",
-    "section": "",
-    "text": "Ingrese a la cuenta del clúster.\nEn vez de crear una carpeta copiara la carpeta completa de datasets\nCopie todo el directorio de Datasets/Taller_4/ a su directorio Taller4\nEjecute los comandos de este taller en una sesión interactiva preferiblemente con 10G de memoria y al menos 4 cpus per task.\nCargue el módulo de QIIME2 disponible en el clúster.\n\n\n\n\n\n\n\nA lo largo del taller tendrá menos ayudas que en anterior, de no saber que ingresar en los flags de los comandos use –help para ver que archivos requiere. Anexe también imágenes de los pasos realizados para el resto del taller",
-    "crumbs": [
-      "Análisis de diversidad"
-    ]
-  },
-  {
-    "objectID": "chapters/04-diversity-analisis.html#ii.-asignación-taxonómica",
-    "href": "chapters/04-diversity-analisis.html#ii.-asignación-taxonómica",
-    "title": "Análisis de diversidad",
-    "section": "II. Asignación taxonómica",
-    "text": "II. Asignación taxonómica\n\nprimero va a realizar una asignación taxonómica de los datos con el plugin de sklearn utilizando la base de datos anteriormente entrenada de SILVA.\n\n\n\n\n\n\n\nEn la carpeta que copió verá el archivo clasificación.sh. Primero modifique para que las rutas absolutas coincidan con sus archivos y segundo ejecútelo con sbatch (es decir como un job) ¿Qué hacer si no sabe si está corriendo?: utilice el comando squeue –u $USER y busque en la primera columna su código, si no está allí es porque no está corriendo y deberá ejecutarlo de nuevo.\n\n\n\n\nuna vez obtenido el taxonomy.qza realizará la diferentes visualizaciones de este artefacto con los siguientes comandos:\n\nqiime metadata tabulate\\\n    --m-input-file taxonomy.qza\\\n    --o-visualization taxonomy.qzv\nqiime taxa barplot\\\n    --i-table feat-table-T4.qza\\\n    --i-taxonomy taxonomy.qza\\\n    --m-metadata-file metadata.tsv\\\n    --o-visualization taxa-bar-plots.qzv\nPara entregar:\n\nAnexe la visualización de la taxonomía y de los Bar plots en Qiime view organizándolos por su locación\nObserve y señale que acciones le permite Qiime view realizar al archivo de visualización.\nAnexe Bar plots con nivel taxonómico de filum y género, y señale las diferencias en las abundancias entre dichos gráficos.",
-    "crumbs": [
-      "Análisis de diversidad"
-    ]
-  },
-  {
-    "objectID": "chapters/04-diversity-analisis.html#iii.-analisis-de-diversidad-alfa",
-    "href": "chapters/04-diversity-analisis.html#iii.-analisis-de-diversidad-alfa",
-    "title": "Análisis de diversidad",
-    "section": "III. Analisis de diversidad alfa",
-    "text": "III. Analisis de diversidad alfa\nRecordemos algunas cosas: En el taller pasado ejecutaron dada2 y obtuvieron varios archivos de salida. Entre ellos la tabla de ASVs. Para este taller los datos serán los mismos (10 peces de mar y río) los cuales habrán cambiado un poco con esta tabla usted podrá realizar los análisis de este Taller\n\nLo primero a realizar será usar el plugin de alpha diversity de qiime para obtener 3 índices de alfa diversidad: shannon, simpson y chao1\n\nqiime diversity alpha\\\n    --i-table feat-table-T4.qza\\\n    --p-metric X\\\n    --o-alpha-diversity X.qza\n\nAhora visualice los índices de diversidad obtenidos en qiime view con el comando:\n\nqiime diversity alpha-correlation\\\n    --i-alpha-diversity X\\\n    --m-metadata-file X\\\n    --o-visualization X.qzv\nPara entregar:\n\nAnalice este índice diferenciando por locación (río vs mar) en cada métrica",
-    "crumbs": [
-      "Análisis de diversidad"
-    ]
-  },
-  {
-    "objectID": "chapters/04-diversity-analisis.html#iv.-rarificar-los-datos",
-    "href": "chapters/04-diversity-analisis.html#iv.-rarificar-los-datos",
-    "title": "Análisis de diversidad",
-    "section": "IV. Rarificar los datos",
-    "text": "IV. Rarificar los datos\n\nAhora espere. Tómese un momento para preguntarse si lo que acaba de hacer está del todo bien… ¡Acaba de realizar un análisis sin rarificar sus datos!\n\nPara entregar:\n\nPorqué es importante realizar rarefacción de los datos al hacer análisis de diversidad y que pasaría si se omite dicho paso.\n\n\nAhora aprenderán a rarificar: lo primero será visualizar un summary de su feature table con el siguiente comando:\n\nqiime feature-table summarize\\\n    --i-table feat-table-T4.qza\\\n    --o-visualization X.qzv\\\n    --m-sample-metadata-file X\nAl visualizar este archivo qzv podrá observar una tabla muy larga con los conteos de reads para cada muestra (pez).\nPara entregar:\n\n¿Cuál de esos valores escogería para hacer la rarefacción y por qué?\nVuelva a realizar la alfa diversidad con los mismos tres índices y señale las principales diferencias. Puede realizar esto con el comando que se muestra a continuación y después visualice como en el punto anterior:\n\nqiime diversity alpha-rarefaction\\\n    --i-table feat-table-T4\\\n    --p-max-depth X\\\n    --p-metrics X\\\n    --m-metadata-file X\\\n    --o-visualization X.qzv\\",
-    "crumbs": [
-      "Análisis de diversidad"
-    ]
-  },
-  {
-    "objectID": "chapters/04-diversity-analisis.html#v.-análisis-de-diversidad-beta",
-    "href": "chapters/04-diversity-analisis.html#v.-análisis-de-diversidad-beta",
-    "title": "Análisis de diversidad",
-    "section": "V. Análisis de diversidad beta",
-    "text": "V. Análisis de diversidad beta\n\nPor último aprenderá a realizar diversidad beta con un plugin llamado core-metrics. Lo primero será realizar los árboles filogenéticos como en el taller anterior:\n\nqiime phylogeny align-to-tree-mafft-fasttree \\\n    --i-sequences 16s-rep-seqs.qza\\\n    --o-alignment aligned-reps.qza\\\n    --o-masked-alignment masked-aligned.qza\\\n    --o-tree unrooted-tree.qza\\\n    --o-rooted-tree rooted-tree.qza\n\nPor último realizará los análisis de core metrics, tenga en cuenta que los resultados serán enviados a una carpeta que usted dará nombre, lo podrá ejecutar con el siguiente comando:\n\nqiime diversity core-metrics-phylogenetic\\\n    --i-phylogeny rooted-tree.qza\\\n    -i-table feat-table-T4.qza\\\n    --p-sampling-depth X\\\n    --m-metadata-file metadata-Taller4.tsv\\\n    --output-dir core-metrics-results\nPara entregar:\n\nObtendrá varios archivos de visualización, Analice los resultados de bray-curtis, unweighted unifrac y unweighted unifrac haciendo diferenciación de colores entre los peces de río y los de mar.\n\n\n\n\n\n\n\nVI. Análisis de diversidad usando microviz\n\n\n\nPara este punto usted ya habrá aprendido a realizar análisis de diversidad en Qiime2, pero ahora aprenderá a realizarlos en R. Para esto usará el paquete microviz en R.\n\nLuego de instalar el paquete, podrá ingresar los archivos que resultado del análisis y preprocesarlos correctamente:\n\nOTU &lt;- vroom(\"OTU_table.txt\", delim = \"\\t\", col_names = T)\nTax &lt;- vroom(\"Tax_table.txt\", delim = \"\\t\", col_names = T)\nMetadata &lt;- vroom(\"Metadata_table.txt\", delim = \"\\t\", col_names = T)\nAlgunos reajustes a la tabla de OTU y Metadata:\nMetadata &lt;- column_to_rownames(Metadata, var = \"sampleID\") \nMETA &lt;- sample_data(Metadata)\nOTU &lt;- OTU |&gt;\n  column_to_rownames(var = \"otuID\")\n\nOTU &lt;- as.matrix(OTU)\nTax &lt;- Tax |&gt;\n  column_to_rownames(var = \"otuID\")\n\nTax &lt;- as.matrix(Tax)\n\nAhora podra crear una instancia de los archivos en una estructura conocida como phyloseq\n\nOTUps &lt;- otu_table(OTU, taxa_are_rows = TRUE)\nTAXps &lt;- tax_table(Tax)\n\nps0 &lt;- phyloseq(OTUps, TAXps)\nps0\n\nphyloseqOBJ &lt;- merge_phyloseq(ps0,META)\n\nExplore los datos con el siguiente comando:\n\nord_explore(phyloseqOBJ)\n\nAhora podrá hacer manipulación de los datos, filtrarlos y seleccionar los que desee para el análisis. Por ejemplo, Podemos filtrar usando el archivo de metadatos. usando ps_filter() podemos mantener sólo las muestras con sample_data que coincidan con una o más condiciones:\n\npartial_ps &lt;- phyloseqOBJ |&gt;\n  ps_filter(\n    gender == \"female\",\n    activity %in% c(\"mild\", \"severe\"),\n    age &gt;= 13\n  )\n\nFijar la taxonomía: microviz no puede manejar los niveles taxonómicos vacíos por lo que para las OTU con baja resolución taxonómica, se debe utilizar el nivel superior.\n\ntax_table(phyloseqOBJ)[40:54, 4:7]\nSe observan varios NA, luego podemos fijarla usando:\nphyloseqOBJ &lt;- phyloseqOBJ |&gt;\n  tax_fix()\n\ntax_table(phyloseqOBJ)[40:54, 4:7]\n\nUn paso importante en los análisis de diversidad es remover las muestras que no tienen suficientes lecturas es decir de baja abundancia y prevalencia.\n\nphyloseqOBJ &lt;- phyloseqOBJ |&gt;\n  tax_filter(\n1  min_prevalence = 0.1,\n  prev_detection_threshold = 1,\n  min_total_abundance = 0,\n2  min_sample_abundance = 0,\n  tax_level = NA\n)\n\n1\n\nLos OTU tienen que estar en el 10% de las muestras.\n\n2\n\nRecuento mínimo requerido (o valor) para que un taxón se considere presente en esa muestra.\n\n\nAhora bien, nos podemos preguntar varias cosas sobre los datos, para esto debemos hacer varias transformaciones.\n\nTransformación de los datos. La transformación de los datos dependerá del tipo de métrica o análisis que se vaya a utilizar:\n\nConsidere la posibilidad de transformar los recuentos microbianos, por ejemplo, utilizando la transformación “clr” (centred log ratio), que a menudo se recomienda para los datos de composición (como los datos de secuenciación)\nAlgunos métodos, como PCoA, requieren una matriz de distancias entre pares de muestras, Normalmente NO debe transformar sus datos cuando utilice un método basado en distancias.\nphyloseqOBJ |&gt;\n  tax_transform(trans = \"clr\", rank = \"Genus\")\nphyloseqOBJ |&gt;\n  tax_transform(trans = \"identity\", rank = \"Genus\") |&gt;\n  dist_calc(\"bray\")\n\nGraficos de ordenamiento de datos: PCA y PCoA.\n\nEl Análisis de Componentes Principales (PCA) se destaca por ser un método no restringido que prescinde de una matriz de distancias. En lugar de utilizar distancias, PCA trabaja directamente con las variables microbianas transformadas, evitando así la necesidad de emplear dist_calc(). Para llevar a cabo la ordenación, se utiliza ord_calc(), que agrega esta información al objeto psExtra. Posteriormente, la creación del gráfico de dispersión ggplot2 se realiza mediante ord_plot().\nphyloseqOBJ |&gt;\n  tax_transform(\"clr\", rank = \"Genus\") |&gt; \n1  ord_calc(method = \"PCA\") |&gt;\n  ord_plot(\n    color = \"ibd\",\n    shape = \"DiseaseState\",\n    plot_taxa = 1:5,\n    size = 2\n    ) +\n  scale_colour_brewer(palette = \"Dark2\")\n\n1\n\nCuando no se proporciona ninguna matriz de distancias ni restricciones, PCA es el método de ordenación por defecto/automático.\n\n\nEl análisis de coordenadas principales también es un método sin restricciones, pero requiere una matriz de distancias. En un contexto ecológico, una medida de distancia (o más generalmente de “disimilitud”) indica lo diferentes que son un par de ecosistemas (microbianos). Puede calcularse de muchas formas.\nphyloseqOBJ |&gt;\n  tax_transform(\"identity\", rank = \"Genus\") |&gt;\n  dist_calc(dist = \"jaccard\", binary = TRUE) |&gt;\n  ord_calc(\"PCoA\") |&gt;\n  ord_plot(color = \"ibd\", shape = \"DiseaseState\", size = 2) +\n  scale_colour_brewer(palette = \"Dark2\")\n\nAnálisis de redundancia (RDA)\n\nEl análisis de redundancia (RDA) es un método de ordenación restringida. Muestra la variación microbiana que también puede ser explicada por las variables de restricción seleccionadas.\nPor detras, se crea un modelo de regresión lineal para cada variable de abundancia microbiana (utilizando las restricciones como variables explicativas) y se realiza un PCA utilizando los valores ajustados de las abundancias microbianas.\nTraducción realizada con la versión gratuita del traductor www.DeepL.com/Translator\nphyloseqOBJ |&gt;\n  ps_mutate(\n    IBD = as.numeric(ibd == \"ibd\"),\n    Female = as.numeric(gender == \"female\"),\n    Abx. = as.numeric(abx == \"abx\")\n  ) |&gt;\n  tax_transform(\"clr\", rank = \"Genus\") |&gt;\n  ord_calc(constraints = c(\"IBD\", \"Female\", \"Abx.\"), method = \"RDA\") |&gt;\n  ord_plot(\n    colour = \"DiseaseState\", \n    size = 2,\n    alpha = 0.5,\n    shape = \"active\",\n    plot_taxa = 1:8\n  )\n\nAnálisis de composición de comunidades (CCA).\n\nphyloseqOBJ |&gt;\n  ps_filter(gender == \"female\") |&gt;\n  comp_barplot(\n    tax_level = \"Genus\",\n1    label = \"DiseaseState\",\n2    n_taxa = 15,\n3    taxon_renamer = function(x) stringr::str_replace_all(x, \"_\", \" \"),\n4    other_name = \"Other genera\",\n5    merge_other = FALSE,\n6    bar_width = 0.7,\n7    bar_outline_colour = \"grey5\"\n  ) +\n  coord_flip()\n\n1\n\nNombrar una variable alternativa para etiquetar el eje\n\n2\n\nDar colores únicos a más taxones\n\n3\n\nEliminar los guiones bajos\n\n4\n\nEstablecer un nombre personalizado para la categoría “Otros”\n\n5\n\nDividir la categoría “Otros” para mostrar la diversidad alfa\n\n6\n\nReducir la anchura de la barra al 70% de una fila\n\n7\n\nWs el valor por defecto (utilice NA para eliminar los contornos)",
-    "crumbs": [
-      "Análisis de diversidad"
-    ]
-  },
-  {
-    "objectID": "chapters/05-taxa-assignment.html",
-    "href": "chapters/05-taxa-assignment.html",
-    "title": "Asignación taxonómica",
-    "section": "",
-    "text": "I. Limpieza de secuencias",
-    "crumbs": [
-      "Asignación taxonómica"
-    ]
-  },
-  {
-    "objectID": "chapters/05-taxa-assignment.html#i.-limpieza-de-secuencias",
-    "href": "chapters/05-taxa-assignment.html#i.-limpieza-de-secuencias",
-    "title": "Asignación taxonómica",
-    "section": "",
-    "text": "Primero es necesario limpiar las lecturas, lo haremos usando primero FastQC y Trimmomatic como ya lo han usado anteriormente. Recuerden los ambientes que deben activar (en serie) para esos dos programas. Para ejecutar Trimmomatic use unos parámetros para el sliding window de 4:20, un Headcrop de 4 y un tamaño mínimo de secuencia de 50.\nEn ambos casos adjunte los comandos usados y los pantallazos de los cambios en la calidad de las secuencias antes y después de la limpieza. También indique el porcentaje de secuencias que NO pasaron los filtros de la limpieza (puntaje 20/100)\nRepita el proceso para cada conjunto de archivos.",
-    "crumbs": [
-      "Asignación taxonómica"
-    ]
-  },
-  {
-    "objectID": "chapters/05-taxa-assignment.html#ii.-creación-de-un-perfil-taxonómico",
-    "href": "chapters/05-taxa-assignment.html#ii.-creación-de-un-perfil-taxonómico",
-    "title": "Asignación taxonómica",
-    "section": "II. Creación de un perfil taxonómico",
-    "text": "II. Creación de un perfil taxonómico\nMetaPhlAn acepta como entrada lecturas cortas de un solo experimento de secuenciación metagenómica tipo shotgun y genera la lista de microorganismos detectados y sus abundancias relativas. Además de esto, recibe lecturas pareadas y no pareadas\nActive el módulo de MetaPhlAn con el comando: source activate mpa, luego familiarícese con la ejecución de MetaPhlAn con el siguiente comando metaphlan -h (esto puede tardar un poco)\n\nEjecute MetaPhlAn sobre cada par de archivos FASTQ limpios teniendo en cuenta que son archivos pareados. IMPORTANTE! Además de los comandos que indica el manual, es obligatorio poner los siguientes parámetros:\n\n--index mpa_vJan21_CHOCOPhlAnSGB_202103\n--bowtie2db /hpcfs/home/cursos/bcom4102/Datasets/Taller_5/database/\nAsegúrese de utilizar las siguientes opciones en la ejecución:\n\n--bt2_ps very-sensitive:\n--tax_lev 's'\n--t  rel_ab\n\nPruebe con un archivo primero y asegúrese que corre bien y envíe el resto como un job de bash. Para la corrida de múltiples archivos,consulte este recurso de ayuda y modifíquelo para que incluya los parámetros especificados arriba.\n\n¿Cuál fue el comando que ejecutó? Explíquelo. (puntaje 15/100)\n¿Qué archivos de salida obtiene por muestra? Descríbalos. (puntaje 15/100)",
-    "crumbs": [
-      "Asignación taxonómica"
-    ]
-  },
-  {
-    "objectID": "chapters/05-taxa-assignment.html#iii.-fusionar-salidas-de-metaphlan",
-    "href": "chapters/05-taxa-assignment.html#iii.-fusionar-salidas-de-metaphlan",
-    "title": "Asignación taxonómica",
-    "section": "III. Fusionar salidas de MetaPhlAn",
-    "text": "III. Fusionar salidas de MetaPhlAn\n\nPara visualizar los resultados, primero necesita fusionar las diferentes salidas en un solo archivo, para esto use el comando merge_metaphlan_tables.py, un script de MetaPhlAn que creará una única tabla delimitada por tabuladores a partir de esos múltiples perfiles.\n\nmerge_metaphlan_tables.py profiled_metagenome.txt profiled_metagenome_2.txt -o merge.txt\n\nCree un mapa de calor con hclust2. Un mapa de calor es una forma de visualizar resultados tabulares de abundancia como los de MetaPhlAn. La herramienta de trazado que usaremos aquí es hclust2, sirve para mostrar cualquiera, algunos o todos los microorganismos o muestras en una tabla MetaPhlAn. (puntaje 30/100)\n\nActive el módulo de haclust2 con el comando source activate hclust2\n\nGenere un mapa de calor para todas las muestras.\nDescargue la imagen a su máquina local y examínela.\n¿Cuántos y cuáles genomas diferentes se encontraron en las muestras? Adjunte la imagen del PDF.\nDiscuta qué similitudes y/o diferencias encuentra entre las dos clases de microbiota vaginal.",
-    "crumbs": [
-      "Asignación taxonómica"
-    ]
-  },
-  {
-    "objectID": "chapters/05-taxa-assignment.html#iv.-otras-visualizaciones",
-    "href": "chapters/05-taxa-assignment.html#iv.-otras-visualizaciones",
-    "title": "Asignación taxonómica",
-    "section": "IV. Otras visualizaciones",
-    "text": "IV. Otras visualizaciones\nEs posible crear otras visualizaciones usando pie charts, puede hacerlo usando la herramienta Krona.\n\nUtilice el script metaphlan2krona.py para convertir el archivo de salida de perfil de MetaPhlAn a Krona.\nPara construir el gráfico circular, use las herramientas de Krona, en particular ktImportText sobre el archivo que acaba de convertir. (puntaje 10/100)\n\n\nDescargue y explore los resultados con un navegador.\n¿Qué comando usó para generar el gráfico?\nAdjunte el pantallazo de la imagen generada en el html.\n¿Qué ventaja observa de usar este tipo de imágenes?\n\n\nPara ver un gráfico de Krona con todos los niveles taxonómicos, puede volver a ejecutar el comando MetaPhlAn sin necesidad de ejecutar bowtie nuevamente para esto es importante modificar los siguientes parámteros:\n\n\ntax_lev 'a'\ninput_type bowtie2out\n\nNo es necesario darle los parámetros específicos de bowtie, pero en este caso el archivo de entrada es el que guardaron como archivo de salida de bowtie la primera vez que lo corrieron. Ejecute con la nueva salida los comandos metaphlan2krona.py y ktImportText (puntaje 10/100)\n\nDescargue y explore los resultados con un navegador.\n¿Qué comandos usó para generar este gráfico?\nAdjunte el pantallazo de la imagen generada en html.\n¿Qué ventaja observa al usar todos los niveles taxonómicos?",
-    "crumbs": [
-      "Asignación taxonómica"
-    ]
-  },
-  {
     "objectID": "chapters/06-mag-assembly.html",
     "href": "chapters/06-mag-assembly.html",
     "title": "Análisis de MAGs",
     "section": "",
-    "text": "I. Genomas individuales (puntaje 33.3/100)\nComo podrá verificar, los archivos de secuencia para el genoma de Klebsiella pneumoniae contienen demasiadas lecturas. Solo usaremos un subconjunto del conjunto de datos original para este taller.\nLa calidad del ensamblaje depende en gran medida del tamaño de k-mero utilizado. El tamaño ideal de k-mero depende de la longitud de lectura y la profundidad de secuenciación y la diversidad de la muestra secuenciada.\n→ Para entregar (genoma Klebsiella pneumoniae):\nReportes de QUAST y una explicación que resulte de comparar los ensamblajes realizados con las dos longitudes de k-mero.",
+    "text": "I. Ensamble y análisis de calidad de MAGs (50/100)",
     "crumbs": [
       "Análisis de MAGs"
     ]
   },
   {
-    "objectID": "chapters/06-mag-assembly.html#i.-genomas-individuales-puntaje-33.3100",
-    "href": "chapters/06-mag-assembly.html#i.-genomas-individuales-puntaje-33.3100",
+    "objectID": "chapters/06-mag-assembly.html#i.-ensamble-y-análisis-de-calidad-de-mags-50100",
+    "href": "chapters/06-mag-assembly.html#i.-ensamble-y-análisis-de-calidad-de-mags-50100",
     "title": "Análisis de MAGs",
     "section": "",
-    "text": "Cree un directorio de datos en su carpeta de grupo que tenga el nombre ensamblaje_genoma\nUse Seqtk v1.3 y trabaje con una muestra del 25% de las secuencias de estos archivos. Busque el comando en Seqtk para realizar esta labor y nombre los archivos de salida como klebsiella_0.25_1.fastq y klebsiella _2.fastq, y ubíquelos en el directorio que creó en el paso anterior.\n\n\n\nUse SPAdes v3.15.3 y realice dos ensamblajes, uno con longitud de k-mero 61 y otro con longitud 91. Nombre los archivos de modo que reflejen la diferencia en el parámetro. Recuerde también especificar que los archivos de entrada son pareados.\nAhora evalúe la calidad de los dos ensamblajes. Utilice QUAST v5.0.2 para esta labor. Utilice como referencia el genoma de Klebsiella pneumoniae subsp. pneumoniae HS11286 disponible aquí.",
+    "text": "Realice el ensamble de las muestras metagenómicas (control y caso) con los parámetros por defecto para librerías pareadas usando el software megahit. ¿Cuáles son los parámetros por defecto del programa? ¿Que parámetros considera que sería útil modificar? Justifique su respuesta.\n\nmegahit -1 &lt;forwardreads&gt;.f10.fastq.gz -2 &lt;reversereads&gt;.f10.fastq.gz -o control\n\n\n\n\n\n\nBono\n\n\n\nRealice el ensamble con los parámetros por defecto y con los parámetros que usted considera útiles modificar. Compare los resultados y justifique su elección. Luego realice el ensamble usando otro ensamblador como SPAdes en modo metagenómico. Compare los resultados obtenidos con los de megahit. ¿Cuál ensamblador considera que es mejor para este tipo de datos? Justifique su respuesta1.\n\n\n\nUtilice QUAST v5.0.2 para revisar los estadísticos del ensamblaje. Genere y muestre el reporte. Responda ¿Qué le indican la longitud total, el número de contigs totales, el número de contigs, y las métricas de N50 y L50? Revise la siguiente discusión y explique.\n\n\n\n\n\n\n\nTip\n\n\n\n\n\nUna manera rápida de calcular las estadísticas sin el reporte visual es usando seqfu:\nseqfu stats -n SRR13452514_1.f10.fastq.gz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFile\n#Seq\nTotal bp\nAvg\nN50\nN75\nN90\nauN\nMin\nMax\n\n\n\n\nSRR13452514_1.f10.fastq.gz\n4154060\n627263060\n151.00\n151\n151\n151\n0.00\n151\n151\n\n\n\n\n\n\n\nSegún esto ¿Qué tan bien cree que se realizó el ensamblaje? de las dos muestras metagonómicas, cuál cree que tiene mejor calidad? Justifique su respuesta.",
     "crumbs": [
       "Análisis de MAGs"
     ]
   },
   {
-    "objectID": "chapters/06-mag-assembly.html#ii.-metagenomas-puntaje-33.3100",
-    "href": "chapters/06-mag-assembly.html#ii.-metagenomas-puntaje-33.3100",
+    "objectID": "chapters/06-mag-assembly.html#ii.-predicción-de-genes-y-análisis-funcional-50100",
+    "href": "chapters/06-mag-assembly.html#ii.-predicción-de-genes-y-análisis-funcional-50100",
     "title": "Análisis de MAGs",
-    "section": "II. Metagenomas (puntaje 33.3/100)",
-    "text": "II. Metagenomas (puntaje 33.3/100)\nEstos datos ya han sido limpiados y filtrados por calidad. De nuevo, solo usaremos un subconjunto del conjunto de los datos originales para esta sección.\n\nCree un directorio de datos en su carpeta de grupo que tenga el nombre ensamblaje_metagenoma\nUse Seqtk v1.3 y trabaje con una muestra del 25% de las secuencias de estos archivos. Busque el comando en Seqtk para realizar esta labor y nombre los archivos de salida para reflejar este procesamiento y ubíquelos en el directorio que creó en el paso anterior.\nRealice el ensamblaje del metagenoma con los parámetros por defecto para librerías pareadas usando el software Megahit.\n\n→ Para entregar:\n3a. ¿Cuáles son los parámetros por defecto del programa? Consulte.\n3b. ¿Que parámetros considera que sería útil modificar? Justifique su respuesta.\n\nUtilice QUAST v5.0.2 para revisar los estadísticos del ensamblaje.\n\n→ Para entregar (metagenoma):\n4a. Reporte de QUAST.\n4b. ¿Qué le indican la longitud total, el número de contigs totales, el número de contigs &gt; 1Kb, y las métricas de N50 y L50?",
+    "section": "II. Predicción de genes y análisis funcional (50/100)",
+    "text": "II. Predicción de genes y análisis funcional (50/100)\nPredicción de genes: La predicción de genes es la identificación algorítmica de segmentos de secuencias que son biológicamente funcionales, como los genes codificantes de proteínas, genes codificadores de ARN (e.g, 16S rARN) y secuencias reguladoras. Una vez ensamblado el genoma o el metagenoma, vamos a llevar a cabo la predicción de genes mediante el software Bakta.\n\nEjecute bakta sobre cada ensamble (control y caso) realizado según la sección elegida al inicio del taller. Para esto utilice:\n\nbakta --threads 8\\\n --prefix &lt;prefix&gt;\\\n --db ~/.dbs/db-light\\\n --output &lt;outdir&gt;\\\n --meta\\\n1 --skip-trna\\\n2 --skip-tmrna\\\n3 --skip-rrna \\\n4 --skip-ncrna\\\n5 --skip-ncrna-region\\\n6 --skip-crispr\\\n7 --skip-plot\\\n &lt;contigs&gt;.fasta\n\n1\n\nSkip tRNA detection & annotation\n\n2\n\nSkip tmRNA detection & annotation\n\n3\n\nSkip rRNA detection & annotation\n\n4\n\nSkip ncRNA detection & annotation\n\n5\n\nSkip ncRNA region detection & annotation\n\n6\n\nSkip CRISPR array detection & annotation\n\n7\n\nSkip generation of circular genome plots\n\n\n\n\n¿Qué clase de archivos de salida produce Bakta, explique? Visualice el archivo FAA y cuente ¿Cuántas regiones codificantes encontró para cada muestra metagenómica?\nAhora realice la clasificación funcional de los genes predichos y visualice. Para esto, utilice COGclassifier. Este software permite realizar la búsqueda de secuencias de consulta en la base de datos COG, pasando por la anotación y clasificación de las funciones de los genes, hasta la generación de figuras. ¿Qué porcentaje de secuencias fueron clasificadas? ¿Qué le indican las gráficas generadas? Adjunta las figuras y describelas.\nResponda a partir de los conteos de genes predichos y su anotación funcional ¿Qué diferencias observa entre las dos muestras metagenómicas? Especule sobre las posibles diferencias en la funcionalidad de la comunidad microbiana en cada una de las muestras (control y caso). Complemente su respuesta mediante la revisión del articulo de referencia2.",
     "crumbs": [
       "Análisis de MAGs"
     ]
   },
   {
-    "objectID": "chapters/06-mag-assembly.html#iii.-mapeo-de-lecturas-al-ensamblaje-puntaje-33.3100",
-    "href": "chapters/06-mag-assembly.html#iii.-mapeo-de-lecturas-al-ensamblaje-puntaje-33.3100",
+    "objectID": "chapters/06-mag-assembly.html#footnotes",
+    "href": "chapters/06-mag-assembly.html#footnotes",
     "title": "Análisis de MAGs",
-    "section": "III. Mapeo de lecturas al ensamblaje (puntaje 33.3/100)",
-    "text": "III. Mapeo de lecturas al ensamblaje (puntaje 33.3/100)\n(ya sea Klebsiella pneumoniae o metagenoma) Es importante saber cuál es la contribución de las lecturas obtenidas al ensamblaje resultante. No es lo mismo que los contigs reflejen la información de 80% de las secuencias iniciales a que reflejen solo el 10% de las secuencias de su muestra de interés. Para revisar esto vamos a realizar un procedimiento de mapeo. Si desarrolló la sección I, debe realizar tres mapeos diferentes, según las indicaciones en el punto 5.\n\nUse Bowtie2 para mapear las lecturas iniciales al archivo resultante de su ensamblaje, ya sea final.contigs.fa producido por Megahit (metagenomas) o los archivos producidos por SPAdes con las diferentes longitudes de k-mero (genoma individual).\n\nPrimero cree el índice usando el comando bowtie-build. El comando requiere 2 argumentos. El primer argumento es la referencia FASTA (“final.contigs.fa” en el caso del metagenoma o tres opciones en el ensamblaje de Klebsiella pneumoniae individual, ya sea a) el genoma de referencia que descargó de Klebsiella pneumoniae o b) el ensamblaje con longitud de k-mero 61 y c) el ensamblaje con longitud de k-mero de 91). El segundo argumento es el nombre de archivo “base” que se utilizará\npara los archivos de índice creados. Creará un montón de archivos que comienzan con nombre_elegido_índice(puede ser ref_megahit, ref_NCBI, ref_k61, o ref_k91). Luego, corra el mapeo como tal:\nbowtie2 -x nombre_elegido_índice\\\n    -1 archivo_1.fastq\\\n    -2 archivo_2.fastq\\\n    -S output.sam\n→ Para entregar (tanto Klebsiella pneumoniae como metagenoma):\n5a. ¿Qué porcentaje de lecturas pudo mapear a los contigs generados? ¿Qué conclusiones podría sacar?\n5b. ¿Cómo podría cambiar esta visión si solo se mantienen los contigs &gt; 2Kb?\n5c. ¿Para qué otras aplicaciones es útil la técnica de mapeo a (meta)genomas de referencia?",
+    "section": "",
+    "text": "El bono es valido al realizar ambas comparaciones.↩︎\nBai, X., Narayanan, A., Nowak, P., Ray, S., Neogi, U., & Sönnerborg, A. (2021). Whole-genome metagenomic analysis of the gut microbiome in HIV-1-infected individuals on antiretroviral therapy. Frontiers in Microbiology, 12, 667718.↩︎",
     "crumbs": [
       "Análisis de MAGs"
-    ]
-  },
-  {
-    "objectID": "chapters/06-mag-assembly.html#iv.-predicción-de-genes-y-análisis-funcional-ya-sea-klebsiella-pneumoniae-o-metagenoma",
-    "href": "chapters/06-mag-assembly.html#iv.-predicción-de-genes-y-análisis-funcional-ya-sea-klebsiella-pneumoniae-o-metagenoma",
-    "title": "Análisis de MAGs",
-    "section": "IV. Predicción de genes y análisis funcional (ya sea Klebsiella pneumoniae o metagenoma)",
-    "text": "IV. Predicción de genes y análisis funcional (ya sea Klebsiella pneumoniae o metagenoma)\nPredicción de genes: La predicción de genes es la identificación algorítmica de segmentos de secuencias que son biológicamente funcionales, como los genes codificantes de proteínas, genes codificadores de ARN (e.g, 16S rARN) y secuencias reguladoras. Una vez ensamblado el genoma o el metagenoma, vamos a llevar a cabo la predicción de genes mediante el software Prokka. Ejecute Prokka sobre el ensamblaje realizado según la sección elegida al inicio del taller. Para esto utilice\nprokka contigs.fa\\\n    --outdir $SAMPLE\\\n    --norrna\\\n    --notrna\\\n    --metagenome\\\n    --cpus 8\n$SAMPLE es una variable ambiental en bash para reemplazar con el nombre que desee para sus archivos por otro lado, la opción --metegenome indica que las muestras son metagenomas.\nPara entregar (tanto Klebsiella pneumoniae como metagenoma):\n\n¿Qué clase de archivos produce como salida Prokka?\nVisualice el archivo GFF con el comando grep -v \"^#\" $SAMPLE | less –S. ¿Cuántas regiones codificantes encontró?\n\n-. ¿Para qué sirve el archivo .ffa?\nAhora realizaremos la anotación funcional de los genes predichos y los visualizaremos gráficamente. Para esto, utilizaremos COGclassifier. Este software permite realizar la búsqueda de secuencias de consulta en la base de datos COG, pasando por la anotación y clasificación de las funciones de los genes, hasta la generación de figuras.\nEs necesario que el número de threads sea 8 --thread_num 8\nPara entregar (tanto Klebsiella pneumoniae como metagenoma):\n\nIdentifique los archivos generados. ¿Qué indica cada uno?\n¿Qué porcentaje de secuencias fueron clasificadas?\n¿Qué le indican las gráficas generadas? Adjunte las imágenes.",
-    "crumbs": [
-      "Análisis de MAGs"
-    ]
-  },
-  {
-    "objectID": "chapters/07-binning.html",
-    "href": "chapters/07-binning.html",
-    "title": "Binning de metagenomas",
-    "section": "",
-    "text": "I. Ensamble de MAGs\nCree un ensamblaje para cada tipo de muestra con Megahit Archivos que incluyen en el nombre la letra “P”: toda la planta; archivos con la letra “L”: hojas). Tenga en cuenta que va a realizar un co-ensamblaje para cada tipo de muestra, por ende, debe especificar los comandos de la siguiente manera:\n→ Entregue el comando que ejecutó (Nota: son dos en total, uno que integra las tres muestras de toda la planta y otro que integra las tres muestras de hoja).",
-    "crumbs": [
-      "Binning de metagenomas"
-    ]
-  },
-  {
-    "objectID": "chapters/07-binning.html#ii.-binning-de-metagenomas",
-    "href": "chapters/07-binning.html#ii.-binning-de-metagenomas",
-    "title": "Binning de metagenomas",
-    "section": "II. Binning de metagenomas",
-    "text": "II. Binning de metagenomas\nCalcule la profundidad de secuenciación de cada contig o scaffold en el ensamblaje. Primero debe mapear cada librería al co-ensamblaje correspondiente con Bowtie2 y generar seis archivos .bam (uno para cada muestra con respecto al coensamblaje correspondiente, ej: P1_1.fastq y P1_2.fastq a co-ensamblaje_P.fasta). Utilizando samtools, aplique sorting e indexing a cada uno de estos seis archivos.",
-    "crumbs": [
-      "Binning de metagenomas"
-    ]
-  },
-  {
-    "objectID": "chapters/07-binning.html#iii.-análisis-de-profundidad-de-secuenciación",
-    "href": "chapters/07-binning.html#iii.-análisis-de-profundidad-de-secuenciación",
-    "title": "Binning de metagenomas",
-    "section": "III. Análisis de profundidad de secuenciación",
-    "text": "III. Análisis de profundidad de secuenciación\nLa profundidad de secuenciación para cada contig se utiliza para crear los bins. Siga los pasos enunciados en el tutorial de CONCOCT en este enlace. Nota: Recuerde que existen dos co-ensamblajes, un por cada tipo de muestra (P: toda la planta; L: hojas).\n→ Para entregar:\n\nPara cada tipo de muestra: ¿cuántos contigs resultantes obtiene después de fragmentarlos en secuencias contiguas de máximo 10 Kb?\n¿Para qué se realiza este procedimiento de fragmentación inicial? (pista: revise la publicación de la herramienta)\nInspeccione alguno de los dos archivos coverage_table_P.csv o coverage_table_L.csv y describa lo que observa allí.",
-    "crumbs": [
-      "Binning de metagenomas"
-    ]
-  },
-  {
-    "objectID": "chapters/07-binning.html#iv.-calidad-de-los-bins",
-    "href": "chapters/07-binning.html#iv.-calidad-de-los-bins",
-    "title": "Binning de metagenomas",
-    "section": "IV. Calidad de los bins",
-    "text": "IV. Calidad de los bins\nproducidos: Idealmente, un bin debe representar el contenido genómico de una especie de la comunidad. Para comprobar que este sea el caso, podemos usar la herramienta CheckM utilizando (conda activate checkm). Con esta, se puede evaluar qué tan completo y/o contaminado está cada bin de acuerdo a la presencia y número de copias de un conjunto de marcadores de copia única (single-copy-marker-genes).\n→ Para entregar:\n\nPara cada tipo de muestra: ¿Cuántos bins cumplen con las reglas de oro (presentadas en la introducción teórica) a partir de las métricas que indican qué tan completo y contaminado está cada uno?\n¿Cómo contrasta esta información con lo descrito en el artículo del cuál provienen los datos? ¿A qué pueden deberse las discrepancias?",
-    "crumbs": [
-      "Binning de metagenomas"
-    ]
-  },
-  {
-    "objectID": "chapters/07-binning.html#v.-revise-las-asignaciones-taxonómicas-y-el-potencial-funcional-descrito-en-el-artículo-del-cual-provienen-los-datos",
-    "href": "chapters/07-binning.html#v.-revise-las-asignaciones-taxonómicas-y-el-potencial-funcional-descrito-en-el-artículo-del-cual-provienen-los-datos",
-    "title": "Binning de metagenomas",
-    "section": "V. Revise las asignaciones taxonómicas y el potencial funcional descrito en el artículo del cual provienen los datos",
-    "text": "V. Revise las asignaciones taxonómicas y el potencial funcional descrito en el artículo del cual provienen los datos\n→ Para entregar:\n\n¿Qué grupos taxonómicos están sobrerepresentados en las muestras de hoja en comparación a las de toda la planta?\n¿Qué tipo de potencial funcional está codificado en los bins provenientes de las muestras de hoja, en contraste con aquéllos provenientes de toda la planta?",
-    "crumbs": [
-      "Binning de metagenomas"
-    ]
-  },
-  {
-    "objectID": "chapters/08-comparative-genomics.html",
-    "href": "chapters/08-comparative-genomics.html",
-    "title": "Genómica comparativa",
-    "section": "",
-    "text": "I. Análisis de genomas\nNota: Esta herramienta se descarga a su máquina (su propio computador, es un programa de interfaz gráfica y se encuentra disponible para todos los sistemas operativos.\nUn tutorial detallado para su uso se encuentra disponible en este enlace.\n→ Para entregar:\nEntregue las respuestas a las interrogantes planteadas acompañadas de pantallazos de los resultados, cuando aplique.",
-    "crumbs": [
-      "Genómica comparativa"
-    ]
-  },
-  {
-    "objectID": "chapters/08-comparative-genomics.html#i.-análisis-de-genomas",
-    "href": "chapters/08-comparative-genomics.html#i.-análisis-de-genomas",
-    "title": "Genómica comparativa",
-    "section": "",
-    "text": "En la página de ncbi busque los genomas seleccionados. Descargue los genomas a su computador (descargue (a) el genoma completo en fasta y (b) las secuencias de aminoácidos en fasta). Seleccione uno de los genomas como referencia y los otros van a ser usados para su comparación.\nUsando la herramienta MAUVE realice el alineamiento multiple (para cada conjunto de genomas por separado).\n\n\n\nEntregue un pantallazo del alineamiento para cada grupo de genomas.\n¿Sí soportan su hipótesis que habían un conjunto de genomas más cercanamente asociado entre si que el otro? Discuta.\n\n\nEntre a la página de Integrated Microbial Genomes (IMG); vaya a la pestaña de “Compare Genomes”, después “Average Nucelotide Identity” y finalmente “Pairwise ANI”. Calcule el ANI pareado entre todos sus genomas, para cada grupo de interés por separado. Si tiene dudas del uso de la herramienta puede consultar este Webinar.\n\n\nIndique cuál fue el ANI y la Fracción Alineada (AF) para cada comparación.\nInterprete los resultados, le indica más o menos lo mismo que encontró en el punto anterior?\n\n\nVamos a hacer un análisis de ortólogos para los genomas. Para esto usaremos el programa OrthoVenn2, el cual está disponible en una plataforma web, y se utiliza para la comparación y anotación de grupos de genes ortólogos entre múltiples especies. No se requiere instalación ni registro. Funciona en cualquier sistema operativo con un navegador moderno y Javascript habilitado.\n\n\n\nLo primero que debe hacer es subir al sitio web los seis proteomas de los organismos que escogió. Es decir los archivos de proteínas en formato fasta (los descargó en el punto 1). Asigne a cada proteoma a una palabra que represente el organismo seleccionado, e.g. Human (recuerde no incluir caracteres como espacios).\nRevise la información presentada en los resultados. Defina los conceptos básicos presentados, ¿a qué corresponden los siguientes términos?:\n\n\nCluster\nOverlapping cluster number\nCluster count\nProtein count\nSingleton\nSingle copy gene cluster\n\n\nInterprete la información presentada. El gráfico de resumen muestra los grupos de genes ortólogos compartidos entre múltiples especies. ¿Qué tan similares son los genomas analizados? ¿Obtiene información adicional con respecto a lo analizado en los puntos anteriores?\nHaga clic en el botón “Pairwise HeatMap” (Mapa de calor por pares) visualice los números de clusters compartidos para las especies de interés de forma pareada. ¿El patrón obtenido corresponde con su predicción inicial?\nAl hacer clic en el número debajo de la columna “Cluster number” o en el número que aparece en el diagrama de Venn, se mostrarán los clusters compartidos entre especies. ¿A qué funciones biológicas corresponden los primeros 5 clusters en cada comparación?",
-    "crumbs": [
-      "Genómica comparativa"
     ]
   }
 ]

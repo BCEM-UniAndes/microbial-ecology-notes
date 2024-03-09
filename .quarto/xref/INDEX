@@ -37,5 +37,11 @@
   },
   "chapters/08-comparative-genomics.qmd": {
     "08-comparative-genomics.html": "734096ef"
+  },
+  "chapters/microviz.qmd": {
+    "microviz.html": "9ca74d7e"
+  },
+  "chapters/05-microviz-analyses.qmd": {
+    "05-microviz-analyses.html": "1a69029e"
   }
 }
