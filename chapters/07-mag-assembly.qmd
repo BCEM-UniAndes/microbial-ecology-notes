@@ -1,0 +1,104 @@
+---
+lang: 'es'
+toc: true
+code-annotations: select
+---
+# Análisis de MAGs {.unnumbered}
+
+::: {.callout-note appearance="simple"}
+## Objetivos
+El objetivo de este taller es realizar el ensamblaje y análisis de calidad de metagenomas, así como la predicción de genes y su anotación funcional de dos muestras metagenómicas de pacientes con VIH y sin VIH. De este modo se espera que el estudiante sea capaz de aprender sobre las principales herramientas bioinformáticas para el análisis de metagenomas y su aplicación en la investigación. Consulte la presentación en este [link](https://camilogarciabotero.github.io/mags-slides/mags-slides.html).
+
+Para este taller se usaran [muestras de metagenomas](https://www.ncbi.nlm.nih.gov/sra/SRX9865427) de pacientes con [VIH y sin VIH](https://www.frontiersin.org/journals/microbiology/articles/10.3389/fmicb.2021.667718/full). Los datos de secuenciación están disponibles en el directorio `~/Datasets/Taller6`. Los archivos son:
+
+| Archivo                 | Descripción                                |
+|-------------------------|--------------------------------------------|
+| SRR13452514_1.f10.fastq.gz  | Muestra forward control al 10% (Q_C3)          |
+| SRR13452514_2.f10.fastq.gz  | Muestra reverse control al 10% (Q_C3)           |
+| SRR13452521_1.f10.fastq.gz  | Muestra forward caso al 10% (Q_H1)              |
+| SRR13452521_2.f10.fastq.gz  | Muestra forward caso al 10% (Q_H1)              |
+
+Note que estos fueron submuestreados al 10% para facilitar el análisis usando [rasusa](https://github.com/mbhall88/rasusa):
+
+```bash
+rasusa -i <samplereads>.fastq.gz -f 0.1 -o <samplereads>.f10.fastq.gz
+```
+
+:::
+
+## I. Ensamble y análisis de calidad de MAGs (50/100)
+
+1. Realice el ensamble de las muestras metagenómicas (control y caso) con los parámetros por defecto para librerías pareadas usando el software [megahit](https://github.com/voutcn/megahit). ¿Cuáles son los parámetros por defecto del programa? ¿Que parámetros considera que sería útil modificar? Justifique su respuesta.
+
+:::{.callout-important}
+Recuerde activar el ambiente adecuado: `conda activate megahit`
+:::
+
+```bash
+megahit -1 <forwardreads>.f10.fastq.gz -2 <reversereads>.f10.fastq.gz -o control
+```
+
+::: {.callout-caution}
+## Bono
+Realice el ensamble con los parámetros por defecto y con los parámetros que usted considera útiles modificar. Compare los resultados y justifique su elección. Luego realice el ensamble usando otro ensamblador como [SPAdes](https://github.com/ablab/spades) en modo metagenómico. Compare los resultados obtenidos con los de `megahit`. ¿Cuál ensamblador considera que es mejor para este tipo de datos? Justifique su respuesta[^1].
+:::
+
+2. Utilice [QUAST](https://github.com/ablab/quast) v5.0.2 para revisar los estadísticos del ensamblaje. Genere y muestre el reporte. Responda ¿Qué le indican la longitud total, el número de *contigs* totales, el número de *contigs*, y las métricas de N50 y L50? Revise la siguiente [discusión](http://lh3.github.io/2020/04/08/a-new-metric-on-assembly-contiguity) y explique. 
+
+::: {.callout-tip collapse="true"}
+Una manera rápida de calcular las estadísticas sin el reporte visual es usando [seqfu]():
+
+```bash
+seqfu stats -n SRR13452514_1.f10.fastq.gz
+```
+
+| File              | #Seq      | Total bp    | Avg      | N50   | N75   | N90   | auN    | Min   | Max   |
+|-------------------|-----------|-------------|----------|-------|-------|-------|--------|-------|-------|
+| SRR13452514_1.f10.fastq.gz     | 4154060   | 627263060   | 151.00   | 151   | 151   | 151   | 0.00   | 151   | 151   |
+
+:::
+
+3. Según esto ¿Qué tan bien cree que se realizó el ensamblaje? de las dos muestras metagonómicas, cuál cree que tiene mejor calidad? Justifique su respuesta.
+
+## II. Predicción de genes y análisis funcional (50/100)
+
+Predicción de genes: La predicción de genes es la identificación algorítmica de segmentos de secuencias que son biológicamente funcionales, como los genes codificantes de proteínas, genes codificadores de ARN (e.g, 16S rARN) y secuencias reguladoras. Una vez ensamblado el genoma o el metagenoma, vamos a llevar a cabo la predicción de genes mediante el software [Bakta](https://github.com/oschwengers/bakta). 
+
+1. Ejecute `bakta` sobre cada ensamble (control y caso) realizado según la sección elegida al inicio del taller. Para esto utilice:
+
+:::{.callout-important}
+Recuerde activar el ambiente adecuado: `conda activate bakta-1.9.3`
+:::
+
+```bash
+bakta --threads 8\
+ --prefix <prefix>\
+ --db ~/.dbs/bakta-db/db-full\
+ --output <outdir>\
+ --meta\
+ --skip-trna\          #<1> 
+ --skip-tmrna\         #<2> 
+ --skip-rrna \         #<3> 
+ --skip-ncrna\         #<4> 
+ --skip-ncrna-region\  #<5> 
+ --skip-crispr\        #<6> 
+ <contigs>.fasta
+```
+1. Skip tRNA detection & annotation
+2. Skip tmRNA detection & annotation
+3. Skip rRNA detection & annotation
+4. Skip ncRNA detection & annotation
+5. Skip ncRNA region detection & annotation
+6. Skip CRISPR array detection & annotation
+
+***
+
+2. ¿Qué clase de archivos de salida produce Bakta, explique? Visualice el archivo `FAA` y cuente ¿Cuántas regiones codificantes encontró para cada muestra metagenómica?
+
+3. Ahora realice la clasificación funcional de los genes predichos y visualice. Para esto, utilice [COGclassifier](https://github.com/moshi4/COGclassifier/). Este software permite realizar la búsqueda de secuencias de consulta en la base de datos COG, pasando por la anotación y clasificación de las funciones de los genes, hasta la generación de figuras. ¿Qué porcentaje de secuencias fueron clasificadas? ¿Qué le indican las gráficas generadas? Adjunta las figuras y describelas.
+
+4. Responda a partir de los conteos de genes predichos y su anotación funcional ¿Qué diferencias observa entre las dos muestras metagenómicas? Especule sobre las posibles diferencias en la funcionalidad de la comunidad microbiana en cada una de las muestras (control y caso). Complemente su respuesta mediante la revisión del articulo de referencia[^2].
+
+[^1]: El bono es valido al realizar ambas comparaciones.
+
+[^2]: Bai, X., Narayanan, A., Nowak, P., Ray, S., Neogi, U., & Sönnerborg, A. (2021). Whole-genome metagenomic analysis of the gut microbiome in HIV-1-infected individuals on antiretroviral therapy. Frontiers in Microbiology, 12, 667718.

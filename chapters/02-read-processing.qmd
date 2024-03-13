@@ -5,7 +5,7 @@ El preprocesamiento de datos es una etapa fundamental en el análisis de datos e
 La importancia del preprocesamiento radica en que los datos de secuenciación pueden contener ruido, artefactos y errores que pueden afectar la interpretación de los resultados. Al realizar un adecuado preprocesamiento, se pueden eliminar estos problemas y obtener datos más confiables y precisos. Además, el preprocesamiento permite estandarizar los datos, eliminar secuencias de baja calidad y reducir el tamaño del conjunto de datos, lo que facilita su análisis y reduce el tiempo de procesamiento.
 
 
-::: {.callout-tip}
+::: {.callout-note}
 ## Objetivos
 Describir y entender los pasos involucrados en el preprocesamiento y limpieza de los datos de secuenciación, así como evaluar y mejorar la calidad de los datos de secuencia de un experimento de secuenciación.
 :::

@@ -1,0 +1,91 @@
+# Análisis de microbiomas con `microViz` {.unnumbered}
+
+::: {.callout-note appearance="simple"}
+## Objetivos
+En este taller se busca que el estudiante sea capaz de realizar análisis de diversidad utilizando la herramienta `microviz`, para ello se utilizarán datos de secuenciación de microbiomas y metadatos asociados de un estudio de manuscritos antiguos. Las siguientes preguntas requieren realizar mutiles análisis y procesamientos de datos, pero parten de un conjunto de datos limpio y filtrado que resulto de análisis previos (como los vistos en el curso). Consulte la presentación [aquí](https://camilogarciabotero.github.io/microviz-slides/microviz.html#/title-slide)
+:::
+
+
+0. Antes de iniciar con las preguntas de análisis, es importante revisar los conceptos de OTU y ASV, ya que en el taller se utilizarán como referencias a especies la nomenclatura OTU, sin embargo en clases anteriores se ha usado el termino ASV.  Por lo tanto, tómese su tiempo de consultar y explique las diferencias entre estas dos nomenclaturas.
+
+<!-- Que ocurre en la composición de los microorganismos en la muestra XX.
+* agreagar tipo de escritura -->
+
+::: {.callout-tip appearance="simple" collapse="true"}
+Para cargar los datos en `microViz` se deben seguir tres pasos (además de cargar las librerías):
+
+```{r}
+#| eval: false
+library(tidyverse)
+library(microViz)
+library(phyloseq)
+```
+
+1. Cargar los datos de OTU, ASV o taxonomía.
+```{r}
+#| eval: false
+#| include: true
+otus  <- read_delim("data/otu-table.txt")
+taxa   <- read_delim("data/taxa-table.txt")
+metadata <- read_delim("data/metadata.txt")
+```
+
+2. Transformar los datos a un formato que `microViz` pueda leer usando las funciones dedicadas:
+```{r}
+#| eval: false
+#| include: true
+#| echo: true
+sampledata <- metadata |>
+  column_to_rownames(var = "sampleID") |> 
+  sample_data()
+
+otutable  <- otus |>
+  column_to_rownames(var = "otuID") |> 
+  as.matrix() |> 
+  otu_table(taxa_are_rows = TRUE)
+
+taxatable  <- taxa |>
+  column_to_rownames(var = "otuID") |> 
+  as.matrix() |> 
+  tax_table()
+```
+
+3. Finalmente, se debe crear un objeto de tipo `phyloseq` que contenga los datos de OTU, ASV o taxonomía, y los metadatos asociados.
+```{r}
+#| eval: false
+phso  <- phyloseq(otutable, taxatable, sampledata)
+```
+
+:::
+
+## I. Análisis composicionales
+
+1. ¿Cómo varía la composición bacteriana a nivel de familia y género, según la época de la elaboración y la región, de los manuscritos tiene alguna relación con la composición bacteriana (agrupe el *top* 15 de cada ranking)? Muestre los resultados gráficamente, explique los resultados y discuta.
+
+2. Dentro de los microorganismos hallados en las muestras de manuscritos ¿Qué patógenos muestran altas abundancias (agrupe el *top* 15 de las especies)? Teniendo en cuenta los metadatos, especule para al menos tres patógenos por qué pueden estar presentes.
+
+::: {.callout-tip appearance="simple" collapse="true"}
+Recuerde usar la función `plot_bar` para visualizar los resultados.
+:::
+
+## II. Análisis ordinales
+
+1. ¿Existen géneros de microorganismos que permitan diferenciar las muestras de manuscritos según su región y época? Muestre mediante al menos dos análisis ordinales (PCA, PCoA) cuáles géneros contribuyen y son más importantes para cada una de estas categorías. Explique los resultados y discuta.
+
+::: {.callout-tip appearance="simple" collapse="true"}
+Recuerde usar la función `ord_calc` y `ord_plot` para los análisis ordinales.
+:::
+
+## III. Análisis de diversidad
+
+1. ¿Qué sitios de procedencia en España presentan mayor diversidad alfa y beta, y por qué puede estar ocurriendo de esta forma? Explique apoyándose en los metadatos.
+
+::: {.callout-tip appearance="simple" collapse="true"}
+Recuerde crear las variables de diversidad alfa y beta con la función `ps_calc_diversity` antes de crear los gráficos.
+:::
+
+2. ¿Cuál es la relación entre la diversidad de microorganismos y la época de elaboración de los manuscritos con las abundancias? Muestre los resultados gráficamente, explique los resultados y discuta.
+
+::: {.callout-tip appearance="simple" collapse="true"}
+La función `cor_heatmap` puede ser de ayuda para visualizar estas relaciones.
+:::

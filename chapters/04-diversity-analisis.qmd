@@ -1,7 +1,7 @@
 # Análisis de diversidad {.unnumbered}
 
 
-::: {.callout-tip appearance="simple"}
+::: {.callout-note appearance="simple"}
 ## Objetivos
 Explorar el flujo de Qiime2 para analizar la diversidad microbiana, considerando la influencia de la profundidad de muestreo, la dependencia de las probabilidades en la evaluación de la diversidad, y realizar cálculos de índices de diversidad junto con curvas de rarefacción.
 :::
