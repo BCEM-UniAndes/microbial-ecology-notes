@@ -1,56 +1,114 @@
 ## Genómica comparativa {.unnumbered}
 
 ::: {.callout-tip appearance="simple"}
-## Objetivos 
-1. Interpretar alineamientos de genomas.
-2. Poner en práctica conceptos evolutivos clave e inferir ortólogos y parálogos.
-3. Diseñar e implementar análisis comparativos para interrogar datos genómicos.
+## Objetivos
+
+1.  Interpretar alineamientos de genomas.
+2.  Poner en práctica conceptos evolutivos clave e inferir ortólogos y parálogos.
+3.  Diseñar e implementar análisis comparativos para interrogar datos genómicos.
 :::
 
 Datos:
 
-La práctica a realizar se basa parcialmente en este artículo de acceso libre donde se analizan los genomas completos de Archaea disponibles hasta el año 2003. Utilice la Tabla 1 referenciada en el artículo para escoger 6 genomas de géneros o familias de arquea que estén más o menos relacionados entre sí (es decir, pueden ser dos genomas de un mismo género, dos de otro género de la misma familia, y dos de otra familia).
+En la primera guía de este curso vimos que existen muchas bases de datos donde hay depositados genomas microbianos, y estas pueden diferir en carácterísticas como el nivel de curación o el nivel de especialización de la información. De esta manera, sabemos que en el [NCBI](https://www.ncbi.nlm.nih.gov/) podemos encontrar toda la información que la comunidad científica quiera depositar, pero que si queremos encontrar genomas confiables idealmente deberiamos utilizar [RefSeq](https://www.ncbi.nlm.nih.gov/refseq/). De manera alternativa, también podríamos utilizar la base de datos [GOLD](https://gold.jgi.doe.gov/) del [JGI](https://jgi.doe.gov/), que también es una base de datos curada de genomas.
 
-Nota: La combinación de los genomas es de su elección, la idea es que haya distintos grados de distancia evolutiva entre los genomas seleccionados.
+Adicional a estos recursos, existen otras bases de datos muy confiables y altamente curadas para encontrar genoma bacterianos. Por un lado, tenemos el [Integrated Microbial Genomes & Microbioms (IMG/M)](https://img.jgi.doe.gov/) y [BacDive](https://bacdive.dsmz.de/), que son bases de datos curadas que poseen un compendio muy amplio de genomas microbianos e información relevante de estos.
+
+En la práctica de hoy nos vamos a enfocar en bacterias que conforman la microbiota intestinal humana, y para nuestra conveniencia, también existen un par de bases de datos altamente curadas que están especializadas en este microbioma. Por un lado, tenemos la [Unified Human Gastrointestinal Genome (UHGG)](https://www.ebi.ac.uk/metagenomics/genome-catalogues/human-gut-v2-0-1), a la cual podemos acceder desde [MGnify](https://www.ebi.ac.uk/metagenomics), la cual es una base de datos semi-automatizada que busca establecer un catalogo de cientos de miles de genomas microbianos de referencia de la microbiota intestinal del ser humano y asociarla con información relevante de la fisiología de la microbiota y del hospedero. De manera similar, tenemos la bases de datos de microbiota intestinal del [Virtual Metabolic Human (VMH)](https://vmh.life/#microbes/search), que es un compendio más especializados de microbios que son considerados como altamente relevantes para la microbiota intestinal del humano, en donde además de encontrar información curada de los genomas microbianos, también podemos encontrar reconstrucciones metabólicas de escala genómica (GEMs) curadas de estos microbios.
+
+```{=html}
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-cly1{text-align:left;vertical-align:middle}
+.tg .tg-1wig{font-weight:bold;text-align:left;vertical-align:top}
+.tg .tg-mlwo{font-style:italic;text-align:left;vertical-align:middle}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+```
++-------------------------------------------------+----------------------------------------------------------------------------------+----------------------+-----------------------------------------------+----------------------------------------------------------------------------------+
+| Filum                                           | Especie                                                                          | Tipo                 | Taxón                                         | Acceso NCBI                                                                      |
++=================================================+==================================================================================+======================+===============================================+==================================================================================+
+| Bacteroidetes                                   | B. fragilis                                                                      | Patógeno oportunista | Bacteroides fragilis YCH46                    | [GCF_000009925.1](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000009925.1/) |
++-------------------------------------------------+----------------------------------------------------------------------------------+----------------------+-----------------------------------------------+----------------------------------------------------------------------------------+
+| Bacteroides fragilis NCTC 9343                  | [GCF_000025985.1](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000025985.1/) |                      |                                               |                                                                                  |
++-------------------------------------------------+----------------------------------------------------------------------------------+----------------------+-----------------------------------------------+----------------------------------------------------------------------------------+
+| Bacteroides fragilis 638R                       | [GCF_000210835.1](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000210835.1/) |                      |                                               |                                                                                  |
++-------------------------------------------------+----------------------------------------------------------------------------------+----------------------+-----------------------------------------------+----------------------------------------------------------------------------------+
+| Bacteroides fragilis 3_1_12                     | [GCF_000157015.1](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000157015.1/) |                      |                                               |                                                                                  |
++-------------------------------------------------+----------------------------------------------------------------------------------+----------------------+-----------------------------------------------+----------------------------------------------------------------------------------+
+| Firmicutes                                      | F. prausnitzii                                                                   | Comensal             | Faecalibacterium prausnitzii SL3/3            | [GCF_000209855.1](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000209855.1/) |
++-------------------------------------------------+----------------------------------------------------------------------------------+----------------------+-----------------------------------------------+----------------------------------------------------------------------------------+
+| Faecalibacterium prausnitzii L2-6               | [GCF_000210735.1](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000210735.1/) |                      |                                               |                                                                                  |
++-------------------------------------------------+----------------------------------------------------------------------------------+----------------------+-----------------------------------------------+----------------------------------------------------------------------------------+
+| Faecalibacterium prausnitzii M21/2              | [GCF_000154385.1](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000154385.1/) |                      |                                               |                                                                                  |
++-------------------------------------------------+----------------------------------------------------------------------------------+----------------------+-----------------------------------------------+----------------------------------------------------------------------------------+
+| Faecalibacterium prausnitzii Fp360              | [GCF_019967975.1](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_019967975.1/) |                      |                                               |                                                                                  |
++-------------------------------------------------+----------------------------------------------------------------------------------+----------------------+-----------------------------------------------+----------------------------------------------------------------------------------+
+| Proteobacteria                                  | C. jejuni                                                                        | Patógeno             | Campylobacter jejuni subsp. jejuni NCTC 11168 | [GCF_000009085.1](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000009085.1/) |
++-------------------------------------------------+----------------------------------------------------------------------------------+----------------------+-----------------------------------------------+----------------------------------------------------------------------------------+
+| Campylobacter jejuni subsp. jejuni M1           | [GCF_000148705.1](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000148705.1/) |                      |                                               |                                                                                  |
++-------------------------------------------------+----------------------------------------------------------------------------------+----------------------+-----------------------------------------------+----------------------------------------------------------------------------------+
+| Campylobacter jejuni subsp. jejuni ICDCCJ07004  | [GCF_000355845.1](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000355845.1/) |                      |                                               |                                                                                  |
++-------------------------------------------------+----------------------------------------------------------------------------------+----------------------+-----------------------------------------------+----------------------------------------------------------------------------------+
+| Campylobacter jejuni subsp. jejuni 81-176       | [GCF_000015525.1](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000015525.1/) |                      |                                               |                                                                                  |
++-------------------------------------------------+----------------------------------------------------------------------------------+----------------------+-----------------------------------------------+----------------------------------------------------------------------------------+
+| Actinobacteria                                  | B. longum                                                                        | Probiótico           | Bifidobacterium longum subsp. longum JCM 1217 | [GCF_000196555.1](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000196555.1/) |
++-------------------------------------------------+----------------------------------------------------------------------------------+----------------------+-----------------------------------------------+----------------------------------------------------------------------------------+
+| Bifidobacterium longum subsp. longum JDM301     | [GCF_000092325.1](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000092325.1/) |                      |                                               |                                                                                  |
++-------------------------------------------------+----------------------------------------------------------------------------------+----------------------+-----------------------------------------------+----------------------------------------------------------------------------------+
+| Bifidobacterium longum subsp. longum BBMN68     | [GCF_000166315.1](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000166315.1/) |                      |                                               |                                                                                  |
++-------------------------------------------------+----------------------------------------------------------------------------------+----------------------+-----------------------------------------------+----------------------------------------------------------------------------------+
+| Bifidobacterium longum subsp. longum ATCC 55813 | [GCF_000003135.1](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000003135.1/) |                      |                                               |                                                                                  |
++-------------------------------------------------+----------------------------------------------------------------------------------+----------------------+-----------------------------------------------+----------------------------------------------------------------------------------+
 
 ## I. Análisis de genomas {.unnumbered}
 
-1. En la página de ncbi busque los genomas seleccionados. Descargue los genomas a su computador (descargue (a) el genoma completo en fasta y (b) las secuencias de aminoácidos en fasta). Seleccione uno de los genomas como referencia y los otros van a ser usados para su comparación.
+1.  En la página de ncbi busque los genomas seleccionados. Descargue los genomas a su computador (descargue (a) el genoma completo en fasta y (b) las secuencias de aminoácidos en fasta). Seleccione uno de los genomas como referencia y los otros van a ser usados para su comparación.
 
-2. Usando la herramienta MAUVE realice el alineamiento multiple (para cada conjunto de genomas por separado). 
+2.  Usando la herramienta MAUVE realice el alineamiento multiple (para cada conjunto de genomas por separado).
 
 Nota: Esta herramienta se descarga a su máquina (su propio computador, es un programa de interfaz gráfica y se encuentra disponible para todos los sistemas operativos.
 
-a. Entregue un pantallazo del alineamiento para cada grupo de genomas.
+a.  Entregue un pantallazo del alineamiento para cada grupo de genomas.
 
-b. ¿Sí soportan su hipótesis que habían un conjunto de genomas más cercanamente asociado entre si que el otro? Discuta.
+b.  ¿Sí soportan su hipótesis que habían un conjunto de genomas más cercanamente asociado entre si que el otro? Discuta.
 
-3. Entre a la página de Integrated Microbial Genomes (IMG); vaya a la pestaña de “Compare Genomes”, después “Average Nucelotide Identity” y finalmente “Pairwise ANI”. Calcule el ANI pareado entre todos sus genomas, para cada grupo de interés por separado. Si tiene dudas del uso de la herramienta puede consultar este Webinar.
+<!-- -->
 
-a. Indique cuál fue el ANI y la Fracción Alineada (AF) para cada comparación.
+3.  Entre a la página de Integrated Microbial Genomes (IMG); vaya a la pestaña de “Compare Genomes”, después “Average Nucelotide Identity” y finalmente “Pairwise ANI”. Calcule el ANI pareado entre todos sus genomas, para cada grupo de interés por separado. Si tiene dudas del uso de la herramienta puede consultar este Webinar.
 
-b. Interprete los resultados, le indica más o menos lo mismo que encontró en el punto anterior?
+<!-- -->
 
-4. Vamos a hacer un análisis de ortólogos para los genomas. Para esto usaremos el programa OrthoVenn2, el cual está disponible en una plataforma web, y se utiliza para la comparación y anotación de grupos de genes ortólogos entre múltiples especies. No se requiere instalación ni registro. Funciona en cualquier sistema operativo con un navegador moderno y Javascript habilitado.
+a.  Indique cuál fue el ANI y la Fracción Alineada (AF) para cada comparación.
+
+b.  Interprete los resultados, le indica más o menos lo mismo que encontró en el punto anterior?
+
+<!-- -->
+
+4.  Vamos a hacer un análisis de ortólogos para los genomas. Para esto usaremos el programa OrthoVenn2, el cual está disponible en una plataforma web, y se utiliza para la comparación y anotación de grupos de genes ortólogos entre múltiples especies. No se requiere instalación ni registro. Funciona en cualquier sistema operativo con un navegador moderno y Javascript habilitado.
 
 Un tutorial detallado para su uso se encuentra disponible en este enlace.
 
-a. Lo primero que debe hacer es subir al sitio web los seis proteomas de los organismos que escogió. Es decir los archivos de proteínas en formato fasta (los descargó en el punto 1). Asigne a cada proteoma a una palabra que represente el organismo seleccionado, e.g. Human (recuerde no incluir caracteres como espacios).
+a.  Lo primero que debe hacer es subir al sitio web los seis proteomas de los organismos que escogió. Es decir los archivos de proteínas en formato fasta (los descargó en el punto 1). Asigne a cada proteoma a una palabra que represente el organismo seleccionado, e.g. Human (recuerde no incluir caracteres como espacios).
 
-b. Revise la información presentada en los resultados. Defina los conceptos básicos presentados, ¿a qué corresponden los siguientes términos?:
+b.  Revise la información presentada en los resultados. Defina los conceptos básicos presentados, ¿a qué corresponden los siguientes términos?:
 
-- Cluster
-- Overlapping cluster number
-- Cluster count
-- Protein count
-- Singleton
-- Single copy gene cluster
+-   Cluster
+-   Overlapping cluster number
+-   Cluster count
+-   Protein count
+-   Singleton
+-   Single copy gene cluster
 
-c. Interprete la información presentada. El gráfico de resumen muestra los grupos de genes ortólogos compartidos entre múltiples especies. ¿Qué tan similares son los genomas analizados? ¿Obtiene información adicional con respecto a lo analizado en los puntos anteriores?
+c.  Interprete la información presentada. El gráfico de resumen muestra los grupos de genes ortólogos compartidos entre múltiples especies. ¿Qué tan similares son los genomas analizados? ¿Obtiene información adicional con respecto a lo analizado en los puntos anteriores?
 
-d. Haga clic en el botón “Pairwise HeatMap” (Mapa de calor por pares) visualice los números de clusters compartidos para las especies de interés de forma pareada. ¿El patrón obtenido corresponde con su predicción inicial?
+d.  Haga clic en el botón “Pairwise HeatMap” (Mapa de calor por pares) visualice los números de clusters compartidos para las especies de interés de forma pareada. ¿El patrón obtenido corresponde con su predicción inicial?
 
-e. Al hacer clic en el número debajo de la columna “Cluster number” o en el número que aparece en el diagrama de Venn, se mostrarán los clusters compartidos entre especies. ¿A qué funciones biológicas corresponden los primeros 5 clusters en cada comparación?
+e.  Al hacer clic en el número debajo de la columna “Cluster number” o en el número que aparece en el diagrama de Venn, se mostrarán los clusters compartidos entre especies. ¿A qué funciones biológicas corresponden los primeros 5 clusters en cada comparación?
 
 → Para entregar:
 
