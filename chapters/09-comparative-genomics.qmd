@@ -1,0 +1,176 @@
+## Genómica comparativa {.unnumbered}
+
+::: {.callout-tip appearance="simple"}
+## Objetivos
+
+El objetivo de este taller es comprender el alcance y utilidad de las distintas aproximaciones para comparar genomas microbianos. De esta manera, vamos a poner en práctica conceptos evolutivos clave e inferir ortólogos y parálogos. Adicionalmente, vamos a interpretar alineamientos de genomas completos.                                 
+:::
+
+### Datos
+
+Existen bases de datos muy confiables y altamente curadas para encontrar genoma microbianos especificamente Por un lado, tenemos el [Integrated Microbial Genomes & Microbioms (IMG/M)](https://img.jgi.doe.gov/) y [BacDive](https://bacdive.dsmz.de/), que son bases de datos curadas que poseen un compendio muy amplio de genomas microbianos e información relevante de estos.
+
+En la práctica de hoy, vamos a trabajar puntualmente con en bacterias que conforman la microbiota intestinal humana. Para nuestra conveniencia, también existen un par de bases de datos altamente curadas que están especializadas en este microbioma. Por un lado, tenemos la [Unified Human Gastrointestinal Genome (UHGG)](https://www.ebi.ac.uk/metagenomics/genome-catalogues/human-gut-v2-0-1) (a la cual podemos acceder desde [MGnify](https://www.ebi.ac.uk/metagenomics)), que es una base de datos semi-automatizada que busca establecer un catalogo de cientos de miles de genomas microbianos de referencia de la microbiota intestinal del ser humano y asociarla con información relevante de la fisiología de la microbiota y del hospedero. De manera similar, tenemos la bases de datos de microbiota intestinal del [Virtual Metabolic Human (VMH)](https://vmh.life/#microbes/search), que es un compendio más especializados de microbios que son considerados como altamente relevantes para la microbiota intestinal del humano, en donde además de encontrar información curada de los genomas microbianos, también podemos encontrar reconstrucciones metabólicas a escala genómica (GEMs) curadas de estos microbios.
+
+Vamos a trabajar con una especie bacteriana representativa de cada uno de los principales filos que conforman la microbiota intestinal humana. En las bases mencionadas previamente pueden encontrar genomas para especies de su escogencia, sin embargo es importante que encuentren al menos 4 genomas por especies (idealmente de cepas distintas bien caracterizadas). Por facilidad, en la siguiente tabla les dejamos la información de 4 especies (y 4 cepas para cada especies) quee pueden utilizar para el taller.
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-lboi{border-color:inherit;text-align:left;vertical-align:middle}
+.tg .tg-wa9f{border-color:inherit;font-style:italic;text-align:left;vertical-align:middle}
+.tg .tg-7btt{border-color:inherit;font-weight:bold;text-align:center;vertical-align:top}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-7btt">Filo</th>
+    <th class="tg-7btt">Especie</th>
+    <th class="tg-7btt">Tipo</th>
+    <th class="tg-7btt">Taxón</th>
+    <th class="tg-7btt">Acceso NCBI</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-lboi" rowspan="4">Bacteroidetes</td>
+    <td class="tg-wa9f" rowspan="4">B. fragilis</td>
+    <td class="tg-lboi" rowspan="4">Patógeno oportunista</td>
+    <td class="tg-0pky"><span style="font-style:italic">Bacteroides fragilis</span> YCH46</td>
+    <td class="tg-0pky"><a href="https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000009925.1/">GCF_000009925.1</a></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"><span style="font-style:italic">Bacteroides fragilis</span> NCTC 9343</td>
+    <td class="tg-0pky"><a href="https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000025985.1/">GCF_000025985.1</a></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"><span style="font-style:italic">Bacteroides fragilis</span> 638R</td>
+    <td class="tg-0pky"><a href="https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000210835.1/">GCF_000210835.1</a></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"><span style="font-style:italic">Bacteroides fragilis</span> 3_1_12</td>
+    <td class="tg-0pky"><a href="https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000157015.1/">GCF_000157015.1</a></td>
+  </tr>
+  <tr>
+    <td class="tg-lboi" rowspan="4">Firmicutes</td>
+    <td class="tg-wa9f" rowspan="4">F. prausnitzii</td>
+    <td class="tg-lboi" rowspan="4">Comensal</td>
+    <td class="tg-0pky"><span style="font-style:italic">Faecalibacterium prausnitzii</span> SL3/3</td>
+    <td class="tg-0pky"><a href="https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000209855.1/">GCF_000209855.1</a></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"><span style="font-style:italic">Faecalibacterium prausnitzii</span> L2-6</td>
+    <td class="tg-0pky"><a href="https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000210735.1/">GCF_000210735.1</a></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"><span style="font-style:italic">Faecalibacterium prausnitzii</span> M21/2</td>
+    <td class="tg-0pky"><a href="https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000154385.1/">GCF_000154385.1</a></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"><span style="font-style:italic">Faecalibacterium prausnitzii</span>  Fp360</td>
+    <td class="tg-0pky"><a href="https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_019967975.1/">GCF_019967975.1</a></td>
+  </tr>
+  <tr>
+    <td class="tg-lboi" rowspan="4">Proteobacteria</td>
+    <td class="tg-wa9f" rowspan="4">C. jejuni</td>
+    <td class="tg-lboi" rowspan="4">Patógeno</td>
+    <td class="tg-0pky"><span style="font-style:italic">Campylobacter jejuni </span>subsp. jejuni NCTC 11168 = ATCC 700819</td>
+    <td class="tg-0pky"><a href="https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000009085.1/">GCF_000009085.1</a></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"><span style="font-style:italic">Campylobacter jejuni</span> subsp. jejuni M1</td>
+    <td class="tg-0pky"><a href="https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000148705.1/">GCF_000148705.1</a></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"><span style="font-style:italic">Campylobacter jejuni</span> subsp. jejuni ICDCCJ07004</td>
+    <td class="tg-0pky"><a href="https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000355845.1/">GCF_000355845.1</a></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"><span style="font-style:italic">Campylobacter jejuni</span> subsp. jejuni 81-176</td>
+    <td class="tg-0pky"><a href="https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000015525.1/">GCF_000015525.1</a></td>
+  </tr>
+  <tr>
+    <td class="tg-lboi" rowspan="4">Actinobacteria</td>
+    <td class="tg-wa9f" rowspan="4">B. longum</td>
+    <td class="tg-lboi" rowspan="4">Probiótico</td>
+    <td class="tg-0pky"><span style="font-style:italic">Bifidobacterium longum</span> subsp. longum JCM 1217</td>
+    <td class="tg-0pky"><a href="https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000196555.1/">GCF_000196555.1</a></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"><span style="font-style:italic">Bifidobacterium longum </span>subsp. longum JDM301</td>
+    <td class="tg-0pky"><a href="https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000092325.1/">GCF_000092325.1</a></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"><span style="font-style:italic">Bifidobacterium longum</span> subsp. longum BBMN68</td>
+    <td class="tg-0pky"><a href="https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000166315.1/">GCF_000166315.1</a></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky"><span style="font-style:italic">Bifidobacterium longum</span> subsp. longum ATCC 55813</td>
+    <td class="tg-0pky"><a href="https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000003135.1/">GCF_000003135.1</a></td>
+  </tr>
+</tbody>
+</table>  
+
+1.  En la página de ncbi busque los genomas seleccionados. Descargue los genomas a su computador (descargue (a) el genoma completo en fasta y (b) las secuencias de aminoácidos en fasta). Seleccione uno de los genomas como referencia y los otros van a ser usados para su comparación.
+
+::: {.callout-important collapse="true"}
+Le recomendamos guardar todos los genomas en una misma carpeta (e.g. `genomes_folder`) y todas las proteínas en una misma carepta (e.g. `proteins_folder`), donde los nombres de los genomas y proteínas coincidan o al menos tengan un sujifo o prefijo en común.
+:::
+
+<!-- -->
+
+2.  Calcule la distancia ANI entre todos los genomas utilizando [skani](https://github.com/bluenote-1577/skani). Indique cuál fue el ANI y la Fracción Alineada (AF) para cada comparación. Discuta: ¿Cúales fueron las especies más lejanas? ¿Cúales fueron las especies con mayor y menor variabilidad interna?
+
+::: {.callout-important collapse="true"}
+Use el ambiente de conda `skani-0.2.1` para correr skani. Si está enviando un trabajo a un cluster, recuerde que debe activar el ambiente de conda antes de correr el comando, para eso utilice `source activate skani-0.2.1`. Para generar los heatmaps a partir de las matrices de comparación de los genomas 'todos contra todos' debe descargar el script `clustermap_triangle.py`.
+
+``` bash
+wget https://raw.githubusercontent.com/bluenote-1577/skani/main/scripts/clustermap_triangle.py
+```
+:::
+
+-   Comparación de ANI de los genomas 'todos contra todos'
+
+``` bash
+skani triangle <genomes_folder/*> -t <threads> > skani_matrix.txt
+```
+
+-   Visualización de los resultados de las comparaciones
+
+``` bash
+python clustermap_triangle.py skani_matrix.txt <ani_percentage_tolerance>
+```
+
+<!-- -->
+
+3.  Vamos a hacer un análisis de ortólogos para los genomas. Para esto usaremos el programa [OrthoVenn3](https://orthovenn3.bioinfotoolkits.net/), el cual está disponible en una plataforma web, y se utiliza para la comparación y anotación de grupos de genes ortólogos entre múltiples especies. No se requiere instalación ni registro.
+
+a.  Revise la información presentada en los resultados. Defina los conceptos básicos presentados, ¿a qué corresponden los siguientes términos?:
+
+  -   Cluster
+  -   Overlapping cluster number
+  -   Cluster count
+  -   Protein count
+  -   Singleton
+  -   Single copy gene cluster
+
+b.  Interprete la información presentada. El gráfico de resumen muestra los grupos de genes ortólogos compartidos entre múltiples especies. ¿Qué tan similares son los genomas analizados? ¿Obtiene información adicional con respecto a lo analizado en los puntos anteriores?
+
+c.  Haga clic en el botón “Pairwise HeatMap” (Mapa de calor por pares) visualice los números de clusters compartidos para las especies de interés de forma pareada. ¿El patrón obtenido corresponde con su predicción inicial?
+
+d.  Al hacer clic en el número debajo de la columna “Cluster number” o en el número que aparece en el diagrama de Venn, se mostrarán los clusters compartidos entre especies. ¿A qué funciones biológicas corresponden los primeros 5 clusters en cada comparación?
+
+4.  Ahora vamos a realizar una comparación centrada en genomas para estudiar la sintenia entre los genomas. Pra esto, escoja una de las especies y realice un alineamiento de las 4 cepas utilizando la herramienta [MAUVE](https://darlinglab.org/mauve/mauve.html). Discuta las siguientes preguntas: ¿Hay sinténia? ¿Qué variaciones entre genomas encuentra interesantes?
+
+::: {.callout-important collapse="true"}
+Esta herramienta se descarga a su máquina (su propio computador, es un programa de interfaz gráfica y se encuentra disponible para todos los sistemas operativos.
+:::
+
+
+→ Para entregar:
+
+Entregue las respuestas a las interrogantes planteadas acompañadas de pantallazos de los resultados, cuando aplique.

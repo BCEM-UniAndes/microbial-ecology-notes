@@ -37,5 +37,23 @@
   },
   "chapters/08-comparative-genomics.qmd": {
     "08-comparative-genomics.html": "734096ef"
+  },
+  "chapters/microviz.qmd": {
+    "microviz.html": "9ca74d7e"
+  },
+  "chapters/05-microviz-analyses.qmd": {
+    "05-microviz-analyses.html": "1a69029e"
+  },
+  "chapters/06-microviz-analyses.qmd": {
+    "06-microviz-analyses.html": "5aa77490"
+  },
+  "chapters/07-mag-assembly.qmd": {
+    "07-mag-assembly.html": "bcc84ef3"
+  },
+  "chapters/08-binning.qmd": {
+    "08-binning.html": "f12a358e"
+  },
+  "chapters/09-comparative-genomics.qmd": {
+    "09-comparative-genomics.html": "11f30849"
   }
 }

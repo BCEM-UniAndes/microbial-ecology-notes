@@ -1,0 +1,102 @@
+---
+lang: 'es'
+toc: true
+code-annotations: select
+from: markdown+emoji
+---
+
+## Binning de metagenomas {.unnumbered}
+
+# Análisis de MAGs {.unnumbered}
+
+::: {.callout-note appearance="simple"}
+## Objetivos
+El objetivo de este taller es comprender las estrategias de *binning* y generar *bins* (o verdaderos MAGs), para luego usar algún sistema especializado de anotación de genomas, clasificarlos y visualizarlos. Para esto se usaran nuevamente las [muestras de metagenomas](https://www.ncbi.nlm.nih.gov/sra/SRX9865427) de pacientes con [VIH y sin VIH](https://www.frontiersin.org/journals/microbiology/articles/10.3389/fmicb.2021.667718/full), que fueron ensambladas a nivel de *contigs* mediante `megahit`. Los *contigs* se encuentran disponibles en el directorio `~/Datasets/Taller8`. Los archivos son:
+
+| Archivo                 | Descripción                                |
+|-------------------------|--------------------------------------------|
+| control.contigs.renamed.fa  | Contigs de un muestreo al 10% del control (Q_C3)  |
+| case.contigs.renamed.fa  |  Contigs de un muestreo al 10% del caso  (Q_H1) |
+
+Note que estos fueron generados usando `megahit`:
+
+```bash
+megahit -1 SRR13452514_1.f10.fastq.gz -2 SRR13452514_2.f10.fastq.gz -o <outdir>
+megahit -1 SRR13452521_1.f10.fastq.gz -2 SRR13452521_2.f10.fastq.gz -o <outdir>
+```
+
+:::{.callout-warning}
+Si desean pueden usar los archivos de los *contigs* generados en la práctica anterior por ustedes mismos, bajo su responsabilidad y riesgo :grimacing:
+:::
+
+Consulte la presentación de esta clase en este [link](https://camilogarciabotero.github.io/binning-slides/binning-slides.html).
+
+:::
+
+
+## I. Binning de MAGs
+
+1. Realice el *binning* de los metagenomas de las dos muestras usando [Vamb](https://github.com/RasmussenLab/vamb?tab=readme-ov-file#how-to-run-using-your-own-input-files). Para esto, primero debe concatenar el catálogo de *contigs* de las muestras de control y caso. Luego, mapee las lecturas de cada muestra al catálogo de *contigs* con `minimap2` y genere los archivos `BAM` correspondientes. Finalmente, realice propiamente el *binning* con `vamb`:
+
+:::{.callout-important collapse="true"}
+
+Use el ambiente de conda `vamb-4.1.3` para correr `vamb`. Si está enviando un trabajo a un cluster, recuerde que debe activar el ambiente de conda antes de correr el comando, para eso utilice `source activate vamb-4.1.3`. Las funciones `concatenate.py` y el paquete `minimap2` están disponibles en el mismo ambiente.
+:::
+
+- Concatenar el catálogo de genes de las muestras de control y caso. 
+
+```bash
+concatenate.py catalogue.fna.gz <contigs-case>.fa <contigs-control>.fa
+```
+
+```bash
+minimap2 -d catalogue.mmi catalogue.fna.gz;
+```
+
+- Mapear las lecturas de cada muestra al catálogo de *contigs* con `minimap2` y genere los archivos `BAM` correspondientes.
+
+```bash
+minimap2 -t 8\
+         -N 5\
+         -ax sr catalogue.mmi\
+         --split-prefix mmsplit\
+         <reads-fraction-forward>.fastq.gz <reads-fraction-forward>.fastq.gz\
+         | samtools view -F 3584 -b --threads 8 > <{case|control}>.bam
+```
+
+::: {.callout-caution}
+## Bono
+¿Qué hace la linea de comando `samtools view -F 3584 -b --threads 8 > <{case|control}>.bam`
+:::
+
+- Correr binning con Vamb
+
+```bash
+vamb --outdir <outdir> --fasta catalogue.fna.gz --bamfiles <maped-reads-{case|control}>.bam -o C
+```
+
+2. Revisa los *bins* generados mediante al menos una de las herramientas vistas anteriormente (BUSCO, QUAST, CheckM, *etc.*). Muestre y describa las estadísticas de calidad de los *bins* generados y concluya sobre la calidad de los mismos.
+
+3. Discuta sobre el número de *bins* generados a la luz de cada una de las muestras. ¿Qué puede concluir sobre el número y de los *bins* generados en cada muestra?
+
+## II. Clasificación, Anotación y Visualización de los *bins*
+
+1. Para clasificar los *bins* generados, use la herramienta [GTDB-Tk](https://github.com/Ecogenomics/GTDBTk) y el comando `classify_wf`. Revise la clasificación taxonómica de los *bins* y describa el lineaje taxonómico de los *bins* de cada muestra.
+
+:::{.callout-important collapse="true"}
+Para la clasificación de los *bins* generados, use el ambiente de conda `gtdbtk-2.3.2`. Si está enviando un trabajo a un cluster, recuerde que debe activar el ambiente de conda antes de correr el comando, para eso utilice `source activate gtdbtk-2.3.2`.
+
+```bash
+gtdbtk classify_wf --genome_dir <bins-dir> --out_dir <classified-bins> --skip_ani_screen
+```
+:::
+
+2. Anote el *bin* más completo de cada muestra de forma general mediante `bakta` del mismo modo que anotó los *contigs* en la práctica anterior. Muestre el resumen de la anotación del *bin* más completo en cada una de las muestras.
+
+3. Ingrese a [Proksee](https://proksee.ca) y visualice el *bin* más completo de cada muestra. Describa las características y muestre la visualización que obtiene luego de utilizar los parámetros de la interfaz.^[Notarás que la anotación de los genomas o *bins* puede hacerse directamente en Proksee, esto es posible pero recuerde dar la información de las estadísticas de anotación.]
+
+## III. Análisis especializado de los *bins*
+
+1. Planteé una pregunta de investigación sencilla que pueda ser resuelta mediante el análisis de una anotación especializada (*e.g.* AMRs, BGCs, CGCs) de los *bins* generados que permita entender las diferencias muestras de control y caso. Provea una justificación (preámbulo) de la pregunta. Apóyese en el artículo de origen de los metagenomas ^[Bai, X, et al., 2021].
+
+2. Muestre el resumen de la anotación especializada de cada uno de los *bins* más completos en cada una de las muestras y discuta los resultados a la luz de pregunta de investigación planteada.

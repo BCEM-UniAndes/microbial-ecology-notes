@@ -2,7 +2,7 @@
 
 En el campo de la Ecología Microbiana, el acceso a bases de datos y el uso de la línea de comandos son habilidades fundamentales para realizar análisis e investigaciones. En este capítulo, exploraremos cómo realizar búsquedas en bases de datos como las del NCBI y EBI, así como el uso de comandos en la terminal del sistema operativo Unix.
 
-::: {.callout-tip appearance="simple"}
+::: {.callout-note appearance="simple"}
 ## Objetivos
 
 Repasar comandos para realizar búsqueda en bases de datos como las del NCBI y EBI en búsquedas de utilidad en el contexto de análisis en Ecología Microbiana, así como también el uso de la línea de comandos en el sistema operativo Unix, combinando conceptos tanto informáticos como biológicos vistos en clase hasta ahora.

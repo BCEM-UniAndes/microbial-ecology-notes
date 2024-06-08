@@ -7,7 +7,7 @@ Un proceso fundamental en este ámbito es la derreplicación, que implica la ide
 
 La relevancia de la derreplicación radica en su capacidad para mitigar sesgos en la estimación de la diversidad y abundancia, proporcionando así una representación más precisa de la comunidad microbiana. En el campo de la ecología microbiana, la derreplicación se convierte en un componente crucial al reducir la sobreestimación de la diversidad, permitiendo interpretaciones más exactas sobre la estructura y composición de las comunidades microbianas. A lo largo de este taller, exploraremos cómo la derreplicación y otros procesos en QIIME2 contribuyen a la comprensión de la ecología microbiana a partir de datos de secuenciación de amplicones.
 
-:::{.callout-tip appearance="simple"}
+:::{.callout-note appearance="simple"}
 ## Objetivos
 
 Conocer la metodología para importar datos y crear artefactos, integrar archivos *manifest* y *metadata* de manera efectiva, generar Amplicon Sequence Variants (ASVs) utilizando DADA2 con derreplicación y corrección de errores, explorar archivos de salida para obtener frecuencias de ASVs, construir árboles filogenéticos mediante la metodología de *insertion placement*
