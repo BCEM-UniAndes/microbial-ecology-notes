@@ -6,7 +6,7 @@
 Explorar el flujo de Qiime2 para analizar la diversidad microbiana, considerando la influencia de la profundidad de muestreo, la dependencia de las probabilidades en la evaluación de la diversidad, y realizar cálculos de índices de diversidad junto con curvas de rarefacción.
 :::
 
-Usted obtiene los mismos datos del Taller pasado, amplicones de 16s RNA de peces de mar y río, con la particularidad de que esta vez cada pez no tiene la misma cantidad de lecturas. Usted debe realizar análisis de diversidad de estas secuencias teniendo en cuenta la cantidad de datos que está asignando a cada análisis.
+Usando los mismos datos del taller pasado, amplicones de 16s RNA de peces de mar y río, con la particularidad de que esta vez cada pez no tiene la misma cantidad de lecturas. Usted debe realizar análisis de diversidad de estas secuencias teniendo en cuenta la cantidad de datos que está asignando a cada análisis.
 
 ## I. Preparación de ambiente de trabajo
 
