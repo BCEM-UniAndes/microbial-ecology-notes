@@ -13,7 +13,7 @@ book:
   date: "2024-01-01"
   chapters:
     - index.qmd
-    # - chapters/01-cli-dbs.qmd
+    - chapters/01-cli-dbs.qmd
     # - chapters/02-read-processing.qmd
     # - chapters/03-qiime.qmd
     # - chapters/04-diversity-analisis.qmd
