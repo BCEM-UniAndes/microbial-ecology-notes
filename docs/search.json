@@ -28,5 +28,45 @@
     "crumbs": [
       "Introducción"
     ]
+  },
+  {
+    "objectID": "chapters/01-cli-dbs.html",
+    "href": "chapters/01-cli-dbs.html",
+    "title": "Bases de datos y la terminal",
+    "section": "",
+    "text": "I. Búsqueda en bases de datos\nEn el campo de la Ecología Microbiana y la biología computacional, el acceso a bases de datos y el uso de la línea de comandos son habilidades fundamentales para realizar análisis e investigaciones. En este capítulo, exploraremos cómo realizar búsquedas en bases de datos como las del NCBI y EBI, así como el uso de comandos en la terminal del sistema operativo Unix.\nEn primer lugar, vamos a realizar una búsqueda de literatura en la base de datos del NCBI a través de PubMed. Esta búsqueda nos permitirá obtener artículos relevantes relacionados con nuestro tema de interés en Ecología Microbiana.",
+    "crumbs": [
+      "Bases de datos y la terminal"
+    ]
+  },
+  {
+    "objectID": "chapters/01-cli-dbs.html#i.-búsqueda-en-bases-de-datos",
+    "href": "chapters/01-cli-dbs.html#i.-búsqueda-en-bases-de-datos",
+    "title": "Bases de datos y la terminal",
+    "section": "",
+    "text": "Especifique como realizó la búsqueda para cada punto. Solo si es necesario, adjunte pantallazos que acompañen la búsqueda.\n\n\n\n\nBusque artículos con Guankui Du como autor. ¿Cuántos encuentra?\nAhora busque artículos por Guankui Du y Li Ying , cuantos obtiene?\nSeleccione el artículo Effects of cat ownership on the gut microbiota of owners\n¿Cuantos individuos se analizaron en ese estudio?\nEn Información relacionada, buscar Data Availability. ¿Cuál es el número de acceso de este proyecto? ¿A qué proyecto pertenecen los datos?\n¿Cuántas entradas hay en SRA?\n¿A que corresponden los datos que están en SRA?\nBusque el sample id ERR1072659. A que tipo de estrategia de secuenciación corresponde? ¿Qué instrumento se usó para generar estos datos? ¿Cuantas corridas hacen parte de este experimento? ¿Y cuantas secuencias en total se generaron?\nSi entra a la corrida ERR1072659 en la sección de análisis que información le da? Cuál es el phylum bacteriano más abundante?\nQue información le da la sección reads y la sección Data Access? En el EBI\nRealice la misma búsqueda de artículos escritos por Guankui Du y Li Ying entre 2017 y 2023. De esta búsqueda: ¿Cuantos resultados da? ¿Son los mismos?\nSeleccione nuevamente el mismo artículo. ¿Cuántas citas obtiene? De un pantallazo de las citas en función del tiempo. ¿Si es diferente a los resultados del NCBI a que cree que se debe la diferencia?\nEn la sección de datos hay vínculos nuevamente a Bio-estudios, secuencias de nucleótidos y Magnify. ¿A que corresponde y a donde los lleva cada uno de estos links?\nAl entrar a Magnify ¿qué información pueden encontrar en esta base de datos? Con el número de accesión PRJEB11419 ¿a qué información puede acceder en los links correspondientes? (de ser necesario espere un poco a que cargue la información)\nEn el link de nucleótidos que lleva al ENA, hay referencia a un estudio. El Accession number de este estudio es el mismo encontrado en el NCBI? ¿A dónde lleva ese vínculo?\n¿Es posible encontrar las mismas corridas? ¿El mismo experimento? ¿Como se reconocen los códigos de acceso de las corridas o los experimentos? ¿Permite ver los análisis o descargar los datos?\nEn el link a Magnify ¿cuantos análisis están disponibles para este estudio? ¿Corresponden a los datos de secuenciación del gen 16S? o a shotgun metagenomics?\nEntrando al primer análisis, correspondiente al ERS1265399 (MGYA00608637). ¿Qué información le da cada una de las diferentes pestañas siguientes pestañas: Quality Control, Taxonomic analysis, Functional analysis, Download?.\n¿Considera más útiles los resultados obtenidos con el NCBI o con el EBI? Explique.",
+    "crumbs": [
+      "Bases de datos y la terminal"
+    ]
+  },
+  {
+    "objectID": "chapters/01-cli-dbs.html#ii.-comandos-básicos-en-unix",
+    "href": "chapters/01-cli-dbs.html#ii.-comandos-básicos-en-unix",
+    "title": "Bases de datos y la terminal",
+    "section": "II. Comandos básicos en Unix",
+    "text": "II. Comandos básicos en Unix\nInicie una sesión en el cluster vía ssh como se muestra en la introducción a los talleres.\n\nPara guardar tanto los comandos que ejecuta como los resultados use el comando script (e.j. script Resultados_Taller1_grupo01.txt).\nIdentifique en qué directorio y cuál es el path completo de donde se encuentra al iniciar la conexión.\nListe los contenidos en el directorio actual.\nCree su directorio de grupo con el nombre ejemplo: Grupo_01\nCambie de posición y entre al directorio de su grupo que acaba de crear. 6. ¿A dónde lo lleva el comando cd ~ y el comando cd ..? Vuelva al directorio del grupo que creó.\nCree un subdirectorio (en su directorio de grupo), llámelo Taller_1 y muévase a ese subdirectorio.\nListe los contenidos en el directorio Datasets usando la ruta relativa.\nDel directorio Datasets/Taller_2 copie el archivo comprimido llamado unix_class_file_samples.zip al directorio en el que se encuentra en este momento.\nListe los archivos en el directorio actual de modo que pueda observar los permisos de lectura, escritura y ejecución del mismo, la fecha, y el tamaño. ¿Qué tamaño tiene este archivo comprimido?\nCámbiele el nombre al archivo que copió, de modo que el nuevo nombre sea files-[GrupoX].zip.\nDescomprima los archivos y revise nuevamente qué tamaño ocupan. ¿Hay algún archivo ejecutable?\nVisualice cada uno de los archivos descomprimidos, ¿reconoce los formatos en los que se encuentran? ¿qué le indican las extensiones? Describa a qué corresponde cada formato.\nBusque la expresión product=16S ribosomal RNA en el archivo GCF_000005845.2_ASM584v2_genomic.gff con el comando grep. ¿Cuántas copias encuentra? ¿A qué se debe?",
+    "crumbs": [
+      "Bases de datos y la terminal"
+    ]
+  },
+  {
+    "objectID": "chapters/01-cli-dbs.html#iii.-ejecutando-un-script-en-el-cluster",
+    "href": "chapters/01-cli-dbs.html#iii.-ejecutando-un-script-en-el-cluster",
+    "title": "Bases de datos y la terminal",
+    "section": "III. Ejecutando un script en el cluster",
+    "text": "III. Ejecutando un script en el cluster\nConsulte la documentación de Hypatia en la ruta: /hpcfs/shared/README/. Lea, en su orden, los siguientes archivos: a. readme.txt\n\nsrun.txt\npartitions.txt\ntestjob.sh\n\n\n\nDe acuerdo a su lectura, responda a las siguientes preguntas:\n\n\n¿Qué es SLURM, para que se usa y por qué es importante? Explore en línea cuáles son los comandos básicos para utilizar bajo este sistema. ¿Para qué se utilizan sbatch, srun, scancel, y squeue? También puede usar el comando man para determinar qué hacen y qué argumentos toman estos y otros comandos.\nDespués de consultar los contenidos del archivo srun.txt en /hpcfs/shared/README/, explique cómo se especifican los recursos requeridos en una sesión interactiva. ¿Para qué sirve modificar estos valores de los argumentos?\n¿Qué particiones existen y qué límites de tiempo y capacidad de memoria RAM tiene cada una? ¿Para una corrida de prueba, qué partición usaría?\nUse el archivo testjob.sh que ya se encuentra en su directorio de grupo. ¿Qué parámetros de solicitud de recursos puede modificar?\n\n\nInicie un nodo interactivo (srun --pty bash) y asegúrese de estar en el subdirectorio Taller01 del grupo que creó.\nListe los módulos existentes en Hypatia y los que tiene cargados en este momento.\nVa a correr un script utilizando bash. Pero primero, identifique si bash está dentro de su PATH de ejecución. ¿Cómo lo hace?\nVerifique la dirección donde se encuentra bash con el commando which.\nCambie los permisos del archivo (testjob.sh) para que sean ejecutables por el dueño del archivo pero no por el grupo.\nAhora sí ejecute el script, ¿qué aparece impreso en la terminal? Consulte qué es standard output y el standard error en el contexto de ejecución de un programa.",
+    "crumbs": [
+      "Bases de datos y la terminal"
+    ]
   }
 ]
