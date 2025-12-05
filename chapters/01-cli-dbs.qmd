@@ -10,7 +10,7 @@ Repasar comandos para realizar búsqueda en bases de datos como las del NCBI y E
 
 ## I. Búsqueda en bases de datos
 
-En primer lugar, realizaremos una búsqueda de literatura en la base de datos del NCBI a través de [PubMed](https://pubmed.ncbi.nlm.nih.gov/). Esta búsqueda nos permitirá obtener artículos relevantes relacionados con nuestro tema de interés en Ecología Microbiana.
+En primer lugar, vamos a realizar una búsqueda de literatura en la base de datos del NCBI a través de [PubMed](https://pubmed.ncbi.nlm.nih.gov/). Esta búsqueda nos permitirá obtener artículos relevantes relacionados con nuestro tema de interés en Ecología Microbiana.
 
 ::: {.callout-important appearance="simple" collapse="true"}
 Especifique como realizó la búsqueda para cada punto. Solo si es necesario, adjunte pantallazos que acompañen la búsqueda.
