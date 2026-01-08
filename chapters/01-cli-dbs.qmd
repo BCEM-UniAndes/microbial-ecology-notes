@@ -1,11 +1,14 @@
 # Bases de datos y la terminal {.unnumbered}
 
-En el campo de la Ecología Microbiana y la biología computacional, el acceso a bases de datos y el uso de la línea de comandos son habilidades fundamentales para realizar análisis e investigaciones. En este capítulo, exploraremos cómo realizar búsquedas en bases de datos como las del NCBI y EBI, así como el uso de comandos en la terminal del sistema operativo Unix.
+El acceso a bases de datos y el uso de la línea de comandos son habilidades fundamentales para realizar investigaciones en ecología microbiana y biología computacional. En este taller, aprenderemos a realizar búsquedas en bases de datos como las del NCBI y del EBI, así como a usar comandos en la terminal del sistema operativo Unix.
 
 ::: {.callout-note appearance="simple"}
 ## Objetivos
 
-Repasar comandos para realizar búsqueda en bases de datos como las del NCBI y EBI en búsquedas de utilidad en el contexto de análisis en Ecología Microbiana, así como también el uso de la línea de comandos en el sistema operativo Unix, combinando conceptos tanto informáticos como biológicos vistos en clase hasta ahora.
+1. Familiarizarse con el uso de bases de datos biológicas, como las del NCBI y del EBI, para la búsqueda de datos e información en el ámbito de la ecología microbiana.
+2. Aprender y aplicar comandos básicos de la línea de comando en sistemas operativos Unix para la gestión y el procesamiento de datos biológicos.
+3. Comenzar a integrar conceptos biológicos y computacionales abordados en clase para realizar búsquedas, manipular archivos y realizar análisis exploratorios de datos de secuenciación.
+
 :::
 
 ## I. Búsqueda en bases de datos
@@ -18,41 +21,39 @@ Especifique como realizó la búsqueda para cada punto. Solo si es necesario, ad
 
 1.  Busque artículos con Guankui Du como autor. ¿Cuántos encuentra?
 
-2.  Ahora busque artículos por Guankui Du y Li Ying , cuantos obtiene?
+2.  Ahora busque artículos por Guankui Du y Li Ying. ¿Cuántos encuentra?
 
-3.  Seleccione el artículo *Effects of cat ownership on the gut microbiota of owners*
+3.  Seleccione el artículo *Effects of cat ownership on the gut microbiota of owners* ¿Cuántos individuos se analizaron en ese estudio?
 
-4.  ¿Cuantos individuos se analizaron en ese estudio?
+4.  En la información relacionada, buscar *Data Availability*. ¿Cuál es el número de acceso de este proyecto? ¿A qué proyecto pertenecen los datos?
 
-5.  En Información relacionada, buscar *Data Availability*. ¿Cuál es el número de acceso de este proyecto? ¿A qué proyecto pertenecen los datos?
+5.  ¿Cuántas entradas hay en SRA?
 
-6.  ¿Cuántas entradas hay en SRA?
+6.  ¿A qué corresponden los datos que están en SRA?
 
-7.  ¿A que corresponden los datos que están en SRA?
+7.  Busque el Run de secuenciación ERR1072659. ¿A qué tipo de estrategia de secuenciación corresponde? ¿Qué instrumento se utilizó para generar estos datos? ¿Cuántas corridas hacen parte de este experimento? ¿Y cuántas secuencias en total se generaron?
 
-8.  Busque el sample id ERR1072659. A que tipo de estrategia de secuenciación corresponde? ¿Qué instrumento se usó para generar estos datos? ¿Cuantas corridas hacen parte de este experimento? ¿Y cuantas secuencias en total se generaron?
+8.  Si entra a la corrida ERR1072659 en la sección de análisis, ¿qué información le proporciona? ¿Cuál es el filo bacteriano más abundante?
 
-9.  Si entra a la corrida ERR1072659 en la sección de análisis que información le da? Cuál es el phylum bacteriano más abundante?
+9. En el [EBI](http://europepmc.org/), realice de nuevo la búsqueda del Run de secuenciación con número de acceso ERR1072659. Revise la información técnica disponible sobre las lecturas generadas, incluyendo el número total de bases y el estado de acceso a los datos. ¿La información encontrada es consistente con la reportada en el SRA o se observan diferencias entre ambos repositorios?
 
-10. Que información le da la sección *reads* y la sección *Data Access*? En el [EBI](http://europepmc.org/)
+10. Realice la misma búsqueda de artículos escritos por Guankui Du y Li Ying, pero limitando el período de publicación entre 2017 y 2023. A partir de esta búsqueda, ¿cuántos resultados se obtienen en cada caso? ¿Son los mismos artículos para ambos autores?
 
-11. Realice la misma búsqueda de artículos escritos por Guankui Du y Li Ying entre 2017 y 2023. De esta búsqueda: ¿Cuantos resultados da? ¿Son los mismos?
+11. Seleccione nuevamente el mismo artículo. ¿Cuántas citas obtiene? De un pantallazo de las citas en función del tiempo. ¿Si es diferente a los resultados del NCBI a que cree que se debe la diferencia?
 
-12. Seleccione nuevamente el mismo artículo. ¿Cuántas citas obtiene? De un pantallazo de las citas en función del tiempo. ¿Si es diferente a los resultados del NCBI a que cree que se debe la diferencia?
+12. En la sección de datos hay vínculos nuevamente a Bio-estudios, secuencias de nucleótidos y Magnify. ¿A que corresponde y a donde los lleva cada uno de estos links?
 
-13. En la sección de datos hay vínculos nuevamente a Bio-estudios, secuencias de nucleótidos y Magnify. ¿A que corresponde y a donde los lleva cada uno de estos links?
+13. Al entrar a [Magnify](https://www.ebi.ac.uk/metagenomics/search/studies) ¿qué información pueden encontrar en esta base de datos? Con el número de accesión PRJEB11419 ¿a qué información puede acceder en los links correspondientes? (de ser necesario espere un poco a que cargue la información)
 
-14. Al entrar a [Magnify](https://www.ebi.ac.uk/metagenomics/search/studies) ¿qué información pueden encontrar en esta base de datos? Con el número de accesión PRJEB11419 ¿a qué información puede acceder en los links correspondientes? (de ser necesario espere un poco a que cargue la información)
+14. En el link de nucleótidos que lleva al ENA, hay referencia a un estudio. El *Accession number* de este estudio es el mismo encontrado en el NCBI? ¿A dónde lleva ese vínculo?
 
-15. En el link de nucleótidos que lleva al ENA, hay referencia a un estudio. El *Accession number* de este estudio es el mismo encontrado en el NCBI? ¿A dónde lleva ese vínculo?
+15. ¿Es posible encontrar las mismas corridas? ¿El mismo experimento? ¿Como se reconocen los códigos de acceso de las corridas o los experimentos? ¿Permite ver los análisis o descargar los datos?
 
-16. ¿Es posible encontrar las mismas corridas? ¿El mismo experimento? ¿Como se reconocen los códigos de acceso de las corridas o los experimentos? ¿Permite ver los análisis o descargar los datos?
+16. En el link a [Magnify](https://www.ebi.ac.uk/metagenomics/search/studies) ¿cuantos análisis están disponibles para este estudio? ¿Corresponden a los datos de secuenciación del gen 16S? o a *shotgun metagenomics*?
 
-17. En el link a [Magnify](https://www.ebi.ac.uk/metagenomics/search/studies) ¿cuantos análisis están disponibles para este estudio? ¿Corresponden a los datos de secuenciación del gen 16S? o a *shotgun metagenomics*?
+17. Entrando al primer análisis, correspondiente al ERS1265399 (MGYA00608637). ¿Qué información le da cada una de las diferentes pestañas siguientes pestañas: *Quality Control, Taxonomic analysis, Functional analysis, Download*?.
 
-18. Entrando al primer análisis, correspondiente al ERS1265399 (MGYA00608637). ¿Qué información le da cada una de las diferentes pestañas siguientes pestañas: *Quality Control, Taxonomic analysis, Functional analysis, Download*?.
-
-19. ¿Considera más útiles los resultados obtenidos con el NCBI o con el EBI? Explique.
+18. ¿Considera más útiles los resultados obtenidos con el NCBI o con el EBI? Explique.
 
 ## II. Comandos básicos en Unix
 
