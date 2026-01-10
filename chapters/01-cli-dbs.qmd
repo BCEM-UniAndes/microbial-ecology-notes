@@ -1,6 +1,6 @@
 # Bases de datos y la terminal {.unnumbered}
 
-El acceso a bases de datos y el uso de la línea de comandos son habilidades fundamentales para realizar investigaciones en ecología microbiana y biología computacional. En este taller, aprenderemos a realizar búsquedas en bases de datos como las del NCBI y del EBI, así como a usar comandos en la terminal del sistema operativo Unix.
+El acceso a bases de datos biológicas y el uso de la línea de comandos se han convertido en habilidades esenciales para la investigación en ecología microbiana y biología computacional. El crecimiento acelerado de los datos generados por técnicas de secuenciación masiva ha hecho indispensable saber localizar, interpretar y reutilizar información disponible en repositorios públicos. En este taller aprenderemos a realizar búsquedas eficientes en bases de datos como las del NCBI y el EBI, y a comprender cómo se organizan los proyectos, muestras y datos de secuenciación. Además, nos familiarizaremos con el uso de la línea de comandos en sistemas operativos Unix como una herramienta clave para acceder, gestionar y explorar datos biológicos de manera reproducible y eficiente.
 
 ::: {.callout-note appearance="simple"}
 ## Objetivos
@@ -13,13 +13,13 @@ El acceso a bases de datos y el uso de la línea de comandos son habilidades fun
 
 ## I. Búsqueda en bases de datos
 
-En primer lugar, vamos a realizar una búsqueda de literatura en la base de datos del NCBI a través de [PubMed](https://pubmed.ncbi.nlm.nih.gov/). Esta búsqueda nos permitirá obtener artículos relevantes relacionados con nuestro tema de interés en Ecología Microbiana.
+En primer lugar, vamos a realizar una búsqueda de literatura en la base de datos del NCBI a través de [PubMed](https://pubmed.ncbi.nlm.nih.gov/) y la del EBI a traves de [Europe PMC](https://europepmc.org/). Esta búsqueda nos permitirá obtener artículos relevantes relacionados con nuestro tema de interés en Ecología Microbiana. Tenga en cuenta que vamos a movernos por difenrentes páginas
 
 ::: {.callout-important appearance="simple" collapse="true"}
 Especifique como realizó la búsqueda para cada punto. Solo si es necesario, adjunte pantallazos que acompañen la búsqueda.
 :::
 
-1.  Busque artículos con Guankui Du como autor. ¿Cuántos encuentra?
+1.  En PubMed busque artículos con Guankui Du como autor. ¿Cuántos encuentra?
 
 2.  Ahora busque artículos por Guankui Du y Li Ying. ¿Cuántos encuentra?
 
@@ -35,17 +35,17 @@ Especifique como realizó la búsqueda para cada punto. Solo si es necesario, ad
 
 8.  Si entra a la corrida ERR1072659 en la sección de análisis, ¿qué información le proporciona? ¿Cuál es el filo bacteriano más abundante?
 
-9. En el [EBI](http://europepmc.org/), realice de nuevo la búsqueda del Run de secuenciación con número de acceso ERR1072659. Revise la información técnica disponible sobre las lecturas generadas, incluyendo el número total de bases y el estado de acceso a los datos. ¿La información encontrada es consistente con la reportada en el SRA o se observan diferencias entre ambos repositorios?
+9. En el ENA realice de nuevo la búsqueda del Run de secuenciación con número de acceso ERR1072659. Revise la información técnica disponible sobre las lecturas generadas, incluyendo el número total de bases y el estado de acceso a los datos. ¿La información encontrada es consistente con la reportada en el SRA o se observan diferencias entre ambos repositorios?
 
-10. Realice la misma búsqueda de artículos escritos por Guankui Du y Li Ying, pero limitando el período de publicación entre 2017 y 2023. A partir de esta búsqueda, ¿cuántos resultados se obtienen en cada caso? ¿Son los mismos artículos para ambos autores?
+10. Ahora en Europe PMC, realice la misma búsqueda de artículos escritos por Guankui Du y Li Ying, pero limitando el período de publicación entre 2017 y 2026. A partir de esta búsqueda, ¿cuántos resultados se obtienen en cada caso? ¿Son los mismos artículos para ambos autores?
 
-11. Seleccione nuevamente el mismo artículo. ¿Cuántas citas obtiene? De un pantallazo de las citas en función del tiempo. ¿Si es diferente a los resultados del NCBI a que cree que se debe la diferencia?
+11. Seleccione nuevamente el mismo artículo y revise cuántas citas tiene. Tome un pantallazo de la gráfica de citas en función del tiempo y compare este número con el reportado en el NCBI. En caso de encontrar diferencias entre ambos valores, explique a qué cree que se debe esta discrepancia.
 
 12. En la sección de datos hay vínculos nuevamente a Bio-estudios, secuencias de nucleótidos y Magnify. ¿A que corresponde y a donde los lleva cada uno de estos links?
 
 13. Al entrar a [Magnify](https://www.ebi.ac.uk/metagenomics/search/studies) ¿qué información pueden encontrar en esta base de datos? Con el número de accesión PRJEB11419 ¿a qué información puede acceder en los links correspondientes? (de ser necesario espere un poco a que cargue la información)
 
-14. En el link de nucleótidos que lleva al ENA, hay referencia a un estudio. El *Accession number* de este estudio es el mismo encontrado en el NCBI? ¿A dónde lleva ese vínculo?
+14. En MGnify, dentro de la sección de enlaces externos, se encuentra un vínculo que dirige al ENA, donde se hace referencia a un estudio asociado. Revise el *accession number* de este estudio y compárelo con el encontrado previamente en el NCBI. ¿Corresponden al mismo proyecto? ¿A qué tipo de información conduce este vínculo dentro del ENA?
 
 15. ¿Es posible encontrar las mismas corridas? ¿El mismo experimento? ¿Como se reconocen los códigos de acceso de las corridas o los experimentos? ¿Permite ver los análisis o descargar los datos?
 
@@ -57,7 +57,7 @@ Especifique como realizó la búsqueda para cada punto. Solo si es necesario, ad
 
 ## II. Comandos básicos en Unix
 
-Inicie una sesión en el cluster vía `ssh` como se muestra en la introducción a los talleres.
+Inicie una sesión en el cluster vía `ssh` como se muestra en la introducción a los talleres. Tenga en cuenta que, para los siguientes puntos, se espera que usted investigue y determine de manera autónoma cómo llevar a cabo cada una de las tareas solicitadas.
 
 1.  Para guardar tanto los comandos que ejecuta como los resultados use el comando script (e.j. `script Resultados_Taller1_grupo01.txt`).
 
@@ -67,11 +67,11 @@ Inicie una sesión en el cluster vía `ssh` como se muestra en la introducción 
 
 4.  Cree su directorio de grupo con el nombre ejemplo: `Grupo_01`
 
-5.  Cambie de posición y entre al directorio de su grupo que acaba de crear. 6. ¿A dónde lo lleva el comando `cd ~` y el comando `cd ..`? Vuelva al directorio del grupo que creó.
+5.  Cambie de posición y entre al directorio de su grupo que acaba de crear. ¿A dónde lo lleva el comando `cd ~` y el comando `cd ..`?
 
-6.  Cree un subdirectorio (en su directorio de grupo), llámelo `Taller_1` y muévase a ese subdirectorio.
+6.  Regrese al directorio del grupo que creó y cree un subdirectorio (en su directorio de grupo), llámelo `Taller_1` y muévase a ese subdirectorio.
 
-7.  Liste los contenidos en el directorio `Datasets` usando la ruta relativa.
+7.  Sin cambiar su ubicación, liste los contenidos del directorio `Datasets` usando la ruta relativa.
 
 8.  Del directorio `Datasets/Taller_2` copie el archivo comprimido llamado `unix_class_file_samples.zip` al directorio en el que se encuentra en este momento.
 
