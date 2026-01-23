@@ -65,15 +65,15 @@ Inicie una sesión en el cluster vía `ssh` como se muestra en la introducción 
 
 3.  Liste los contenidos en el directorio actual.
 
-4.  Cree su directorio de grupo con el nombre ejemplo: `Grupo_01`
+4.  Diríjase al directorio "grupos" y cree su directorio de grupo con el nombre ejemplo: `Grupo_01`
 
-5.  Cambie de posición y entre al directorio de su grupo que acaba de crear. ¿A dónde lo lleva el comando `cd ~` y el comando `cd ..`?
+5.  Cambie de ubicación y entre al directorio de su grupo que acaba de crear. ¿A dónde lo lleva el comando `cd ~` y el comando `cd ..`?
 
 6.  Regrese al directorio del grupo que creó y cree un subdirectorio (en su directorio de grupo), llámelo `Taller_1` y muévase a ese subdirectorio.
 
-7.  Sin cambiar su ubicación, liste los contenidos del directorio `Datasets` usando la ruta relativa.
+7.  Sin cambiar su ubicación, liste los contenidos del directorio `datasets` usando la ruta relativa.
 
-8.  Del directorio `Datasets/Taller_2` copie el archivo comprimido llamado `unix_class_file_samples.zip` al directorio en el que se encuentra en este momento.
+8.  Del directorio `datasets/Taller_1` copie el archivo comprimido llamado `unix_class_file_samples.zip` al directorio en el que se encuentra en este momento.
 
 9.  Liste los archivos en el directorio actual de modo que pueda observar los permisos de lectura, escritura y ejecución del mismo, la fecha, y el tamaño. ¿Qué tamaño tiene este archivo comprimido?
 
@@ -83,7 +83,7 @@ Inicie una sesión en el cluster vía `ssh` como se muestra en la introducción 
 
 12. Visualice cada uno de los archivos descomprimidos, ¿reconoce los formatos en los que se encuentran? ¿qué le indican las extensiones? Describa a qué corresponde cada formato.
 
-13. Busque la expresión `product=16S ribosomal RNA` en el archivo `GCF_000005845.2_ASM584v2_genomic.gff` con el comando `grep`. ¿Cuántas copias encuentra? ¿A qué se debe?
+13. Busque la expresión `^>ERR2816993.3490` en el archivo `ERR2816993_1.fasta` con el comando `grep`. ¿Qué resultado obtiene? ¿A qué qué corresponde?
 
 ## III. Ejecutando un *script* en el cluster
 
@@ -97,7 +97,7 @@ d.  `testjob.sh`
 
 1.  De acuerdo a su lectura, responda a las siguientes preguntas:
 
--   ¿Qué es SLURM, para que se usa y por qué es importante? Explore en línea cuáles son los comandos básicos para utilizar bajo este sistema. ¿Para qué se utilizan `sbatch`, `srun`, `scancel`, y `squeue`? También puede usar el comando man para determinar qué hacen y qué argumentos toman estos y otros comandos.
+-   ¿Qué es SLURM, para qué se usa y por qué es importante? Explore en línea cuáles son los comandos básicos para utilizar bajo este sistema. ¿Para qué se utilizan `sbatch`, `srun`, `scancel`, y `squeue`? También puede usar el comando man para determinar qué hacen y qué argumentos toman estos y otros comandos.
 
 -   Después de consultar los contenidos del archivo `srun.txt` en `/hpcfs/shared/README/`, explique cómo se especifican los recursos requeridos en una sesión interactiva. ¿Para qué sirve modificar estos valores de los argumentos?
 
