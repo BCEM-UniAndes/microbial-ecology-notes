@@ -1,66 +1,74 @@
 # Preprocesamiento de lecturas {.unnumbered}
 
-El preprocesamiento de datos es una etapa fundamental en el análisis de datos en el campo de la ecología microbiana. Consiste en una serie de pasos y técnicas que se aplican a los datos de secuenciación para limpiarlos, corregir posibles errores y mejorar su calidad antes de realizar análisis posteriores.
+El preprocesamiento de datos es una etapa fundamental en el análisis de datos en el campo de la ecología microbiana, y en general en cualquier campo de la bioinformática. Consiste en una serie de pasos y técnicas que se aplican a los datos de secuenciación para limpiarlos, corregir posibles errores y mejorar su calidad antes de realizar análisis posteriores.
 
 La importancia del preprocesamiento radica en que los datos de secuenciación pueden contener ruido, artefactos y errores que pueden afectar la interpretación de los resultados. Al realizar un adecuado preprocesamiento, se pueden eliminar estos problemas y obtener datos más confiables y precisos. Además, el preprocesamiento permite estandarizar los datos, eliminar secuencias de baja calidad y reducir el tamaño del conjunto de datos, lo que facilita su análisis y reduce el tiempo de procesamiento.
 
 
 ::: {.callout-note}
 ## Objetivos
-Describir y entender los pasos involucrados en el preprocesamiento y limpieza de los datos de secuenciación, así como evaluar y mejorar la calidad de los datos de secuencia de un experimento de secuenciación.
+1. Describir y entender los pasos involucrados en el preprocesamiento y limpieza de los datos de secuenciación
+2. Evaluar y mejorar la calidad de los datos de secuencia de un experimento de secuenciación.
 :::
 
-## I. Control de calidad
+## I. Control de calidad (70%)
 
-Los datos para usar en esta sección se depositaron en el *European Nucleotide Archive* (ENA). Puede ir al sitio web de ENA y buscar los archivos con el número de acceso SRR1776881.
+Los datos para usar en esta sección se depositaron en las dos bases de datos de secuenciación vistos en el taller pasado. Puede ir a cualquiera de estos y buscar los archivos con el número de acceso SRR2005652. Luego de esto responda:
 
-1. ¿A qué experimento corresponden los datos? ¿Cuál fue el tipo de secuenciación ¿A qué experimento corresponden los datos? ¿Cuál fue el tipo de secuenciación utilizada para esta corrida? ¿A que organismo corresponden estos datos? ¿Qué estrategia y instrumento de secuenciación fue utilizada? ¿Los datos corresponden a ADN o ARN? (puntaje 5/100)
+1. ¿A qué artículo corresponden los datos?, ¿cuál fue el tipo de secuenciación?, ¿a qué experimento en específico corresponden las lecturas de la accesión?, ¿cuál fue el tipo de secuenciación utilizada para estas corridas?, ¿a que organismo corresponden estos datos?, ¿qué estrategia e instrumento de secuenciación fue utilizado? y ¿los datos corresponden a ADN o ARN?
 
-Como ha podido observar, estos archivos contienen alrededor de 2 millones de
-lecturas y, por lo tanto, son bastante grandes. Solo usaremos un subconjunto del
-conjunto de datos original para este taller.
-
-
-2. Cree un directorio de datos en su carpeta de grupo que tenga el nombre `preprocesamiento`
-
-3. Copie el *script* `SRA_download_NCBI.sh` del directorio `~/datasets/Taller2/` hacia su directorio de grupo.
-
-4. Abra el archivo que copió, realice una búsqueda y describa qué qué hace el comando `fastq-dump` y describa las opciones `-I`, `--split-files`, `--gzip` y `--outdir` del set de utilidades *SRA Toolkit*. (puntaje 5/100)
-
-5. Copie los archivos con la extensión `fastq.gz` que están presentes en el directorio de datasets en la carpeta `Taller2` hacia el directorio `preprocesamiento` en su directorio de grupo.
-
-6. ¿Cuántas lecturas hay por archivo? Realice el conteo tomando en cuenta las cuatro líneas por lectura, de acuerdo con lo visto en la sesión de preparación para el taller. Al revisar los nombres de las primeras 5 secuencias en ambos archivos. ¿Cómo distingue que son secuencias pareadas? puede usar comandos como `zless` o `zcat` (puntaje 10/100)
-
-7. Inicie una sesión interactiva. (revisar: @sec-clusterlogin)
-
-::: {.callout-important}
-Cargue el módulo de `seqtk` en Hypatia (`module load seqtk`). Esta es otra herramienta rápida para procesar secuencias en formato FASTA o FASTQ. Para realizar la práctica, vamos a trabajar con una muestra del 20% de las secuencias de estos archivos. Busque el comando en `seqtk` para realizar esta labor y nombre los archivos de salida como `SRR1776881_untrimmed_0.1_R1.fastq` ó R2 según corresponda.
+::: {.callout-important appearance="simple" collapse="true"}
+Recuerde desde este punto ejecutar `script`, para guardar todos los comandos que use durante el desarrollo del taller.
 :::
 
-8. Para verificar la calidad de los datos de la secuencia usaremos una herramienta llamada `fastqc`. Para utilizar esta herramienta debemos cargar el módulo o programa mediante el comando: `module load fastqc`
+2. Cree un directorio de datos en su carpeta de grupo que tenga el nombre `taller_2`.
 
-9. Use el comando de ayuda `fastqc -h` para obtener información sobre cómo correr este programa. Ejecútelo sobre los dos archivos submuestreados al 20% nombrados con el sufijo “_0.1_R*.fastq`. Describa los archivos que se han generado. (puntaje10/100)
+3. Copie el script `downloadReadsJob.sh` del directorio `~/datasets/taller_2/` hacia su directorio de grupo.
 
-10. Descargue y abra los archivos de extensión `.html` con su navegador de preferencia.
+4. Abra el archivo que copió y describa qué hace cada línea de código presente, exceptuando las necesarias para correr el ejecutable (incluyendo módulos de carga y flags).
 
-11. ¿Basado en lo visto en clase, a qué indicadores debe prestar especial atención en los reportes obtenidos? Descripciones de los distintos campos indicadores de calidad están disponibles aquí. (puntaje 10/100)
+5. Corra el archivo ejecutable sin cambiar ningún campo de disponibilidad de recursos (recuerde que para esto usa el comando `taller_2`) y describa cuantos y que tipo de archivos obtuvo al final de la corrida.
 
-12. Compare su reporte con estos ejemplos de un juego de datos de buena calidad y otro de mala calidad. (puntaje 10/100)
+6. ¿Cuántas lecturas hay por archivo? Realice el conteo tomando en cuenta lo visto en la sesión de preparación para el taller, para este caso use dos diferentes comandos para verificar su resultado. Al revisar los nombres de las primeras 5 secuencias en ambos archivos, ¿cómo distingue que son secuencias pareadas? puede usar comandos como `zmore` o `zcat`.
 
-## II. Limpieza de secuencias
+7. Inicie una sesión interactiva.
 
-En esta sección se realizarán tres pasos, se recortarán los adaptadores, se recortarán las lecturas de acuerdo a la calidad, y se realizará una nueva evaluación de la calidad de las secuencias.
+::: {.callout-important appearance="simple" collapse="true"}
+Como ha podido observar, estos archivos contienen más de dos millones de lecturas y, por lo tanto, son bastante grandes. Solo usaremos un subconjunto del conjunto de datos original para este taller.
+:::
 
-13. Identifique en el reporte de FastQC la presencia de adaptador(es) y a qué tipo corresponde(n). La información en este enlace sobre los diferentes tipos de adaptadores que se usan en secuenciación con Illumina puede ser de utilidad.
+8. Cargue el módulo de `seqtk` en Hypatia utilizando el comando `module load seqtk`. Seqtk es una herramienta rápida y sencilla para procesar secuencias en formato FASTA o FASTQ (recuerde qué son cada uno de estos formatos). Para esta práctica, se trabajará con una muestra de aproximadamente el 30% de las secuencias contenidas en los archivos forward (R1) y reverse (R2).
 
-14. Active módulo o programa disponible para Trimmomatic, mediante el comando `module load trimmomatic`. Consulte el modo de uso de `Trimmomatic` de acuerdo con el tipo de datos que tiene. Busque los archivos de adaptadores que debe utilizar en el directorio de curso en la carpeta de Taller2 y cópielos a su directorio de grupo.
+    Es fundamental asegurarse de que ambos archivos resultantes contengan el mismo número de secuencias. Existen varias formas de lograrlo; en esta actividad se utilizará un procedimiento sencillo en cuatro pasos, empleando pocas herramientas:
 
-15. Ejecute el programa en modo pareado y asegúrese de retener ambas lecturas. Utilice un *sliding window* de 4 para remover las bases con *Phred* o puntaje promedio (en la ventana) inferior a 15. También elimine las lecturas que tengan menos de 40 bases después de este paso.
+    - Submuestree el 30% del archivo forward (R1) utilizando `seqtk`. Nombre el archivo de salida como `SRR2005652raw_R1.fastq`.
+    - Cuente cuántas secuencias quedaron en el archivo generado utilizando `grep`. Pista: en un archivo FASTQ, cada nueva secuencia comienza con una línea que inicia con el carácter `@`.
+    - Submuestree el archivo reverse (R2) utilizando `seqtk`, teniendo en cuenta el número de secuencias obtenido en el paso anterior. Nombre el archivo de salida como `SRR2005652raw_R2.fastq`.
+    - Verifique el número de secuencias en cada archivo generado utilizando nuevamente `grep`.
 
-16. ¿Qué pasaría si utiliza un *sliding window* mayor? (puntaje 15/100)
+9. Ahora, con las secuencias listas, se continuará con el preprocesamiento de los datos. Para evaluar la calidad de los datos de la secuencia usaremos una herramienta llamada `fastqc`. Para utilizar esta herramienta debemos cargar el módulo o programa mediante el comando `module load fastqc`
 
-17. Obtiene cuatro archivos de salida de Trimmomatic. ¿Puede explicar qué son? (puntaje 10/100)
+10. Use el comando de ayuda `fastqc -h` para obtener información sobre cómo correr este programa. Ejecútelo sobre los dos archivos submuestreados al 30% nombrados con el sufijo `raw_R*.fastq`. Describa los archivos que se han generado. También descargue y abra los archivos de extensión `.html` con su navegador de preferencia.
 
-18. De las lecturas “single” resultantes de Trimmomatic, ¿cuál tiene más lecturas? ¿Por qué? ¿Cuántos registros pareados se mantienen después de la limpieza? (puntaje 10/100) 
+11. Basado en lo visto en clase, ¿a qué indicadores debe prestar especial atención en los reportes obtenidos? Descripciones de los distintos campos indicadores de calidad están disponibles [aquí](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/).
 
-19. Vuelva a correr `fastqc` en las secuencias después del trimado. ¿Qué observa? ¿Hubiera sido necesario incluir una remoción de las bases iniciales o finales de cada lectura? ¿Cómo debería modificarse el comando de trimado para incluir ese paso? (*no* es necesario ejecutarlo, solo mencionarlo) (puntaje 15/100)
+12. Compare su reporte con estos ejemplos de un juego de datos de [buena calidad](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/good_sequence_short_fastqc.html) y otro de [mala calidad](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/bad_sequence_fastqc.html). ¿Qué puede inferir de la calidad de sus lecturas?
+
+
+## II. Limpieza de secuencias (30%)
+
+En esta sección se realizará la limpieza de las secuencias utilizando la herramienta `fastp`, que permite integrar en un solo paso: detección y recorte de adaptadores, filtrado por calidad, filtrado por longitud y generación de reportes de calidad.
+
+13. Identifique en el reporte de `fastqc` la presencia de adaptador(es) (si es que hay) y a qué tipo corresponde(n).
+
+14. Compruebe la disponibilidad del programa `fastp` en el sistema, ya sea como módulo (`module avail`) o mediante conda (`conda env list`). Active fastp utilizando el método adecuado y explique brevemente las diferencias entre ambas formas de gestión del software.
+
+15. Ahora ejecute el programa `fastp`. Para ello, consulte la documentación oficial disponible [Github](https://github.com/OpenGene/fastp). Como podrá observar, fastp ofrece múltiples opciones para el preprocesamiento de secuencias. En este ejercicio, concéntrese únicamente en las opciones necesarias para:
+- Indicar los archivos de entrada correspondientes a lecturas paired-end.
+- Definir los archivos de salida para las lecturas limpias.
+- Realizar el filtrado por calidad considerando exclusivamente los siguientes criterios: (1) Aplicar un umbral mínimo de calidad por base de Phred ≥ 30, (2) Descartar las lecturas en las que más del 10% de las bases presenten baja calidad, y (3) Eliminar las lecturas cuya longitud final sea menor a 50 nucleótidos después del filtrado.
+- Además escoja el formato `.html` para el reporte de calidad.
+
+16. Cuántos archivos obtuvo y describa los resultados de cada uno.
+
+17. ¿Por qué cree que es conveniente eliminar las lecturas cuya longitud final sea menor a 50 nucleótidos después del filtrado?

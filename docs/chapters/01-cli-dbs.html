@@ -3981,16 +3981,16 @@ vertical-align: -.125em;
 <li><p>Para guardar tanto los comandos que ejecuta como los resultados use el comando script (e.j. <code>script Resultados_Taller1_grupo01.txt</code>).</p></li>
 <li><p>Identifique en qué directorio y cuál es el path completo de donde se encuentra al iniciar la conexión.</p></li>
 <li><p>Liste los contenidos en el directorio actual.</p></li>
-<li><p>Cree su directorio de grupo con el nombre ejemplo: <code>Grupo_01</code></p></li>
-<li><p>Cambie de posición y entre al directorio de su grupo que acaba de crear. ¿A dónde lo lleva el comando <code>cd ~</code> y el comando <code>cd ..</code>?</p></li>
+<li><p>Diríjase al directorio “grupos” y cree su directorio de grupo con el nombre ejemplo: <code>Grupo_01</code></p></li>
+<li><p>Cambie de ubicación y entre al directorio de su grupo que acaba de crear. ¿A dónde lo lleva el comando <code>cd ~</code> y el comando <code>cd ..</code>?</p></li>
 <li><p>Regrese al directorio del grupo que creó y cree un subdirectorio (en su directorio de grupo), llámelo <code>Taller_1</code> y muévase a ese subdirectorio.</p></li>
-<li><p>Sin cambiar su ubicación, liste los contenidos del directorio <code>Datasets</code> usando la ruta relativa.</p></li>
-<li><p>Del directorio <code>Datasets/Taller_2</code> copie el archivo comprimido llamado <code>unix_class_file_samples.zip</code> al directorio en el que se encuentra en este momento.</p></li>
+<li><p>Sin cambiar su ubicación, liste los contenidos del directorio <code>datasets</code> usando la ruta relativa.</p></li>
+<li><p>Del directorio <code>datasets/Taller_1</code> copie el archivo comprimido llamado <code>unix_class_file_samples.zip</code> al directorio en el que se encuentra en este momento.</p></li>
 <li><p>Liste los archivos en el directorio actual de modo que pueda observar los permisos de lectura, escritura y ejecución del mismo, la fecha, y el tamaño. ¿Qué tamaño tiene este archivo comprimido?</p></li>
 <li><p>Cámbiele el nombre al archivo que copió, de modo que el nuevo nombre sea <code>files-[GrupoX].zip</code>.</p></li>
 <li><p>Descomprima los archivos y revise nuevamente qué tamaño ocupan. ¿Hay algún archivo ejecutable?</p></li>
 <li><p>Visualice cada uno de los archivos descomprimidos, ¿reconoce los formatos en los que se encuentran? ¿qué le indican las extensiones? Describa a qué corresponde cada formato.</p></li>
-<li><p>Busque la expresión <code>product=16S ribosomal RNA</code> en el archivo <code>GCF_000005845.2_ASM584v2_genomic.gff</code> con el comando <code>grep</code>. ¿Cuántas copias encuentra? ¿A qué se debe?</p></li>
+<li><p>Busque la expresión <code>^&gt;ERR2816993.3490</code> en el archivo <code>ERR2816993_1.fasta</code> con el comando <code>grep</code>. ¿Qué resultado obtiene? ¿A qué qué corresponde?</p></li>
 </ol>
 </section>
 <section id="iii.-ejecutando-un-script-en-el-cluster" class="level2">
@@ -4006,7 +4006,7 @@ vertical-align: -.125em;
 <li>De acuerdo a su lectura, responda a las siguientes preguntas:</li>
 </ol>
 <ul>
-<li><p>¿Qué es SLURM, para que se usa y por qué es importante? Explore en línea cuáles son los comandos básicos para utilizar bajo este sistema. ¿Para qué se utilizan <code>sbatch</code>, <code>srun</code>, <code>scancel</code>, y <code>squeue</code>? También puede usar el comando man para determinar qué hacen y qué argumentos toman estos y otros comandos.</p></li>
+<li><p>¿Qué es SLURM, para qué se usa y por qué es importante? Explore en línea cuáles son los comandos básicos para utilizar bajo este sistema. ¿Para qué se utilizan <code>sbatch</code>, <code>srun</code>, <code>scancel</code>, y <code>squeue</code>? También puede usar el comando man para determinar qué hacen y qué argumentos toman estos y otros comandos.</p></li>
 <li><p>Después de consultar los contenidos del archivo <code>srun.txt</code> en <code>/hpcfs/shared/README/</code>, explique cómo se especifican los recursos requeridos en una sesión interactiva. ¿Para qué sirve modificar estos valores de los argumentos?</p></li>
 <li><p>¿Qué particiones existen y qué límites de tiempo y capacidad de memoria RAM tiene cada una? ¿Para una corrida de prueba, qué partición usaría?</p></li>
 <li><p>Use el archivo <code>testjob.sh</code> que ya se encuentra en su directorio de grupo. ¿Qué parámetros de solicitud de recursos puede modificar?</p></li>
