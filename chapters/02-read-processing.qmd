@@ -42,9 +42,9 @@ Como ha podido observar, estos archivos contienen más de dos millones de lectur
     Es fundamental asegurarse de que ambos archivos resultantes contengan el mismo número de secuencias. Existen varias formas de lograrlo; en esta actividad se utilizará un procedimiento sencillo en cuatro pasos, empleando pocas herramientas:
 
     - Submuestree el 30% del archivo forward (R1) utilizando `seqtk`. Nombre el archivo de salida como `SRR2005652raw_R1.fastq`.
-    - Cuente cuántas secuencias quedaron en el archivo generado utilizando `grep`. Pista: en un archivo FASTQ, cada nueva secuencia comienza con una línea que inicia con el carácter `@`.
+    - Cuente cuántas secuencias quedaron en el archivo generado. Recuerde que en un archivo FASTQ cada secuencia está representada por un bloque de cuatro líneas, por lo que el número de secuencias puede obtenerse contando las líneas del archivo y dividiendo este valor entre cuatro (por ejemplo, usando `wc -l`).
     - Submuestree el archivo reverse (R2) utilizando `seqtk`, teniendo en cuenta el número de secuencias obtenido en el paso anterior. Nombre el archivo de salida como `SRR2005652raw_R2.fastq`.
-    - Verifique el número de secuencias en cada archivo generado utilizando nuevamente `grep`.
+    - Verifique el número de secuencias en cada archivo generado.
 
 9. Ahora, con las secuencias listas, se continuará con el preprocesamiento de los datos. Para evaluar la calidad de los datos de la secuencia usaremos una herramienta llamada `fastqc`. Para utilizar esta herramienta debemos cargar el módulo o programa mediante el comando `module load fastqc`
 
