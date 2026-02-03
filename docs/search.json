@@ -58,5 +58,35 @@
     "crumbs": [
       "Preprocesamiento de lecturas"
     ]
+  },
+  {
+    "objectID": "chapters/03-qiime.html",
+    "href": "chapters/03-qiime.html",
+    "title": "Análisis de ASVs con QIIME2",
+    "section": "",
+    "text": "I. Preparación del ambiente de trabajo\nEl análisis microbiano basado en secuenciación de amplicones ha sido ampliamente utilizado para la caracterización de comunidades microbianas en una amplia variedad de ambientes y sistemas biológicos. Este enfoque se fundamenta en la amplificación y secuenciación de genes marcadores específicos, lo que permite inferir la composición taxonómica de las comunidades microbianas. En este contexto, el Amplicon Sequence Variant (ASV) se define como una entidad biológica única, ofreciendo una resolución taxonómica superior en comparación con la tradicional Operational Taxonomic Unit (OTU).\nEn el análisis de secuenciación de amplicones, la derreplicación es un paso clave que consiste en colapsar lecturas idénticas en secuencias únicas con su abundancia asociada, reduciendo la redundancia generada por PCR y secuenciación y preservando la variación exacta de las secuencias; a diferencia del clustering en OTUs con umbrales arbitrarios, este proceso no implica pérdida de información y no corrige errores por sí mismo, sino que constituye un paso previo indispensable para la inferencia de Amplicon Sequence Variants (ASVs) mediante modelos estadísticos de error, como los implementados en DADA2, que permiten distinguir entre errores técnicos y variantes biológicas reales.\nDesde una perspectiva ecológica, la integración de la derreplicación con modelos explícitos de corrección de error contribuye a reducir sesgos computacionales y de conteo que pueden inflar artificialmente las estimaciones de riqueza y abundancia relativa. Como resultado, se obtiene una representación más fiel de la estructura y composición de las comunidades microbianas, lo que fortalece la interpretación ecológica de los patrones observados. En este trabajo, se emplean las herramientas implementadas en QIIME 2 para ilustrar cómo la derreplicación, junto con otros procesos de control de calidad y modelación estadística, sustenta la inferencia robusta de ASVs a partir de datos de secuenciación de amplicones.",
+    "crumbs": [
+      "Análisis de ASVs con QIIME2"
+    ]
+  },
+  {
+    "objectID": "chapters/03-qiime.html#i.-preparación-del-ambiente-de-trabajo",
+    "href": "chapters/03-qiime.html#i.-preparación-del-ambiente-de-trabajo",
+    "title": "Análisis de ASVs con QIIME2",
+    "section": "",
+    "text": "Ingrese a la cuenta del clúster.\nEn su directorio, cree un nuevo directorio y nómbrelo Taller3_Qiime2.\nCopie todo el directorio taller_3 a su directorio Taller3_Qiime2. La siguiente es la ruta donde encuentran el archivo a copiar: /hpcfs/home/cursos/bcom4102/datasets/taller3/\nEn los cuatro archivos proporcionados encontrará un script ejecutable con extensión .sh. Ejecútelo utilizando como argumento el archivo accesionsSoil.txt mediante el siguiente comando: sbatch downloadReadsJob.sh accesionsSoil.txt. Una vez finalizada la descarga, determine si las lecturas obtenidas corresponden a datos single-end o paired-end. Luego, realice una comparación entre este job y el utilizado en el Taller 2, analizando las diferencias en la estrategia de descarga de datos e identificando los cambios introducidos en el flujo de trabajo.\nInicie una sesión interactiva preferiblemente con 20G de memoria y al menos 4 cpus per task.\nCargue el módulo de QIIME2 disponible en el clúster.\n\n\n\n\n\n\n\nQiime2 es un programa con mucho apoyo de los desarrolladores, muchas personas lo usan y cuando surgen errores estos se han reportado y solucionado en su foro. Si tienen problemas esta es su principal herramienta para solucionarlos, aun así, si el problema persiste pueden consultarlo con los monitores.",
+    "crumbs": [
+      "Análisis de ASVs con QIIME2"
+    ]
+  },
+  {
+    "objectID": "chapters/03-qiime.html#iii.-generación-de-asvs",
+    "href": "chapters/03-qiime.html#iii.-generación-de-asvs",
+    "title": "Análisis de ASVs con QIIME2",
+    "section": "III. Generación de ASVs",
+    "text": "III. Generación de ASVs\n\nEn este paso se realiza simultáneamente la derreplicación, el denoising y la generación de las ASVs. Esto se puede realizar con DADA2 en su modo de single end. Haga un job utilizando el siguiente comando, solicitando al menos 20G de memoria, 4 cpus per task, y un tiempo de ejecución de 24 horas.\n\nqiime dada2 denoise-single --i-demultiplexed-seqs A\\ \n    --p-trim-left B\\ \n    --p-trunc-len C\\ \n    --o-table tableSoil.qza\\ \n    --p-n-threads D \\\n    --o-representative-sequences repSeqSoil.qza\\ \n    --o-denoising-stats denoisingStatsSoil.qza\n\n\n\n\n\n\nUsted deberá seleccionar los valores A,B, C y D con base en la información disponible en la visualización de los datos importados en la pestaña de interactive quality plot. --p-n-threads debe coincidir con el número de CPUs que solicite. ´Para saber que significan los flags puede apoyarse de la documentación y usar --help. Explique al final porqué eligió esos valores.\n\n\n\n\nA continuación, se convertirán la tabla de características y las estadísticas de denoising en archivos de visualización. Para ello, será necesario contar con un archivo de metadata, el cual deberá ser construido por usted. En este archivo se incluirán, para cada muestra, el identificador de muestra sample-id utilizado en el archivo manifest, el código de accesión SRA correspondiente y la clasificación del tipo de cultivo del cual proviene la muestra.\n\nEl archivo de metadata deberá estar separado por tabulaciones (.tsv). Una vez completado, verifique cuidadosamente su contenido y tome una captura de pantalla como evidencia del procedimiento. Posteriormente, ejecute el siguiente comando, reemplazando X por el archivo de metadata correspondiente:\nqiime feature-table summarize\\\n    --i-table X\\\n    --o-visualization summSoil2.qzv\\\n    --m-sample-metadata-file soilMetadata.tsv\nTambién corra este comando para obtener las estadísticas de DADA2:\nqiime metadata tabulate\\\n    --m-input-file denoisingStatsSoil.qza\\\n    --o-visualization summSoil3.qzv\nFinalmente para este punto:\n\nVisualice el archivo de estadísticas de DADA2 y describa qué filtro se hace en cada uno de los pasos del proceso.\nIndique el número de features totales que obtuvo después del proceso y para que los podrá utilizar más adelante.\n¿Cuál es el máximo corte de lecturas que puede tomar para conservar todas las muestras?\n\nAdjunte imágenes de las tablas o gráficos que apoyen sus respuestas.",
+    "crumbs": [
+      "Análisis de ASVs con QIIME2"
+    ]
   }
 ]
