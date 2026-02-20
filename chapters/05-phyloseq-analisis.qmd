@@ -1,0 +1,193 @@
+# Análisis de microbiomas con `phyloseq` +  `vegan` {.unnumbered}
+
+Análisis 16S con phyloseq + vegan (GlobalPatterns)
+
+
+::: {.callout-note appearance="simple"}
+## Objetivos
+Este notebook utiliza el dataset `GlobalPatterns` (incluido en el paquete `phyloseq`) para practicar análisis de microbioma 16S integrando herramientas de `phyloseq` y `vegan`.
+
+Se desarrollarán cuatro bloques principales:
+
+1. Análisis composicional (Top 15 familias y géneros).
+2. Análisis de ordenación (PCA y PCoA).
+3. Análisis de diversidad alfa y beta.
+4. Relación diversidad–abundancia mediante correlaciones y heatmap.
+:::
+
+::: {.callout-important appearance="simple" collapse="true"}
+`SampleType` será la variable categórica para comparar grupos
+:::
+
+## I. Preparación de ambiente de trabajo
+
+Primero instale y cargue (usando `library`) las librerías necesarias para el análisis:
+
+```bash
+install.packages("BiocManager")
+BiocManager::install("phyloseq")
+install.packages("vegan")
+install.packages("ggplot2")
+```
+
+Ahora cargue el dataset GlobalPatterns y responda. Este dataset es un ejemplo de microbioma 16S que contiene muestras de diferentes ambientes (suelo, agua, piel humana, etc.) y se utiliza comúnmente para practicar análisis de microbioma.
+
+```bash
+ps <- GlobalPatterns
+ps
+```
+
+## II. Análisis composicional a nivel de Familia
+
+Nuestra unidad de análisis son ASVs individuales o queremos un nivel taxonómico más interpretable (Familia, Género). Para esto, podemos agregar los datos a nivel de Familia usando la función `tax_glom` de `phyloseq`:
+
+```bash
+ps_fam <- tax_glom(ps, taxrank = "Family", NArm = TRUE)
+```
+
+Ahora, podemos identificar las 15 familias más abundantes en el dataset y visualizarlas usando `plot_bar`:
+
+1. Identifica las familias más abundantes globalmente.
+
+```bash
+top15_fam <- names(sort(taxa_sums(ps_fam), decreasing = TRUE))[1:15]
+```
+2. Filtra el dataset para quedarse solo con ellas.
+
+```bash
+ps_fam_top <- prune_taxa(top15_fam, ps_fam)
+```
+3. Convierte los conteos a abundancia relativa por muestra.
+
+```bash
+ps_fam_top_rel <- transform_sample_counts(ps_fam_top, function(x) x / sum(x))
+```
+4. Visualiza la composición de las familias más abundantes por tipo de muestra. Se usa `SampleType`.
+
+```bash
+plot_bar(ps_fam_top_rel, x = "SampleType", fill = "Family") +
+theme_bw() +
+labs(
+y = "Abundancia relativa",
+title = "Composición (Top 15 Familias) por SampleType"
+) +
+theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+a. Repita el mismo proceso para el nivel de Género. 
+b. Para este punto incluya la figura y explique los resultados por medio de una leyenda
+c. A partir de las observaciones anteriores, qué tipo de conclusiones se pueden sacar sobre la composición de los microorganismos en los diferentes tipos de muestras (suelo, agua, piel humana, etc.)?
+
+
+## III. Análisis de ordenación
+
+4. Para analizar la estructura global de las comunidades microbianas y cómo se relacionan entre sí, podemos realizar análisis de ordenación como PCA o PCoA. Primero, necesitamos transformar los datos a abundancia relativa para evitar que las diferencias en el número total de secuencias por muestra afecten el análisis:
+
+```bash
+ps_gen <- tax_glom(ps, taxrank = "Genus", NArm = TRUE) #Este es el objeto que ud había creado para el análisis composicional a nivel de género.
+ps_gen_rel <- transform_sample_counts(ps_gen, function(x) x / sum(x))
+```
+
+5. Ahora es necesario crear una matriz compatible con el paquete estadístico `vegan` para realizar el análisis de ordenación. Para esto, se puede usar la función `otu_table` para extraer la matriz de abundancias y luego convertirla a un formato adecuado:
+
+```bash
+X <- t(as(otu_table(ps_gen_rel), "matrix")) #Extrae la tabla de abundancias, la convierte en una matriz estándar de R, transpone la matriz.
+```
+Responda por qué es necesario transponer la matriz para el análisis de ordenación con `vegan` 
+
+```bash
+meta <- data.frame(sample_data(ps_gen_rel)) #Extrae los metadatos asociados a las muestras y los convierte en un data frame estándar de R.
+```
+Ahora vea las dimensiones de la matriz `X` y explique qué significa cada dimensión 
+
+```bash
+dim(X) 
+```
+
+Revise el contenido de `meta` 
+
+```bash
+head(meta)
+```
+
+6. Ahora sí vamos a hacer un PCoA usando brays-curtis como medida de distancia entre las muestras. Para esto, se puede usar la función `vegdist` para calcular la matriz de distancias y luego `cmdscale` para realizar el PCoA:
+
+```bash
+bray <- vegdist(X, method = "bray") #Calcula la matriz de distancias entre las muestras utilizando la distancia de Bray-Curtis, que es una medida comúnmente utilizada en ecología microbiana para comparar la composición de comunidades.
+```
+Realiza el análisis de ordenación PCoA (Principal Coordinates Analysis) utilizando la matriz de distancias calculada previamente. Responda qué indican los argumentos `k` y `eig` en la función `cmdscale`.
+
+```bash
+pcoa <- cmdscale(bray, k = 2, eig = TRUE) 
+```
+
+Ahora se extraen las coordenadas de las muestras en el espacio de ordenación y se combinan con los metadatos para facilitar la visualización
+
+```bash
+df_pcoa <- data.frame(
+PCoA1 = pcoa$points[,1],
+PCoA2 = pcoa$points[,2]
+)
+df_pcoa <- cbind(df_pcoa, meta) #añadir metadatos a las coordenadas de ordenación
+```
+
+Finalmente, se puede visualizar el resultado del PCoA usando `ggplot2` para crear un gráfico de dispersión donde cada punto representa una muestra y el color indica el tipo de muestra (`SampleType`):
+
+```bash
+ggplot(df_pcoa, aes(PCoA1, PCoA2, color = SampleType))
+```
+
+6. Par ver qué géneros contribuyen más a la separación de las muestras en el espacio de ordenación, se puede usar la función `envfit` del paquete `vegan`, que ajusta vectores de variables (en este caso, géneros) al espacio de ordenación:
+
+```bash
+set.seed(1) #Para asegurar la reproducibilidad del análisis de permutaciones en envfit
+fit <- envfit(pcoa$points, X, permutations = 999) #Ajusta los vectores de los géneros al espacio de ordenación utilizando permutaciones para evaluar la significancia de cada vector.
+
+tax_fit <- as.data.frame(fit$vectors$arrows) #Extrae las coordenadas de los vectores ajustados por envfit.
+tax_fit$r2 <- fit$vectors$r #Agrega una columna con los valores de R², que indican la fuerza de la asociación entre cada género y el espacio de ordenación.
+tax_fit$Genus <- rownames(tax_fit) #Agrega una columna con los nombres de los géneros correspondientes a cada vector.
+
+top_taxa_pcoa <- tax_fit[order(tax_fit$r2, decreasing = TRUE), ][1:15, ] #Ordena los géneros por su valor de R² y selecciona los 15 más importantes para la visualización.
+top_taxa_pcoa
+```
+
+a. Para este punto incluya la figura y explique los resultados por medio de una leyenda
+b. A partir de las observaciones anteriores, qué tipo de conclusiones se pueden sacar sobre la composición de los microorganismos en los diferentes tipos de muestras (suelo, agua, piel humana, etc.)?
+c. El análisis anterior corresponde a inferencia estadística o a análisis exploratorio? Justifique su respuesta.
+
+
+## IV. Análisis de diversidad alfa y beta.
+
+7. Vamos a calcular la diversidad alfa (riqueza, índice de Shannon) 
+
+```bash
+alpha <- estimate_richness(ps, measures = c("Observed", "Shannon")) #Calcula la diversidad alfa para cada muestra utilizando las medidas de riqueza observada y el índice de Shannon.
+alpha$SampleType <- sample_data(ps)$SampleType #Agrega una columna con el tipo de muestra correspondiente a cada muestra.
+
+ggplot(alpha, aes(SampleType, Shannon)) +
+geom_boxplot() +
+theme_bw() +
+labs(title = "Diversidad alfa (Shannon) por SampleType") +
+theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+8. Repita la gráfica anterior pero con la riqueza (Observed) en lugar del índice de Shannon. Explique los resultados
+
+a. Para este punto incluya la figura y explique los resultados por medio de una leyenda
+b. Si quisiera comparar estadísticamente la diversidad alfa entre los diferentes tipos de muestras, ¿qué prueba estadística podría ser la más adecuada? Justifique su respuesta.
+
+9. En el apartado III se realizó un análisis de ordenación (PCoA) basado en la distancia de Bray-Curtis, que es una medida de diversidad beta, pero no se hizo un análisis estadístico para comparar la diversidad beta entre los diferentes tipos de muestras. Para esto, se puede usar la función `adonis` del paquete `vegan`, que realiza un análisis de permutación para evaluar si las diferencias en la composición de las comunidades microbianas entre los grupos (en este caso, `SampleType`) son estadísticamente significativas: 
+
+```bash
+adonis2(bray ~ SampleType, data = meta) #Ejecuta una PERMANOVA (Permutational Multivariate Analysis of Variance).
+```
+```bash
+bd <- betadisper(bray, meta$SampleType) #Evalúa la homogeneidad de dispersión multivariada entre grupos.
+anova(bd) #Realiza un análisis de varianza para comparar la dispersión entre los grupos. 
+```
+
+c. Interprete los resultados de ambos análisis y explique qué indican sobre la diversidad beta entre los diferentes tipos de muestras.
+d. ¿Por qué es importante evaluar la homogeneidad de dispersión antes de interpretar los resultados de la PERMANOVA?
+
+
+10. Explique cómo se debe crear un objeto de tipo `phyloseq` 
