@@ -1,6 +1,6 @@
 # Análisis de microbiomas con `phyloseq` +  `vegan` {.unnumbered}
 
-Análisis 16S con phyloseq + vegan (GlobalPatterns)
+La inferencia estadística parte de un principio fundamental: no observamos la población completa, sino una muestra, y a partir de ella estimamos parámetros y contrastamos hipótesis sobre la estructura poblacional. En estudios de microbioma, este proceso suele ser multivariado: cada muestra está descrita por un vector de abundancias de múltiples taxones, y las comparaciones entre comunidades suelen realizarse mediante métricas de disimilitud. Así, la inferencia puede involucrar tanto estimadores de diversidad dentro de muestras (diversidad alfa) como diferencias estructurales entre comunidades (diversidad beta). En este taller aplicaremos estos principios utilizando el dataset `GlobalPatterns`, incluido en el paquete `phyloseq`, que integra abundancias 16S, taxonomía, metadatos y árbol filogenético en un único objeto estructurado. A partir de este ejemplo, desarrollaremos análisis descriptivos y pruebas inferenciales que permitan interpretar la estructura comunitaria en distintos tipos de ambientes.
 
 
 ::: {.callout-note appearance="simple"}
@@ -12,7 +12,6 @@ Se desarrollarán cuatro bloques principales:
 1. Análisis composicional (Top 15 familias y géneros).
 2. Análisis de ordenación (PCA y PCoA).
 3. Análisis de diversidad alfa y beta.
-4. Relación diversidad–abundancia mediante correlaciones y heatmap.
 :::
 
 ::: {.callout-important appearance="simple" collapse="true"}
@@ -30,7 +29,7 @@ install.packages("vegan")
 install.packages("ggplot2")
 ```
 
-Ahora cargue el dataset GlobalPatterns y responda. Este dataset es un ejemplo de microbioma 16S que contiene muestras de diferentes ambientes (suelo, agua, piel humana, etc.) y se utiliza comúnmente para practicar análisis de microbioma.
+Ahora cargue el dataset GlobalPatterns incluido en `phyloseq` y revise su contenido:
 
 ```bash
 ps <- GlobalPatterns
@@ -39,30 +38,23 @@ ps
 
 ## II. Análisis composicional a nivel de Familia
 
-Nuestra unidad de análisis son ASVs individuales o queremos un nivel taxonómico más interpretable (Familia, Género). Para esto, podemos agregar los datos a nivel de Familia usando la función `tax_glom` de `phyloseq`:
+La unidad de análisis puede definirse a distintos niveles de resolución. Podemos trabajar con ASVs individuales, que ofrecen máxima resolución taxonómica (en el caso de 16S), o bien agruparlos en niveles más agregados (por ejemplo, Familia o Género). Agrupar taxones equivale a sumar sus abundancias dentro de cada muestra. 
+
+1. Para realizar esta agregación a nivel de Familia utilizamos la función `tax_glom()` del paquete `phyloseq`, que colapsa los ASVs pertenecientes a la misma categoría taxonómica:
 
 ```bash
 ps_fam <- tax_glom(ps, taxrank = "Family", NArm = TRUE)
 ```
 
-Ahora, podemos identificar las 15 familias más abundantes en el dataset y visualizarlas usando `plot_bar`:
-
-1. Identifica las familias más abundantes globalmente.
+2. Ahora, podemos identificar las 15 familias más abundantes en el dataset y visualizarlas usando `plot_bar`:
 
 ```bash
-top15_fam <- names(sort(taxa_sums(ps_fam), decreasing = TRUE))[1:15]
+top15_fam <- names(sort(taxa_sums(ps_fam), decreasing = TRUE))[1:15] #Identifica las familias más abundantes globalmente.
+ps_fam_top <- prune_taxa(top15_fam, ps_fam) #Filtra el dataset para quedarse solo con ellas.
+ps_fam_top_rel <- transform_sample_counts(ps_fam_top, function(x) x / sum(x)) #Convierte los conteos a abundancia relativa por muestra.
 ```
-2. Filtra el dataset para quedarse solo con ellas.
 
-```bash
-ps_fam_top <- prune_taxa(top15_fam, ps_fam)
-```
-3. Convierte los conteos a abundancia relativa por muestra.
-
-```bash
-ps_fam_top_rel <- transform_sample_counts(ps_fam_top, function(x) x / sum(x))
-```
-4. Visualiza la composición de las familias más abundantes por tipo de muestra. Se usa `SampleType`.
+3. Visualiza la composición de las familias más abundantes por tipo de muestra. Se usa `SampleType`.
 
 ```bash
 plot_bar(ps_fam_top_rel, x = "SampleType", fill = "Family") +
@@ -110,7 +102,7 @@ Revise el contenido de `meta`
 head(meta)
 ```
 
-6. Ahora sí vamos a hacer un PCoA usando brays-curtis como medida de distancia entre las muestras. Para esto, se puede usar la función `vegdist` para calcular la matriz de distancias y luego `cmdscale` para realizar el PCoA:
+5. Ahora sí vamos a hacer un PCoA usando brays-curtis como medida de distancia entre las muestras. Para esto, se puede usar la función `vegdist` para calcular la matriz de distancias y luego `cmdscale` para realizar el PCoA:
 
 ```bash
 bray <- vegdist(X, method = "bray") #Calcula la matriz de distancias entre las muestras utilizando la distancia de Bray-Curtis, que es una medida comúnmente utilizada en ecología microbiana para comparar la composición de comunidades.

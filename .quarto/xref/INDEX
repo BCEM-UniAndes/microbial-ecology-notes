@@ -55,5 +55,8 @@
   },
   "chapters/09-comparative-genomics.qmd": {
     "09-comparative-genomics.html": "11f30849"
+  },
+  "chapters/05-phyloseq-analisis.qmd": {
+    "05-phyloseq-analisis.html": "f693a353"
   }
 }
