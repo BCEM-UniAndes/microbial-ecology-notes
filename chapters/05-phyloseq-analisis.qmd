@@ -5,8 +5,6 @@ La inferencia estadística parte de un principio fundamental: no observamos la p
 
 ::: {.callout-note appearance="simple"}
 ## Objetivos
-Este notebook utiliza el dataset `GlobalPatterns` (incluido en el paquete `phyloseq`) para practicar análisis de microbioma 16S integrando herramientas de `phyloseq` y `vegan`.
-
 Se desarrollarán cuatro bloques principales:
 
 1. Análisis composicional (Top 15 familias y géneros).
@@ -102,7 +100,7 @@ Revise el contenido de `meta`
 head(meta)
 ```
 
-5. Ahora sí vamos a hacer un PCoA usando brays-curtis como medida de distancia entre las muestras. Para esto, se puede usar la función `vegdist` para calcular la matriz de distancias y luego `cmdscale` para realizar el PCoA:
+6. Ahora sí vamos a hacer un PCoA usando brays-curtis como medida de distancia entre las muestras. Para esto, se puede usar la función `vegdist` para calcular la matriz de distancias y luego `cmdscale` para realizar el PCoA:
 
 ```bash
 bray <- vegdist(X, method = "bray") #Calcula la matriz de distancias entre las muestras utilizando la distancia de Bray-Curtis, que es una medida comúnmente utilizada en ecología microbiana para comparar la composición de comunidades.
@@ -129,7 +127,7 @@ Finalmente, se puede visualizar el resultado del PCoA usando `ggplot2` para crea
 ggplot(df_pcoa, aes(PCoA1, PCoA2, color = SampleType))
 ```
 
-6. Par ver qué géneros contribuyen más a la separación de las muestras en el espacio de ordenación, se puede usar la función `envfit` del paquete `vegan`, que ajusta vectores de variables (en este caso, géneros) al espacio de ordenación:
+7. Par ver qué géneros contribuyen más a la separación de las muestras en el espacio de ordenación, se puede usar la función `envfit` del paquete `vegan`, que ajusta vectores de variables (en este caso, géneros) al espacio de ordenación:
 
 ```bash
 set.seed(1) #Para asegurar la reproducibilidad del análisis de permutaciones en envfit
@@ -150,7 +148,7 @@ c. El análisis anterior corresponde a inferencia estadística o a análisis exp
 
 ## IV. Análisis de diversidad alfa y beta.
 
-7. Vamos a calcular la diversidad alfa (riqueza, índice de Shannon) 
+8. Vamos a calcular la diversidad alfa (riqueza, índice de Shannon) 
 
 ```bash
 alpha <- estimate_richness(ps, measures = c("Observed", "Shannon")) #Calcula la diversidad alfa para cada muestra utilizando las medidas de riqueza observada y el índice de Shannon.
@@ -163,12 +161,12 @@ labs(title = "Diversidad alfa (Shannon) por SampleType") +
 theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
-8. Repita la gráfica anterior pero con la riqueza (Observed) en lugar del índice de Shannon. Explique los resultados
+9. Repita la gráfica anterior pero con la riqueza (Observed) en lugar del índice de Shannon. Explique los resultados
 
 a. Para este punto incluya la figura y explique los resultados por medio de una leyenda
 b. Si quisiera comparar estadísticamente la diversidad alfa entre los diferentes tipos de muestras, ¿qué prueba estadística podría ser la más adecuada? Justifique su respuesta.
 
-9. En el apartado III se realizó un análisis de ordenación (PCoA) basado en la distancia de Bray-Curtis, que es una medida de diversidad beta, pero no se hizo un análisis estadístico para comparar la diversidad beta entre los diferentes tipos de muestras. Para esto, se puede usar la función `adonis` del paquete `vegan`, que realiza un análisis de permutación para evaluar si las diferencias en la composición de las comunidades microbianas entre los grupos (en este caso, `SampleType`) son estadísticamente significativas: 
+10. En el apartado III se realizó un análisis de ordenación (PCoA) basado en la distancia de Bray-Curtis, que es una medida de diversidad beta, pero no se hizo un análisis estadístico para comparar la diversidad beta entre los diferentes tipos de muestras. Para esto, se puede usar la función `adonis` del paquete `vegan`, que realiza un análisis de permutación para evaluar si las diferencias en la composición de las comunidades microbianas entre los grupos (en este caso, `SampleType`) son estadísticamente significativas: 
 
 ```bash
 adonis2(bray ~ SampleType, data = meta) #Ejecuta una PERMANOVA (Permutational Multivariate Analysis of Variance).
@@ -182,4 +180,4 @@ c. Interprete los resultados de ambos análisis y explique qué indican sobre la
 d. ¿Por qué es importante evaluar la homogeneidad de dispersión antes de interpretar los resultados de la PERMANOVA?
 
 
-10. Explique cómo se debe crear un objeto de tipo `phyloseq` 
+11. Explique cómo se debe crear un objeto de tipo `phyloseq` a prtir de las tablas de sus datos.

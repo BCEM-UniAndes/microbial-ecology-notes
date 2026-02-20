@@ -204,7 +204,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Este notebook utiliza el dataset <code>GlobalPatterns</code> (incluido en el paquete <code>phyloseq</code>) para practicar análisis de microbioma 16S integrando herramientas de <code>phyloseq</code> y <code>vegan</code>.</p>
 <p>Se desarrollarán cuatro bloques principales:</p>
 <ol type="1">
 <li>Análisis composicional (Top 15 familias y géneros).</li>
@@ -280,7 +279,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">dim</span><span class="er">(</span><span class="ex">X</span><span class="kw">)</span> </span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Revise el contenido de <code>meta</code></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span><span class="er">(</span><span class="ex">meta</span><span class="kw">)</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<ol start="5" type="1">
+<ol start="6" type="1">
 <li>Ahora sí vamos a hacer un PCoA usando brays-curtis como medida de distancia entre las muestras. Para esto, se puede usar la función <code>vegdist</code> para calcular la matriz de distancias y luego <code>cmdscale</code> para realizar el PCoA:</li>
 </ol>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bray</span> <span class="op">&lt;</span>- vegdist<span class="er">(</span><span class="ex">X,</span> method = <span class="st">"bray"</span><span class="kw">)</span> <span class="co">#Calcula la matriz de distancias entre las muestras utilizando la distancia de Bray-Curtis, que es una medida comúnmente utilizada en ecología microbiana para comparar la composición de comunidades.</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
@@ -294,7 +293,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="ex">df_pcoa</span> <span class="op">&lt;</span>- cbind<span class="er">(</span><span class="ex">df_pcoa,</span> meta<span class="kw">)</span> <span class="co">#añadir metadatos a las coordenadas de ordenación</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Finalmente, se puede visualizar el resultado del PCoA usando <code>ggplot2</code> para crear un gráfico de dispersión donde cada punto representa una muestra y el color indica el tipo de muestra (<code>SampleType</code>):</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ggplot</span><span class="er">(</span><span class="ex">df_pcoa,</span> aes<span class="er">(</span><span class="ex">PCoA1,</span> PCoA2, color = SampleType<span class="kw">))</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<ol start="6" type="1">
+<ol start="7" type="1">
 <li>Par ver qué géneros contribuyen más a la separación de las muestras en el espacio de ordenación, se puede usar la función <code>envfit</code> del paquete <code>vegan</code>, que ajusta vectores de variables (en este caso, géneros) al espacio de ordenación:</li>
 </ol>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">set.seed</span><span class="er">(</span><span class="ex">1</span><span class="kw">)</span> <span class="co">#Para asegurar la reproducibilidad del análisis de permutaciones en envfit</span></span>
@@ -314,7 +313,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="iv.-análisis-de-diversidad-alfa-y-beta." class="level2">
 <h2 class="anchored" data-anchor-id="iv.-análisis-de-diversidad-alfa-y-beta.">IV. Análisis de diversidad alfa y beta.</h2>
-<ol start="7" type="1">
+<ol start="8" type="1">
 <li>Vamos a calcular la diversidad alfa (riqueza, índice de Shannon)</li>
 </ol>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">alpha</span> <span class="op">&lt;</span>- estimate_richness<span class="er">(</span><span class="fu">ps</span>, measures = c<span class="er">(</span><span class="st">"Observed"</span><span class="ex">,</span> <span class="st">"Shannon"</span><span class="kw">))</span> <span class="co">#Calcula la diversidad alfa para cada muestra utilizando las medidas de riqueza observada y el índice de Shannon.</span></span>
@@ -325,14 +324,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_bw()</span> <span class="ex">+</span></span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="ex">labs</span><span class="er">(</span><span class="ex">title</span> = <span class="st">"Diversidad alfa (Shannon) por SampleType"</span><span class="kw">)</span> <span class="ex">+</span></span>
 <span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="ex">theme</span><span class="er">(</span><span class="ex">axis.text.x</span> = element_text<span class="er">(</span><span class="ex">angle</span> = 45, hjust = 1<span class="kw">))</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<ol start="8" type="1">
+<ol start="9" type="1">
 <li>Repita la gráfica anterior pero con la riqueza (Observed) en lugar del índice de Shannon. Explique los resultados</li>
 </ol>
 <ol type="a">
 <li>Para este punto incluya la figura y explique los resultados por medio de una leyenda</li>
 <li>Si quisiera comparar estadísticamente la diversidad alfa entre los diferentes tipos de muestras, ¿qué prueba estadística podría ser la más adecuada? Justifique su respuesta.</li>
 </ol>
-<ol start="9" type="1">
+<ol start="10" type="1">
 <li>En el apartado III se realizó un análisis de ordenación (PCoA) basado en la distancia de Bray-Curtis, que es una medida de diversidad beta, pero no se hizo un análisis estadístico para comparar la diversidad beta entre los diferentes tipos de muestras. Para esto, se puede usar la función <code>adonis</code> del paquete <code>vegan</code>, que realiza un análisis de permutación para evaluar si las diferencias en la composición de las comunidades microbianas entre los grupos (en este caso, <code>SampleType</code>) son estadísticamente significativas:</li>
 </ol>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">adonis2</span><span class="er">(</span><span class="ex">bray</span> ~ SampleType, data = meta<span class="kw">)</span> <span class="co">#Ejecuta una PERMANOVA (Permutational Multivariate Analysis of Variance).</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
@@ -342,7 +341,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Interprete los resultados de ambos análisis y explique qué indican sobre la diversidad beta entre los diferentes tipos de muestras.</li>
 <li>¿Por qué es importante evaluar la homogeneidad de dispersión antes de interpretar los resultados de la PERMANOVA?</li>
 </ol>
-<ol start="10" type="1">
+<ol start="11" type="1">
 <li>Explique cómo se debe crear un objeto de tipo <code>phyloseq</code></li>
 </ol>
 
