@@ -30,106 +30,6 @@
     ]
   },
   {
-    "objectID": "chapters/02-read-processing.html",
-    "href": "chapters/02-read-processing.html",
-    "title": "Preprocesamiento de lecturas",
-    "section": "",
-    "text": "I. Control de calidad (70%)\nEl preprocesamiento de datos es una etapa fundamental en el análisis de datos en el campo de la ecología microbiana, y en general en cualquier campo de la bioinformática. Consiste en una serie de pasos y técnicas que se aplican a los datos de secuenciación para limpiarlos, corregir posibles errores y mejorar su calidad antes de realizar análisis posteriores.\nLa importancia del preprocesamiento radica en que los datos de secuenciación pueden contener ruido, artefactos y errores que pueden afectar la interpretación de los resultados. Al realizar un adecuado preprocesamiento, se pueden eliminar estos problemas y obtener datos más confiables y precisos. Además, el preprocesamiento permite estandarizar los datos, eliminar secuencias de baja calidad y reducir el tamaño del conjunto de datos, lo que facilita su análisis y reduce el tiempo de procesamiento.\nLos datos para usar en esta sección se depositaron en las dos bases de datos de secuenciación vistos en el taller pasado. Puede ir a cualquiera de estos y buscar los archivos con el número de acceso SRR2005652. Luego de esto responda:",
-    "crumbs": [
-      "Preprocesamiento de lecturas"
-    ]
-  },
-  {
-    "objectID": "chapters/02-read-processing.html#i.-control-de-calidad-70",
-    "href": "chapters/02-read-processing.html#i.-control-de-calidad-70",
-    "title": "Preprocesamiento de lecturas",
-    "section": "",
-    "text": "¿A qué artículo corresponden los datos?, ¿cuál fue el tipo de secuenciación?, ¿a qué experimento en específico corresponden las lecturas de la accesión?, ¿cuál fue el tipo de secuenciación utilizada para estas corridas?, ¿a que organismo corresponden estos datos?, ¿qué estrategia e instrumento de secuenciación fue utilizado? y ¿los datos corresponden a ADN o ARN?\n\n\n\n\n\n\n\nRecuerde desde este punto ejecutar script, para guardar todos los comandos que use durante el desarrollo del taller.\n\n\n\n\nCree un directorio de datos en su carpeta de grupo que tenga el nombre taller_2.\nCopie el script downloadReadsJob.sh del directorio ~/datasets/taller_2/ hacia su directorio de grupo.\nAbra el archivo que copió y describa qué hace cada línea de código presente, exceptuando las necesarias para correr el ejecutable (incluyendo módulos de carga y flags).\nCorra el archivo ejecutable sin cambiar ningún campo de disponibilidad de recursos (recuerde que para esto usa el comando taller_2) y describa cuantos y que tipo de archivos obtuvo al final de la corrida.\n¿Cuántas lecturas hay por archivo? Realice el conteo tomando en cuenta lo visto en la sesión de preparación para el taller, para este caso use dos diferentes comandos para verificar su resultado. Al revisar los nombres de las primeras 5 secuencias en ambos archivos, ¿cómo distingue que son secuencias pareadas? puede usar comandos como zmore o zcat.\nInicie una sesión interactiva.\n\n\n\n\n\n\n\nComo ha podido observar, estos archivos contienen más de dos millones de lecturas y, por lo tanto, son bastante grandes. Solo usaremos un subconjunto del conjunto de datos original para este taller.\n\n\n\n\nCargue el módulo de seqtk en Hypatia utilizando el comando module load seqtk. Seqtk es una herramienta rápida y sencilla para procesar secuencias en formato FASTA o FASTQ (recuerde qué son cada uno de estos formatos). Para esta práctica, se trabajará con una muestra de aproximadamente el 30% de las secuencias contenidas en los archivos forward (R1) y reverse (R2).\nEs fundamental asegurarse de que ambos archivos resultantes contengan el mismo número de secuencias. Existen varias formas de lograrlo; en esta actividad se utilizará un procedimiento sencillo en cuatro pasos, empleando pocas herramientas:\n\nSubmuestree el 30% del archivo forward (R1) utilizando seqtk. Nombre el archivo de salida como SRR2005652raw_R1.fastq.\nCuente cuántas secuencias quedaron en el archivo generado. Recuerde que en un archivo FASTQ cada secuencia está representada por un bloque de cuatro líneas, por lo que el número de secuencias puede obtenerse contando las líneas del archivo y dividiendo este valor entre cuatro (por ejemplo, usando wc -l).\nSubmuestree el archivo reverse (R2) utilizando seqtk, teniendo en cuenta el número de secuencias obtenido en el paso anterior. Nombre el archivo de salida como SRR2005652raw_R2.fastq.\nVerifique el número de secuencias en cada archivo generado.\n\nAhora, con las secuencias listas, se continuará con el preprocesamiento de los datos. Para evaluar la calidad de los datos de la secuencia usaremos una herramienta llamada fastqc. Para utilizar esta herramienta debemos cargar el módulo o programa mediante el comando module load fastqc\nUse el comando de ayuda fastqc -h para obtener información sobre cómo correr este programa. Ejecútelo sobre los dos archivos submuestreados al 30% nombrados con el sufijo raw_R*.fastq. Describa los archivos que se han generado. También descargue y abra los archivos de extensión .html con su navegador de preferencia.\nBasado en lo visto en clase, ¿a qué indicadores debe prestar especial atención en los reportes obtenidos? Descripciones de los distintos campos indicadores de calidad están disponibles aquí.\nCompare su reporte con estos ejemplos de un juego de datos de buena calidad y otro de mala calidad. ¿Qué puede inferir de la calidad de sus lecturas?",
-    "crumbs": [
-      "Preprocesamiento de lecturas"
-    ]
-  },
-  {
-    "objectID": "chapters/02-read-processing.html#ii.-limpieza-de-secuencias-30",
-    "href": "chapters/02-read-processing.html#ii.-limpieza-de-secuencias-30",
-    "title": "Preprocesamiento de lecturas",
-    "section": "II. Limpieza de secuencias (30%)",
-    "text": "II. Limpieza de secuencias (30%)\nEn esta sección se realizará la limpieza de las secuencias utilizando la herramienta fastp, que permite integrar en un solo paso: detección y recorte de adaptadores, filtrado por calidad, filtrado por longitud y generación de reportes de calidad.\n\nIdentifique en el reporte de fastqc la presencia de adaptador(es) (si es que hay) y a qué tipo corresponde(n).\nCompruebe la disponibilidad del programa fastp en el sistema, ya sea como módulo (module avail) o mediante conda (conda env list). Active fastp utilizando el método adecuado y explique brevemente las diferencias entre ambas formas de gestión del software.\nAhora ejecute el programa fastp. Para ello, consulte la documentación oficial disponible Github. Como podrá observar, fastp ofrece múltiples opciones para el preprocesamiento de secuencias. En este ejercicio, concéntrese únicamente en las opciones necesarias para:\n\n\nIndicar los archivos de entrada correspondientes a lecturas paired-end.\nDefinir los archivos de salida para las lecturas limpias.\nRealizar el filtrado por calidad considerando exclusivamente los siguientes criterios: (1) Aplicar un umbral mínimo de calidad por base de Phred ≥ 30, (2) Descartar las lecturas en las que más del 10% de las bases presenten baja calidad, y (3) Eliminar las lecturas cuya longitud final sea menor a 50 nucleótidos después del filtrado.\nAdemás escoja el formato .html para el reporte de calidad.\n\n\nCuántos archivos obtuvo y describa los resultados de cada uno.\n¿Por qué cree que es conveniente eliminar las lecturas cuya longitud final sea menor a 50 nucleótidos después del filtrado?",
-    "crumbs": [
-      "Preprocesamiento de lecturas"
-    ]
-  },
-  {
-    "objectID": "chapters/04-diversity-analisis.html",
-    "href": "chapters/04-diversity-analisis.html",
-    "title": "Análisis de diversidad",
-    "section": "",
-    "text": "I. Preparación de ambiente de trabajo\nComo ya saben, QIIME 2 (Quantitative Insights Into Microbial Ecology) es una plataforma de código abierto diseñada para el análisis de microbiomas a partir de datos de secuenciación. En el taller anterior aprendieron a procesar datos de secuenciación de amplicones mediante DADA2, donde se realizó el denoising de las lecturas, la corrección de errores y la eliminación de quimeras, obteniendo como resultado una tabla de características (ASVs) con las abundancias por muestra, las secuencias representativas de cada variante y estadísticas del proceso.\nEn este taller continuaremos a partir de esos productos, explorando cómo utilizar estas tablas para realizar análisis de diversidad microbiana y visualizar los datos, con el fin de describir y comparar la estructura de las comunidades microbianas entre muestras.Abordaremos temas clave como rarefacción de datos, asignación taxonómica de 16S y estimación de la diversidad (alfa y beta).",
-    "crumbs": [
-      "Análisis de diversidad"
-    ]
-  },
-  {
-    "objectID": "chapters/04-diversity-analisis.html#i.-preparación-de-ambiente-de-trabajo",
-    "href": "chapters/04-diversity-analisis.html#i.-preparación-de-ambiente-de-trabajo",
-    "title": "Análisis de diversidad",
-    "section": "",
-    "text": "Ingrese a la cuenta del clúster.\nCopie todo el directorio de datasets/taller_4/ a su directorio de grupo.\nRevise los archivos que hay dentro de este taller (5), en este punto todos trabajaremos con un mismo artefacto de QIIME2 con las secuencias representativas (ASVs) y un nuevo metadata. Los otros archivos .qza los usaremos más adelante.\nEjecute los comandos de este taller en una sesión interactiva preferiblemente con 15G de memoria y al menos 4 cpus per task. También puede probar con jobs si lo desea, pero recuerde que el tiempo de espera para ejecutar un job puede ser largo dependiendo de la cantidad de recursos que solicite y la demanda del clúster. Puede usar el comando sbatch y revisar el estado de su job con squeue -u $USER.\nCargue el módulo de QIIME2 disponible en el clúster.\n\n\n\n\n\n\n\nRecordando, en el taller pasado se ejecutó DADA2 y obtuvo varios archivos de salida. Entre ellos la tabla de ASVs. Para este taller los datos serán 10 muestras de suelos solo de arroz con diferentes tipos de fertilizantes, los archivos resultantes serán el input de los próximos análisis.\nConforme pasen los talleres tendrá menos ayudas a nivel de código que en el anterior, de no saber que ingresar en los flags de los comandos use –-help para ver que archivos requiere.\nEn esta ocasión no trabajaremos con script para el registro de comandos, por lo que usted deberá adjuntar capturas de pantalla a la hora de correr las líneas de código importantes de cada punto.",
-    "crumbs": [
-      "Análisis de diversidad"
-    ]
-  },
-  {
-    "objectID": "chapters/04-diversity-analisis.html#ii.-generación-del-árbol-filogenético",
-    "href": "chapters/04-diversity-analisis.html#ii.-generación-del-árbol-filogenético",
-    "title": "Análisis de diversidad",
-    "section": "II. Generación del árbol filogenético",
-    "text": "II. Generación del árbol filogenético\n\nCon el fin de realizar métricas de diversidad filogenéticas, es necesario construir primero el árbol filogenético.\n\nqiime phylogeny align-to-tree-mafft-fasttree \\\n  --i-sequences X \\\n  --o-alignment alignSoil.qza \\\n  --o-masked-alignment maskAlignSoil.qza \\\n  --o-tree treeSoil.qza \\\n  --o-rooted-tree rootedTreeSoil.qza\n\nDescriba qué representan estos tipos de árboles y qué los diferencian\nExplique la diferencia entre el output de alignment y masked alignment.\n¿De qué maneras puede utilizarse un árbol filogenético generado en QIIME2",
-    "crumbs": [
-      "Análisis de diversidad"
-    ]
-  },
-  {
-    "objectID": "chapters/04-diversity-analisis.html#iii.-análisis-de-diversidad-alfa",
-    "href": "chapters/04-diversity-analisis.html#iii.-análisis-de-diversidad-alfa",
-    "title": "Análisis de diversidad",
-    "section": "III. Análisis de diversidad alfa",
-    "text": "III. Análisis de diversidad alfa\n\nLo primero a realizar será usar el plugin de alpha diversity de qiime para obtener el índice de diversidad Shannon.\n\nqiime diversity alpha \\\n  --i-table X \\\n  --p-metric X \\\n  --o-alpha-diversity shannon.qza\nAhora visualice los índices de diversidad obtenidos en qiime view con el comando:\nqiime diversity alpha-correlation \\\n  --i-alpha-diversity X \\\n  --m-metadata-file soilMetadata.tsv \\\n  --o-visualization shannonView.qzv\nAnalice este gráfico, ¿qué le dice este índice? y ¿comó se diferencia del índice Simpson?",
-    "crumbs": [
-      "Análisis de diversidad"
-    ]
-  },
-  {
-    "objectID": "chapters/04-diversity-analisis.html#iv.-rarefacción-de-datos",
-    "href": "chapters/04-diversity-analisis.html#iv.-rarefacción-de-datos",
-    "title": "Análisis de diversidad",
-    "section": "IV. Rarefacción de datos",
-    "text": "IV. Rarefacción de datos\n\nAhora espere. Tómese un momento para preguntarse si lo que acaba de hacer está del todo bien… ¡Acaba de realizar un análisis sin rarificar sus datos! ¿Por qué es importante realizar rarefacción de los datos al hacer análisis de diversidad?\nPara realizar la rarefacción, el primer paso es examinar la tabla de características (feature table). Recuerde que este procedimiento ya se trabajó en el taller anterior. Identifique el comando correspondiente y aplíquelo ahora a esta nueva feature table para generar la visualización .qzv. Con base en esta información, seleccione un valor de rarefacción que permita conservar el mayor número posible de muestras sin sacrificar excesivamente la profundidad de secuenciación. Justifique su elección explicando el compromiso entre retención de muestras y cobertura de la diversidad.\nPosteriormente, repita el análisis del índice de diversidad utilizando el comando que se presenta a continuación y visualice los resultados de la misma forma que en el punto anterior.\n\nqiime diversity alpha-rarefaction \\\n    --i-table X \\\n    --i-phylogeny X \\\n    --p-max-depth X \\\n    --p-metrics shannon \\\n    --m-metadata-file soilMetadata.tsv \\\n    --o-visualization rarefactShannonSoil.qzv\na. ¿Qué pasaría si omite el flag `--i-phylogeny?`\nb. Ahora haga este mismo análisis con los índices de Simpson y chao1, vealos en Qiime view, adjunte evidencia de las gráficas y diga, ¿qué puede inferir de la diversidad de las muestras?",
-    "crumbs": [
-      "Análisis de diversidad"
-    ]
-  },
-  {
-    "objectID": "chapters/04-diversity-analisis.html#v.-asignación-taxonómica",
-    "href": "chapters/04-diversity-analisis.html#v.-asignación-taxonómica",
-    "title": "Análisis de diversidad",
-    "section": "V. Asignación taxonómica",
-    "text": "V. Asignación taxonómica\n\nAhora va a realizar una asignación taxonómica de los datos con el plugin de sklearn utilizando la base de datos anteriormente entrenada de SILVA. Si observa, en la carpeta copiada desde el inicio hay un archivo tipo artefacto de Qiime (.qza) llamado silvaDatabase.qza. Esta será la base de datos entrenada con la que podrá comparar sus secuencias.\nPara generar la clasificación usted tendrá que crear un job, puede tomar como base trabajos enviados en talleres pasados, en este caso lo importante es que ponga 40G de memoria y 6 horas al menos. En ese job corra el siguiente comando:\n\nqiime feature-classifier classify-sklearn --i-classifier silvaDatabase.qza --i-reads X --o-classification taxonomySoil.qza\n\nUna vez obtenido el taxonomySoil.qza realizará las diferentes visualizaciones de este artefacto con los siguientes comandos:\n\nqiime metadata tabulate --m-input-file taxonomySoil.qza --o-visualization taxonomySoil.qzv\nqiime taxa barplot --i-table soilTable.qza --i-taxonomy taxonomySoil.qza --m-metadata-file soilMetadata.tsv --o-visualization barPlotTaxaSoil.qzv\n\nObserve y señale que acciones le permite Qiime view realizar al archivo de visualización.\nAnexe el bar plot con nivel taxonómico de filum y género y señale las diferencias en las abundancias entre dichos gráficos.\n¿Como se comportan las muestras a nivel taxonómico? ¿Considera que hay algún cluster de muestras raras? Justifique.",
-    "crumbs": [
-      "Análisis de diversidad"
-    ]
-  },
-  {
-    "objectID": "chapters/04-diversity-analisis.html#vi.-análisis-de-diversidad-beta",
-    "href": "chapters/04-diversity-analisis.html#vi.-análisis-de-diversidad-beta",
-    "title": "Análisis de diversidad",
-    "section": "VI. Análisis de diversidad beta",
-    "text": "VI. Análisis de diversidad beta\nPor último aprenderá a realizar análisis de diversidad beta con un plugin llamado core-metrics, tenga en cuenta que los resultados serán enviados a una carpeta que usted dará nombre, lo podrá ejecutar con el siguiente comando:\nqiime diversity core-metrics-phylogenetic --i-phylogeny X --i-table soilTable.qza --p-sampling-depth X --m-metadata-file soilMetadata.tsv --output-dir coreMetrics\nObtendrá varios archivos de visualización, Analice los resultados de Bray-curtis, unweighted unifrac y unweighted unifrac haciendo diferenciación de colores entre los diferentes tipos de suelos fertilizados. ¿Qué están representando estos 3 gráficos? y ¿qué puede concluir de sus muestras?",
-    "crumbs": [
-      "Análisis de diversidad"
-    ]
-  },
-  {
     "objectID": "chapters/05-phyloseq-analisis.html",
     "href": "chapters/05-phyloseq-analisis.html",
     "title": "Análisis de microbiomas con phyloseq + vegan",
@@ -174,7 +74,7 @@
     "href": "chapters/05-phyloseq-analisis.html#iv.-análisis-de-diversidad-alfa-y-beta.",
     "title": "Análisis de microbiomas con phyloseq + vegan",
     "section": "IV. Análisis de diversidad alfa y beta.",
-    "text": "IV. Análisis de diversidad alfa y beta.\n\nVamos a calcular la diversidad alfa (riqueza, índice de Shannon)\n\nalpha &lt;- estimate_richness(ps, measures = c(\"Observed\", \"Shannon\")) #Calcula la diversidad alfa para cada muestra utilizando las medidas de riqueza observada y el índice de Shannon.\nalpha$SampleType &lt;- sample_data(ps)$SampleType #Agrega una columna con el tipo de muestra correspondiente a cada muestra.\n\nggplot(alpha, aes(SampleType, Shannon)) +\ngeom_boxplot() +\ntheme_bw() +\nlabs(title = \"Diversidad alfa (Shannon) por SampleType\") +\ntheme(axis.text.x = element_text(angle = 45, hjust = 1))\n\nRepita la gráfica anterior pero con la riqueza (Observed) en lugar del índice de Shannon. Explique los resultados\n\n\nPara este punto incluya la figura y explique los resultados por medio de una leyenda\nSi quisiera comparar estadísticamente la diversidad alfa entre los diferentes tipos de muestras, ¿qué prueba estadística podría ser la más adecuada? Justifique su respuesta.\n\n\nEn el apartado III se realizó un análisis de ordenación (PCoA) basado en la distancia de Bray-Curtis, que es una medida de diversidad beta, pero no se hizo un análisis estadístico para comparar la diversidad beta entre los diferentes tipos de muestras. Para esto, se puede usar la función adonis del paquete vegan, que realiza un análisis de permutación para evaluar si las diferencias en la composición de las comunidades microbianas entre los grupos (en este caso, SampleType) son estadísticamente significativas:\n\nadonis2(bray ~ SampleType, data = meta) #Ejecuta una PERMANOVA (Permutational Multivariate Analysis of Variance).\nbd &lt;- betadisper(bray, meta$SampleType) #Evalúa la homogeneidad de dispersión multivariada entre grupos.\nanova(bd) #Realiza un análisis de varianza para comparar la dispersión entre los grupos. \n\nInterprete los resultados de ambos análisis y explique qué indican sobre la diversidad beta entre los diferentes tipos de muestras.\n¿Por qué es importante evaluar la homogeneidad de dispersión antes de interpretar los resultados de la PERMANOVA?\n\n\nExplique cómo se debe crear un objeto de tipo phyloseq",
+    "text": "IV. Análisis de diversidad alfa y beta.\n\nVamos a calcular la diversidad alfa (riqueza, índice de Shannon)\n\nalpha &lt;- estimate_richness(ps, measures = c(\"Observed\", \"Shannon\")) #Calcula la diversidad alfa para cada muestra utilizando las medidas de riqueza observada y el índice de Shannon.\nalpha$SampleType &lt;- sample_data(ps)$SampleType #Agrega una columna con el tipo de muestra correspondiente a cada muestra.\n\nggplot(alpha, aes(SampleType, Shannon)) +\ngeom_boxplot() +\ntheme_bw() +\nlabs(title = \"Diversidad alfa (Shannon) por SampleType\") +\ntheme(axis.text.x = element_text(angle = 45, hjust = 1))\n\nRepita la gráfica anterior pero con la riqueza (Observed) en lugar del índice de Shannon. Explique los resultados\n\n\nPara este punto incluya la figura y explique los resultados por medio de una leyenda\nSi quisiera comparar estadísticamente la diversidad alfa entre los diferentes tipos de muestras, ¿qué prueba estadística podría ser la más adecuada? Justifique su respuesta.\n\n\nEn el apartado III se realizó un análisis de ordenación (PCoA) basado en la distancia de Bray-Curtis, que es una medida de diversidad beta, pero no se hizo un análisis estadístico para comparar la diversidad beta entre los diferentes tipos de muestras. Para esto, se puede usar la función adonis del paquete vegan, que realiza un análisis de permutación para evaluar si las diferencias en la composición de las comunidades microbianas entre los grupos (en este caso, SampleType) son estadísticamente significativas:\n\nadonis2(bray ~ SampleType, data = meta) #Ejecuta una PERMANOVA (Permutational Multivariate Analysis of Variance).\nbd &lt;- betadisper(bray, meta$SampleType) #Evalúa la homogeneidad de dispersión multivariada entre grupos.\nanova(bd) #Realiza un análisis de varianza para comparar la dispersión entre los grupos. \n\nInterprete los resultados de ambos análisis y explique qué indican sobre la diversidad beta entre los diferentes tipos de muestras.\n¿Por qué es importante evaluar la homogeneidad de dispersión antes de interpretar los resultados de la PERMANOVA?\n\n\nExplique cómo se debe crear un objeto de tipo phyloseq a prtir de las tablas de sus datos.",
     "crumbs": [
       "Análisis de microbiomas con `phyloseq` +  `vegan`"
     ]
