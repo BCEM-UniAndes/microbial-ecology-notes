@@ -3954,16 +3954,6 @@ vertical-align: -.125em;
 <p>Kraken2 es una herramienta para perfilar la composición taxonómica de comunidades microbianas a partir de datos de metagenoma tipo shotgun. Se basa en la comparación de fragmentos cortos de secuencia (k-mers) contra una base de datos taxonómicamente indexada. Cada k-mer está asociado al nodo taxonómico más específico posible (o a su ancestro común más bajo si es compartido), y la clasificación de cada lectura se realiza mediante un sistema de votos. Este enfoque permite una clasificación rápida y escalable para grandes volúmenes de datos. Dado que el conteo de lecturas no refleja abundancia celular real, Bracken usa la salida de Kraken2 y un modelo probabilístico basado en la distribución esperada de k-mers por genoma para redistribuir lecturas ambiguas y estimar abundancias taxonómicas más precisas.</p>
 <p>Para este taller usaremos secuencias obtenidas del artículo <em>The Alterations of Vaginal Microbiome in HPV16 Infection as Identified by Shotgun Metagenomic Sequencing</em>.En este estudio se realizó un perfilamiento metagenómico mediante <em>Whole Genome Shotgun</em> (WGS) de microbiota vaginal positiva y negativa para el virus del papiloma humano (VPH). Por lo tanto, tendremos 3 muestras de microbiota VPH-negativo (N) y 3 muestras para VPH-positivo (INF).</p>
 <p>Las muestras fueron secuenciadas con el equipo HiSeq X Ten de Illumina. Son secuencias pareadas con estrategia WGS y son un submuestreo de 200000 lecturas por muestra. Los datos se encuentran en la carpeta <code>Taller_6</code> de <code>datasets</code>. Copie la carpta completa al directorio de su grupo.</p>
-<div class="callout callout-style-simple callout-important">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>Inicie la sesión interactiva asignando 16 GB de memoria. Se recomienda también generar scripts ejecutables para facilitar la reproducibilidad.</p>
-</div>
-</div>
-</div>
 <div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -3986,7 +3976,7 @@ vertical-align: -.125em;
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Por favor, asegúrese de adjuntar capturas de pantalla de los comandos ejecutados y de las visualizaciones generadas para cada punto.</p>
+<p>Inicie la sesión interactiva asignando 16 GB de memoria. Se recomienda también generar scripts ejecutables para facilitar la reproducibilidad. Además, por favor adjuntar capturas de pantalla de los comandos ejecutados y de las visualizaciones generadas para cada punto.</p>
 </div>
 </div>
 </div>
@@ -4000,10 +3990,9 @@ vertical-align: -.125em;
 </section>
 <section id="ii.-creación-de-un-perfil-taxonómico" class="level2">
 <h2 class="anchored" data-anchor-id="ii.-creación-de-un-perfil-taxonómico">II. Creación de un perfil taxonómico</h2>
-<p>Kraken2 acepta como entrada lecturas cortas de un solo experimento de secuenciación metagenómica tipo <em>shotgun</em> y genera la lista de microorganismos detectados y sus abundancias relativas. Además de esto, recibe lecturas pareadas y no pareadas</p>
-<p>Active el módulo o el ambiente en conda de <em>Kraken2</em> luego revise la documentación oficial de Kraken2 para entender cómo usarlo.</p>
+<p><em>Kraken2</em> acepta como entrada lecturas cortas de un solo experimento de secuenciación metagenómica tipo <em>shotgun</em> y genera la lista de microorganismos detectados y sus abundancias relativas; puede procesar tanto lecturas pareadas (<em>paired-end</em>) como no pareadas (<em>single-end</em>). Active el módulo o el entorno correspondiente en Conda para <em>Kraken2</em> y revise la documentación para familiarizarse con su uso y los parámetros disponibles antes de ejecutarlo.</p>
 <ol start="4" type="1">
-<li>Ejecute Kraken2 sobre cada par de archivos FASTQ limpios, teniendo en cuenta que se trata de lecturas pareadas (paired-end). La base de datos a utilizar se encuentra en: DB=“/hpcfs/shared/bcem/databases/kraken2/Standard/20241228”</li>
+<li>Ejecute <em>Kraken2</em> sobre cada par de archivos <em>FASTQ</em> limpios, teniendo en cuenta que se trata de lecturas pareadas. La base de datos a utilizar se encuentra en: DB=“/hpcfs/shared/bcem/databases/kraken2/Standard/20241228”</li>
 </ol>
 <p>Pruebe primero con una sola muestra y asegúrese de que el comando se ejecuta correctamente. Luego envíe el procesamiento del resto de las muestras como un job en bash. Para la ejecución de múltiples archivos, consulte el recurso de ayuda proporcionado y modifíquelo para incluir los parámetros especificados anteriormente.</p>
 <ol type="a">
@@ -4014,9 +4003,9 @@ vertical-align: -.125em;
 <section id="iii.-ajuste-de-abundancias-con-bracken" class="level2">
 <h2 class="anchored" data-anchor-id="iii.-ajuste-de-abundancias-con-bracken">III. Ajuste de abundancias con Bracken</h2>
 <ol start="5" type="1">
-<li>Una vez finalizada la clasificación con Kraken2, utilice los archivos <code>.report</code> generados para estimar abundancias ajustadas con Bracken.</li>
+<li>Una vez finalizada la clasificación con <em>Kraken2</em>, utilice los archivos <code>.report</code> generados para estimar abundancias ajustadas con <em>Bracken</em>.</li>
 </ol>
-<p>Ejecute Bracken sobre cada archivo .report individualmente. Un ejemplo de comando es:</p>
+<p>Ejecute Bracken sobre cada archivo <code>.report</code> individualmente. Un ejemplo de comando es:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">bracken</span> <span class="dt">\</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">-d</span> /hpcfs/shared/bcem/databases/kraken2/Standard/20241228 <span class="dt">\</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">-i</span> X <span class="dt">\</span></span>
@@ -4028,7 +4017,7 @@ vertical-align: -.125em;
 <li>Repita el proceso estimando abundancias a nivel de familia pero guarde los resutados en una carpeta diferente.</li>
 </ol>
 <ol start="6" type="1">
-<li>Para combinar los resultados individuales de Bracken en una sola matriz, puede utilizar el script <code>merged_bracken.py</code>. Este script toma como entrada los archivos .bracken de cada muestra presentes en la carpeta y genera una tabla combinada. Asegúrese de antes de ejecutar el script en su carpeta solo tenga los archivos .bracken que desea combinar.</li>
+<li>Para combinar los resultados individuales de Bracken en una sola matriz, puede utilizar el script <code>merged_bracken.py</code>. Este script toma como entrada los archivos .bracken de cada muestra presentes en la carpeta y genera una tabla combinada. Asegúrese de antes de ejecutar el script en su carpeta solo tenga los archivos <code>.bracken</code> que desea combinar.</li>
 </ol>
 <div class="callout callout-style-simple callout-important">
 <div class="callout-body d-flex">
@@ -4043,10 +4032,7 @@ vertical-align: -.125em;
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> merged_bracken.py</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>O especificando la ruta completa del entorno:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">~/.conda/envs/bracken_env/bin/python</span> merged_bracken.py</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Este script genera una tabla combinada donde:</p>
-<pre><code>- Las filas corresponden a taxones
-- Las columnas corresponden a muestras
-- Los valores representan abundancias estimadas por Bracken</code></pre>
+<p>Este script genera una tabla combinada donde las filas corresponden a taxones, las columnas corresponden a muestras, y los valores representan abundancias estimadas por Bracken</p>
 <ol type="a">
 <li>¿Qué son scripts de pyton y qué los diferencia con los scripts de bash?</li>
 <li>¿Por qué el conteo bruto de Kraken2 no representa abundancia celular real?</li>
@@ -4055,10 +4041,20 @@ vertical-align: -.125em;
 </section>
 <section id="iv.-visualización-de-resultados" class="level2">
 <h2 class="anchored" data-anchor-id="iv.-visualización-de-resultados">IV. Visualización de resultados</h2>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Para interpretar mejor los resultados, busque la información relacionada con el proyecto. Revise los códigos de acceso de las muestras, busque en la base de datos de secuenciación a qué tipo de muestra corresponde cada código.</p>
+</div>
+</div>
+</div>
+<p>A partir de la tabla de abundancias relativas por muestra, es posible realizar distintos análisis ecológicos (por ejemplo, diversidad alfa y beta) o generar diversas visualizaciones. En este caso, nos enfocaremos únicamente en una visualización muy común en estudios de microbioma: el mapa de calor (heatmap). Este punto deberá realizarse de manera autónoma:</p>
 <ol start="7" type="1">
-<li>A partir de la tabla de abundancias relativas por muestra, es posible realizar distintos análisis ecológicos (por ejemplo, diversidad alfa y beta) o generar diversas visualizaciones. En este caso, nos enfocaremos únicamente en una visualización muy común en estudios de microbioma: el mapa de calor (heatmap). Este punto deberá realizarse de manera autónoma:</li>
+<li>Descargue la tabla combinada de abundancias relativas generada previamente (al nivel taxonómico de inetrés, puede ser familia). Cárguela en R. Elija las familias más abundantes (por ejemplo, top 20). Utilice el paquete de R de su preferencia (por ejemplo, pheatmap o ggplot2) para generar un mapa de calor.</li>
 </ol>
-<p>Descargue la tabla combinada de abundancias relativas generada previamente (al nivel taxonómico de inetrés, puede ser familia). Cárguela en R. Elija las familias más abundantes (por ejemplo, top 20). Utilice el paquete de R de su preferencia (por ejemplo, pheatmap o ggplot2) para generar un mapa de calor.</p>
 <ol type="a">
 <li>Adjunte el gráfico y su interpretación</li>
 <li>¿Qué otros tipos de visualizaciones podrían ser útiles para interpretar los resultados de perfilado taxonómico?</li>
@@ -4078,14 +4074,14 @@ vertical-align: -.125em;
 </div>
 </div>
 <p>El siguiente comando extrae esa información del archivo .bracken:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'NR&gt;1 {print $6 "\t" $1}'</span> sample.bracken <span class="op">&gt;</span> sample_krona.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="st">'NR&gt;1 {print $6 "\t" $1}'</span> sample.bracken <span class="op">&gt;</span> sample_krona.txt</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Para generar visualización interactiva</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ktImportText</span> sample_krona.txt <span class="at">-o</span> sample.html</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ktImportText</span> sample_krona.txt <span class="at">-o</span> sample.html</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <ol type="a">
 <li>Explique los resultados obtenidos en la visualización de Krona.</li>
 <li>¿Qué opina de este tipo de gráficos?</li>
 </ol>
-<ol start="8" type="1">
+<ol start="9" type="1">
 <li>Haga un cuadro comparativo y mencione las ventajas y desventajas entre las herramientas de anotación taxonómica Krake2, Metaphlan y MEGAN.</li>
 </ol>
 

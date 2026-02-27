@@ -79,6 +79,10 @@ c. ¿Qué significa que Bracken redistribuya lecturas asignadas a niveles taxon�
 
 ## IV. Visualización de resultados
 
+::: {.callout-important appearance="simple"}
+Para interpretar mejor los resultados, busque la información relacionada con el proyecto. Revise los códigos de acceso de las muestras, busque en la base de datos de secuenciación a qué tipo de muestra corresponde cada código.
+:::
+
 A partir de la tabla de abundancias relativas por muestra, es posible realizar distintos análisis ecológicos (por ejemplo, diversidad alfa y beta) o generar diversas visualizaciones. En este caso, nos enfocaremos únicamente en una visualización muy común en estudios de microbioma: el mapa de calor (heatmap). Este punto deberá realizarse de manera autónoma:
 
 7. Descargue la tabla combinada de abundancias relativas generada previamente (al nivel taxonómico de inetrés, puede ser familia).
