@@ -58,5 +58,8 @@
   },
   "chapters/05-phyloseq-analisis.qmd": {
     "05-phyloseq-analisis.html": "f693a353"
+  },
+  "chapters/06-taxa-assignment.qmd": {
+    "06-taxa-assignment.html": "23005126"
   }
 }

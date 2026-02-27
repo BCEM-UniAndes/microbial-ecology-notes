@@ -6,9 +6,6 @@ Para este taller usaremos secuencias obtenidas del artículo *The Alterations of
 
 Las muestras fueron secuenciadas con el equipo HiSeq X Ten de Illumina. Son secuencias pareadas con estrategia WGS y son un submuestreo de 200000 lecturas por muestra. Los datos se encuentran en la carpeta `Taller_6` de `datasets`. Copie la carpta completa al directorio de su grupo.
 
-::: {.callout-important appearance="simple"}
-Inicie la sesión interactiva asignando 16 GB de memoria. Se recomienda también generar scripts ejecutables para facilitar la reproducibilidad.
-:::
 
 ::: {.callout-note appearance="simple"}
 ## Objetivos
@@ -16,8 +13,8 @@ Inicie la sesión interactiva asignando 16 GB de memoria. Se recomienda también
 2. Comprender los pasos y aprender a visualizar los datos de perfilado taxonómico.
 :::
 
-::: {.callout-important appearance="simple" collapse="true"}
-Por favor, asegúrese de adjuntar capturas de pantalla de los comandos ejecutados y de las visualizaciones generadas para cada punto.
+::: {.callout-important appearance="simple"}
+Inicie la sesión interactiva asignando 16 GB de memoria. Se recomienda también generar scripts ejecutables para facilitar la reproducibilidad. Además, por favor adjuntar capturas de pantalla de los comandos ejecutados y de las visualizaciones generadas para cada punto.
 :::
 
 ## I. Limpieza de secuencias
@@ -30,11 +27,9 @@ Por favor, asegúrese de adjuntar capturas de pantalla de los comandos ejecutado
 
 ## II. Creación de un perfil taxonómico
 
-Kraken2 acepta como entrada lecturas cortas de un solo experimento de secuenciación metagenómica tipo *shotgun* y genera la lista de microorganismos detectados y sus abundancias relativas. Además de esto, recibe lecturas pareadas y no pareadas
+*Kraken2* acepta como entrada lecturas cortas de un solo experimento de secuenciación metagenómica tipo *shotgun* y genera la lista de microorganismos detectados y sus abundancias relativas; puede procesar tanto lecturas pareadas (*paired-end*) como no pareadas (*single-end*). Active el módulo o el entorno correspondiente en Conda para *Kraken2* y revise la documentación para familiarizarse con su uso y los parámetros disponibles antes de ejecutarlo.
 
-Active el módulo o el ambiente en conda de *Kraken2* luego revise la documentación oficial de Kraken2 para entender cómo usarlo. 
-
-4. Ejecute Kraken2 sobre cada par de archivos FASTQ limpios, teniendo en cuenta que se trata de lecturas pareadas (paired-end). La base de datos a utilizar se encuentra en: DB="/hpcfs/shared/bcem/databases/kraken2/Standard/20241228"
+4. Ejecute *Kraken2* sobre cada par de archivos *FASTQ* limpios, teniendo en cuenta que se trata de lecturas pareadas. La base de datos a utilizar se encuentra en: DB="/hpcfs/shared/bcem/databases/kraken2/Standard/20241228"
 
 Pruebe primero con una sola muestra y asegúrese de que el comando se ejecuta correctamente. Luego envíe el procesamiento del resto de las muestras como un job en bash. Para la ejecución de múltiples archivos, consulte el recurso de ayuda proporcionado y modifíquelo para incluir los parámetros especificados anteriormente.
 
@@ -43,9 +38,9 @@ b. ¿Qué archivos de salida se generan por muestra? Descríbalos.
 
 ## III. Ajuste de abundancias con Bracken
 
-5. Una vez finalizada la clasificación con Kraken2, utilice los archivos `.report` generados para estimar abundancias ajustadas con Bracken.
+5. Una vez finalizada la clasificación con *Kraken2*, utilice los archivos `.report` generados para estimar abundancias ajustadas con *Bracken*.
 
-Ejecute Bracken sobre cada archivo .report individualmente. Un ejemplo de comando es:
+Ejecute Bracken sobre cada archivo `.report` individualmente. Un ejemplo de comando es:
 
 ```bash
 bracken \
@@ -59,7 +54,7 @@ bracken \
 a. Describa el comando que ejecutó y los archivos de salida que se generan por muestra.
 b. Repita el proceso estimando abundancias a nivel de familia pero guarde los resutados en una carpeta diferente.
 
-6. Para combinar los resultados individuales de Bracken en una sola matriz, puede utilizar el script `merged_bracken.py`. Este script toma como entrada los archivos .bracken de cada muestra presentes en la carpeta y genera una tabla combinada. Asegúrese de antes de ejecutar el script en su carpeta solo tenga los archivos .bracken que desea combinar.
+6. Para combinar los resultados individuales de Bracken en una sola matriz, puede utilizar el script `merged_bracken.py`. Este script toma como entrada los archivos .bracken de cada muestra presentes en la carpeta y genera una tabla combinada. Asegúrese de antes de ejecutar el script en su carpeta solo tenga los archivos `.bracken` que desea combinar.
 
 ::: {.callout-important appearance="simple" collapse="true"}
 Debe cargar o activar el entorno de Python
@@ -75,12 +70,7 @@ O especificando la ruta completa del entorno:
 ~/.conda/envs/bracken_env/bin/python merged_bracken.py
 ```
 
-Este script genera una tabla combinada donde:
-
-    - Las filas corresponden a taxones
-    - Las columnas corresponden a muestras
-    - Los valores representan abundancias estimadas por Bracken
-
+Este script genera una tabla combinada donde las filas corresponden a taxones, las columnas corresponden a muestras, y los valores representan abundancias estimadas por Bracken
 
 a. ¿Qué son scripts de pyton y qué los diferencia con los scripts de bash?
 b. ¿Por qué el conteo bruto de Kraken2 no representa abundancia celular real?
@@ -89,12 +79,10 @@ c. ¿Qué significa que Bracken redistribuya lecturas asignadas a niveles taxon�
 
 ## IV. Visualización de resultados
 
-7. A partir de la tabla de abundancias relativas por muestra, es posible realizar distintos análisis ecológicos (por ejemplo, diversidad alfa y beta) o generar diversas visualizaciones. En este caso, nos enfocaremos únicamente en una visualización muy común en estudios de microbioma: el mapa de calor (heatmap). Este punto deberá realizarse de manera autónoma:
+A partir de la tabla de abundancias relativas por muestra, es posible realizar distintos análisis ecológicos (por ejemplo, diversidad alfa y beta) o generar diversas visualizaciones. En este caso, nos enfocaremos únicamente en una visualización muy común en estudios de microbioma: el mapa de calor (heatmap). Este punto deberá realizarse de manera autónoma:
 
-Descargue la tabla combinada de abundancias relativas generada previamente (al nivel taxonómico de inetrés, puede ser familia).
-Cárguela en R.
-Elija las familias más abundantes (por ejemplo, top 20).
-Utilice el paquete de R de su preferencia (por ejemplo, pheatmap o ggplot2) para generar un mapa de calor.
+7. Descargue la tabla combinada de abundancias relativas generada previamente (al nivel taxonómico de inetrés, puede ser familia).
+Cárguela en R. Elija las familias más abundantes (por ejemplo, top 20). Utilice el paquete de R de su preferencia (por ejemplo, pheatmap o ggplot2) para generar un mapa de calor.
 
 a. Adjunte el gráfico y su interpretación
 b. ¿Qué otros tipos de visualizaciones podrían ser útiles para interpretar los resultados de perfilado taxonómico? 
@@ -123,5 +111,5 @@ a. Explique los resultados obtenidos en la visualización de Krona.
 b. ¿Qué opina de este tipo de gráficos?
 
 
-8. Haga un cuadro comparativo y mencione las ventajas y desventajas entre las herramientas de anotación taxonómica Krake2, Metaphlan y MEGAN.
+9. Haga un cuadro comparativo y mencione las ventajas y desventajas entre las herramientas de anotación taxonómica Krake2, Metaphlan y MEGAN.
 

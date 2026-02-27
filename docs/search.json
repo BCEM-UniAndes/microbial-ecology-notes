@@ -78,5 +78,55 @@
     "crumbs": [
       "Análisis de microbiomas con `phyloseq` +  `vegan`"
     ]
+  },
+  {
+    "objectID": "chapters/06-taxa-assignment.html",
+    "href": "chapters/06-taxa-assignment.html",
+    "title": "Asignación taxonómica",
+    "section": "",
+    "text": "I. Limpieza de secuencias\nKraken2 es una herramienta para perfilar la composición taxonómica de comunidades microbianas a partir de datos de metagenoma tipo shotgun. Se basa en la comparación de fragmentos cortos de secuencia (k-mers) contra una base de datos taxonómicamente indexada. Cada k-mer está asociado al nodo taxonómico más específico posible (o a su ancestro común más bajo si es compartido), y la clasificación de cada lectura se realiza mediante un sistema de votos. Este enfoque permite una clasificación rápida y escalable para grandes volúmenes de datos. Dado que el conteo de lecturas no refleja abundancia celular real, Bracken usa la salida de Kraken2 y un modelo probabilístico basado en la distribución esperada de k-mers por genoma para redistribuir lecturas ambiguas y estimar abundancias taxonómicas más precisas.\nPara este taller usaremos secuencias obtenidas del artículo The Alterations of Vaginal Microbiome in HPV16 Infection as Identified by Shotgun Metagenomic Sequencing.En este estudio se realizó un perfilamiento metagenómico mediante Whole Genome Shotgun (WGS) de microbiota vaginal positiva y negativa para el virus del papiloma humano (VPH). Por lo tanto, tendremos 3 muestras de microbiota VPH-negativo (N) y 3 muestras para VPH-positivo (INF).\nLas muestras fueron secuenciadas con el equipo HiSeq X Ten de Illumina. Son secuencias pareadas con estrategia WGS y son un submuestreo de 200000 lecturas por muestra. Los datos se encuentran en la carpeta Taller_6 de datasets. Copie la carpta completa al directorio de su grupo.",
+    "crumbs": [
+      "Asignación taxonómica"
+    ]
+  },
+  {
+    "objectID": "chapters/06-taxa-assignment.html#i.-limpieza-de-secuencias",
+    "href": "chapters/06-taxa-assignment.html#i.-limpieza-de-secuencias",
+    "title": "Asignación taxonómica",
+    "section": "",
+    "text": "Primero es necesario limpiar las lecturas, lo haremos usando primero FastQC y Fastp como ya lo han usado anteriormente. Recuerden los ambientes que deben activar (en serie) para esos dos programas. Realice el filtrado por calidad considerando exclusivamente los siguientes criterios: (1) Aplicar un umbral mínimo de calidad por base de Phred ≥ 30, (2) Descartar las lecturas en las que más del 10% de las bases presenten baja calidad, y (3) Eliminar las lecturas cuya longitud final sea menor a 50 nucleótidos después del filtrado.\nEn ambos casos adjunte los comandos usados y los pantallazos de los cambios en la calidad de las secuencias antes y después de la limpieza. También indique el porcentaje de secuencias que NO pasaron los filtros de la limpieza.\nRepita el proceso para cada conjunto de archivos.",
+    "crumbs": [
+      "Asignación taxonómica"
+    ]
+  },
+  {
+    "objectID": "chapters/06-taxa-assignment.html#ii.-creación-de-un-perfil-taxonómico",
+    "href": "chapters/06-taxa-assignment.html#ii.-creación-de-un-perfil-taxonómico",
+    "title": "Asignación taxonómica",
+    "section": "II. Creación de un perfil taxonómico",
+    "text": "II. Creación de un perfil taxonómico\nKraken2 acepta como entrada lecturas cortas de un solo experimento de secuenciación metagenómica tipo shotgun y genera la lista de microorganismos detectados y sus abundancias relativas. Además de esto, recibe lecturas pareadas y no pareadas\nActive el módulo o el ambiente en conda de Kraken2 luego revise la documentación oficial de Kraken2 para entender cómo usarlo.\n\nEjecute Kraken2 sobre cada par de archivos FASTQ limpios, teniendo en cuenta que se trata de lecturas pareadas (paired-end). La base de datos a utilizar se encuentra en: DB=“/hpcfs/shared/bcem/databases/kraken2/Standard/20241228”\n\nPruebe primero con una sola muestra y asegúrese de que el comando se ejecuta correctamente. Luego envíe el procesamiento del resto de las muestras como un job en bash. Para la ejecución de múltiples archivos, consulte el recurso de ayuda proporcionado y modifíquelo para incluir los parámetros especificados anteriormente.\n\n¿Cuál fue el comando que ejecutó? Explíquelo.\n¿Qué archivos de salida se generan por muestra? Descríbalos.",
+    "crumbs": [
+      "Asignación taxonómica"
+    ]
+  },
+  {
+    "objectID": "chapters/06-taxa-assignment.html#iii.-ajuste-de-abundancias-con-bracken",
+    "href": "chapters/06-taxa-assignment.html#iii.-ajuste-de-abundancias-con-bracken",
+    "title": "Asignación taxonómica",
+    "section": "III. Ajuste de abundancias con Bracken",
+    "text": "III. Ajuste de abundancias con Bracken\n\nUna vez finalizada la clasificación con Kraken2, utilice los archivos .report generados para estimar abundancias ajustadas con Bracken.\n\nEjecute Bracken sobre cada archivo .report individualmente. Un ejemplo de comando es:\nbracken \\\n    -d /hpcfs/shared/bcem/databases/kraken2/Standard/20241228 \\\n    -i X \\\n    -o muestra.bracken \\\n    -r 150 \\\n    -l S\n\nDescriba el comando que ejecutó y los archivos de salida que se generan por muestra.\nRepita el proceso estimando abundancias a nivel de familia pero guarde los resutados en una carpeta diferente.\n\n\nPara combinar los resultados individuales de Bracken en una sola matriz, puede utilizar el script merged_bracken.py. Este script toma como entrada los archivos .bracken de cada muestra presentes en la carpeta y genera una tabla combinada. Asegúrese de antes de ejecutar el script en su carpeta solo tenga los archivos .bracken que desea combinar.\n\n\n\n\n\n\n\nDebe cargar o activar el entorno de Python\n\n\n\npython merged_bracken.py\nO especificando la ruta completa del entorno:\n~/.conda/envs/bracken_env/bin/python merged_bracken.py\nEste script genera una tabla combinada donde:\n- Las filas corresponden a taxones\n- Las columnas corresponden a muestras\n- Los valores representan abundancias estimadas por Bracken\n\n¿Qué son scripts de pyton y qué los diferencia con los scripts de bash?\n¿Por qué el conteo bruto de Kraken2 no representa abundancia celular real?\n¿Qué significa que Bracken redistribuya lecturas asignadas a niveles taxonómicos superiores?",
+    "crumbs": [
+      "Asignación taxonómica"
+    ]
+  },
+  {
+    "objectID": "chapters/06-taxa-assignment.html#iv.-visualización-de-resultados",
+    "href": "chapters/06-taxa-assignment.html#iv.-visualización-de-resultados",
+    "title": "Asignación taxonómica",
+    "section": "IV. Visualización de resultados",
+    "text": "IV. Visualización de resultados\n\nA partir de la tabla de abundancias relativas por muestra, es posible realizar distintos análisis ecológicos (por ejemplo, diversidad alfa y beta) o generar diversas visualizaciones. En este caso, nos enfocaremos únicamente en una visualización muy común en estudios de microbioma: el mapa de calor (heatmap). Este punto deberá realizarse de manera autónoma:\n\nDescargue la tabla combinada de abundancias relativas generada previamente (al nivel taxonómico de inetrés, puede ser familia). Cárguela en R. Elija las familias más abundantes (por ejemplo, top 20). Utilice el paquete de R de su preferencia (por ejemplo, pheatmap o ggplot2) para generar un mapa de calor.\n\nAdjunte el gráfico y su interpretación\n¿Qué otros tipos de visualizaciones podrían ser útiles para interpretar los resultados de perfilado taxonómico?\nAunque no se va a realizar en este taller, mencione un tipo de tranformación de datos que podría ser útil para mejorar la visualización y análisis de los resultados de perfilado taxonómico, y explique brevemente por qué.\n\n\nEs posible crear otras visualizaciones usando pie charts, puede hacerlo de forma interactiva usando Krona, que genera gráficos jerárquicos en formato HTML. Para esto es necesario convertir los archivos .bracken a un formato compatible con Krona, donde la primera columna representa la abundancia y la segunda columna el taxón correspondiente.\n\n\n\n\n\n\n\nRecuerde cargar o activar el entorno de Krona.\n\n\n\nEl siguiente comando extrae esa información del archivo .bracken:\nawk 'NR&gt;1 {print $6 \"\\t\" $1}' sample.bracken &gt; sample_krona.txt\nPara generar visualización interactiva\nktImportText sample_krona.txt -o sample.html\n\nExplique los resultados obtenidos en la visualización de Krona.\n¿Qué opina de este tipo de gráficos?\n\n\nHaga un cuadro comparativo y mencione las ventajas y desventajas entre las herramientas de anotación taxonómica Krake2, Metaphlan y MEGAN.",
+    "crumbs": [
+      "Asignación taxonómica"
+    ]
   }
 ]
