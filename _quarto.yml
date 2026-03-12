@@ -18,11 +18,11 @@ book:
     #- chapters/03-qiime.qmd
     #- chapters/04-diversity-analisis.qmd
     #- chapters/05-phyloseq-analisis.qmd
-    # chapters/06-taxa-assignment.qmd
+    #- chapters/06-taxa-assignment.qmd
     #- chapters/05-taxa-assignment.qmd
     #- chapters/06-microviz-analyses.qmd
-    - chapters/07-mag-assembly.qmd
-    #- chapters/08-binning.qmd
+    #- chapters/07-mag-assembly.qmd
+    - chapters/08-binning.qmd
     #- chapters/09-comparative-genomics.qmd
     #- references.qmd
 
