@@ -64,14 +64,15 @@ concatenate.py catalogue.fna.gz <contigs-case>.fa <contigs-control>.fa
 minimap2 -d catalogue.mmi catalogue.fna.gz;
 ```
 
-    b y c. Mapear las lecturas de cada muestra al catálogo de *contigs* con `minimap2` y genere los archivos `BAM` correspondientes.
+b. Mapear las lecturas de cada muestra al catálogo de *contigs* con `minimap2` y,
+c. Generar los archivos `BAM` correspondientes.
 
 ```bash
 minimap2 -t 8\
          -N 5\
          -ax sr catalogue.mmi\
          --split-prefix mmsplit\
-         <reads-fraction-forward>.fastq.gz <reads-fraction-forward>.fastq.gz\
+         <reads-fraction-forward>.fastq.gz <reads-fraction-reverse>.fastq.gz\
          | samtools view -F 3584 -b --threads 8 > <{case|control}>.bam
 ```
 
@@ -80,7 +81,7 @@ minimap2 -t 8\
 ¿Qué hace la linea de comando `samtools view -F 3584 -b --threads 8 > <{case|control}>.bam`
 :::
 
-    d. Correr binning con Vamb
+d. Correr binning con Vamb
 
 ```bash
 vamb --outdir <outdir> --fasta catalogue.fna.gz --bamfiles <maped-reads-{case|control}>.bam --minfasta 500000 -o C
@@ -95,7 +96,7 @@ Explique la función del parámetro `--minfasta` en `vamb` y qué valor elegirí
 
 ## II. Clasificación, Anotación y Visualización de los *bins*
 
-1. Para clasificar los *bins* generados, use la herramienta [GTDB-Tk](https://github.com/Ecogenomics/GTDBTk) y el comando `classify_wf`. Revise la clasificación taxonómica de los *bins* y describa el lineaje taxonómico de los *bins* de cada muestra.
+4. Para clasificar los *bins* generados, use la herramienta [GTDB-Tk](https://github.com/Ecogenomics/GTDBTk) y el comando `classify_wf`. Revise la clasificación taxonómica de los *bins* y describa el lineaje taxonómico de los *bins* de cada muestra.
 
 :::{.callout-important collapse="true"}
 Para la clasificación de los *bins* generados, use el ambiente de conda `gtdbtk-2.3.2`. Si está enviando un trabajo a un cluster, recuerde que debe activar el ambiente de conda antes de correr el comando, para eso utilice `conda activate gtdbtk-2.3.2`.
@@ -105,9 +106,9 @@ gtdbtk classify_wf --genome_dir <bins-dir> --out_dir <classified-bins> --skip_an
 ```
 :::
 
-2. Anote el *bin* más completo de cada muestra de forma general mediante `bakta` del mismo modo que anotó los *contigs* en la práctica anterior. Muestre el resumen de la anotación del *bin* más completo en cada una de las muestras.
+5. Anote el *bin* más completo de cada muestra de forma general mediante `bakta` del mismo modo que anotó los *contigs* en la práctica anterior. Muestre el resumen de la anotación del *bin* más completo en cada una de las muestras.
 
-3. Como se ha discutido a lo largo del curso, existen múltiples herramientas y enfoques para el análisis de datos genómicos y metagenómicos. Proksee es una plataforma que permite visualizar genomas procarióticos y explorar de manera interactiva sus anotaciones, facilitando la interpretación de la organización genómica y de las características funcionales de los bins o MAGs obtenidos. Ingrese a Proksee y describa las principales características de esta herramienta, así como su posible utilidad para analizar y visualizar los bins generados en esta práctica.
+6. Como se ha discutido a lo largo del curso, existen múltiples herramientas y enfoques para el análisis de datos genómicos y metagenómicos. Proksee es una plataforma que permite visualizar genomas procarióticos y explorar de manera interactiva sus anotaciones, facilitando la interpretación de la organización genómica y de las características funcionales de los bins o MAGs obtenidos. Ingrese a Proksee y describa las principales características de esta herramienta, así como su posible utilidad para analizar y visualizar los bins generados en esta práctica.
 
 ::: {.callout-caution}
 ## Bono

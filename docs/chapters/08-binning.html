@@ -3895,7 +3895,7 @@ vertical-align: -.125em;
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
-        <div id="quarto-search" class title="Buscar"></div>
+        <div id="quarto-search" class="" title="Buscar"></div>
         </div>
         </div>
     <div class="sidebar-menu-container"> 
@@ -3924,7 +3924,6 @@ vertical-align: -.125em;
   <ul>
   <li><a href="#i.-binning-de-mags" id="toc-i.-binning-de-mags" class="nav-link active" data-scroll-target="#i.-binning-de-mags">I. Binning de MAGs</a></li>
   <li><a href="#ii.-clasificación-anotación-y-visualización-de-los-bins" id="toc-ii.-clasificación-anotación-y-visualización-de-los-bins" class="nav-link" data-scroll-target="#ii.-clasificación-anotación-y-visualización-de-los-bins">II. Clasificación, Anotación y Visualización de los <em>bins</em></a></li>
-  <li><a href="#iii.-análisis-especializado-de-los-bins" id="toc-iii.-análisis-especializado-de-los-bins" class="nav-link" data-scroll-target="#iii.-análisis-especializado-de-los-bins">III. Análisis especializado de los <em>bins</em></a></li>
   </ul>
 </nav>
     </div>
@@ -4019,7 +4018,7 @@ Importante
 <section id="i.-binning-de-mags" class="level2">
 <h2 class="anchored" data-anchor-id="i.-binning-de-mags">I. Binning de MAGs</h2>
 <ol type="1">
-<li><p>Realice el <em>binning</em> de los metagenomas de las dos muestras usando <a href="https://github.com/RasmussenLab/vamb?tab=readme-ov-file#how-to-run-using-your-own-input-files">Vamb</a>. El roceso conta de varias etapas:</p>
+<li><p>Realice el <em>binning</em> de los metagenomas de las dos muestras usando <a href="https://github.com/RasmussenLab/vamb?tab=readme-ov-file#how-to-run-using-your-own-input-files">Vamb</a>. El proceso consta de varias etapas:</p>
 <ol type="a">
 <li>Concatenar el catálogo de <em>contigs</em> de las muestras de control y caso.</li>
 <li>Mapear las lecturas de cada muestra al catálogo de <em>contigs</em> con <code>minimap2</code></li>
@@ -4043,16 +4042,21 @@ Importante
 </div>
 </div>
 </div>
-<pre><code>a. Concatenar el catálogo de genes de las muestras de control y caso. </code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">concatenate.py</span> catalogue.fna.gz <span class="op">&lt;</span>contigs-case<span class="op">&gt;</span>.fa <span class="op">&lt;</span>contigs-control<span class="op">&gt;</span>.fa</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">minimap2</span> <span class="at">-d</span> catalogue.mmi catalogue.fna.gz<span class="kw">;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<pre><code>b y c. Mapear las lecturas de cada muestra al catálogo de *contigs* con `minimap2` y genere los archivos `BAM` correspondientes.</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">minimap2</span> <span class="at">-t</span> 8<span class="dt">\</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">-N</span> 5<span class="dt">\</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">-ax</span> sr catalogue.mmi<span class="dt">\</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">--split-prefix</span> mmsplit<span class="dt">\</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>         <span class="op">&lt;</span>reads-fraction-forward<span class="op">&gt;</span>.fastq.gz <span class="op">&lt;</span>reads-fraction-forward<span class="op">&gt;</span>.fastq.gz<span class="dt">\</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>         <span class="kw">|</span> <span class="ex">samtools</span> view <span class="at">-F</span> 3584 <span class="at">-b</span> <span class="at">--threads</span> 8 <span class="op">&gt;</span> <span class="op">&lt;</span>{case<span class="kw">|</span><span class="ex">control}</span><span class="op">&gt;</span>.bam</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<ol type="a">
+<li>Concatenar el catálogo de genes de las muestras de control y caso.</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">concatenate.py</span> catalogue.fna.gz <span class="op">&lt;</span>contigs-case<span class="op">&gt;</span>.fa <span class="op">&lt;</span>contigs-control<span class="op">&gt;</span>.fa</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">minimap2</span> <span class="at">-d</span> catalogue.mmi catalogue.fna.gz<span class="kw">;</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="2" type="a">
+<li>Mapear las lecturas de cada muestra al catálogo de <em>contigs</em> con <code>minimap2</code> y,</li>
+<li>Generar los archivos <code>BAM</code> correspondientes.</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">minimap2</span> <span class="at">-t</span> 8<span class="dt">\</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">-N</span> 5<span class="dt">\</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">-ax</span> sr catalogue.mmi<span class="dt">\</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">--split-prefix</span> mmsplit<span class="dt">\</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>         <span class="op">&lt;</span>reads-fraction-forward<span class="op">&gt;</span>.fastq.gz <span class="op">&lt;</span>reads-fraction-forward<span class="op">&gt;</span>.fastq.gz<span class="dt">\</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>         <span class="kw">|</span> <span class="ex">samtools</span> view <span class="at">-F</span> 3584 <span class="at">-b</span> <span class="at">--threads</span> 8 <span class="op">&gt;</span> <span class="op">&lt;</span>{case<span class="kw">|</span><span class="ex">control}</span><span class="op">&gt;</span>.bam</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -4066,16 +4070,19 @@ Importante
 <p>¿Qué hace la linea de comando <code>samtools view -F 3584 -b --threads 8 &gt; &lt;{case|control}&gt;.bam</code></p>
 </div>
 </div>
-<pre><code>d. Correr binning con Vamb</code></pre>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vamb</span> <span class="at">--outdir</span> <span class="op">&lt;</span>outdir<span class="op">&gt;</span> --fasta catalogue.fna.gz <span class="at">--bamfiles</span> <span class="op">&lt;</span>maped-reads-{case<span class="kw">|</span><span class="ex">control}</span><span class="op">&gt;</span>.bam <span class="at">-o</span> C</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<ol start="4" type="a">
+<li>Correr binning con Vamb</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vamb</span> <span class="at">--outdir</span> <span class="op">&lt;</span>outdir<span class="op">&gt;</span> --fasta catalogue.fna.gz <span class="at">--bamfiles</span> <span class="op">&lt;</span>maped-reads-{case<span class="kw">|</span><span class="ex">control}</span><span class="op">&gt;</span>.bam <span class="at">--minfasta</span> 500000 <span class="at">-o</span> C</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Explique la función del parámetro <code>--minfasta</code> en <code>vamb</code> y qué valor elegiría en este contexto. Justifique su elección. Además, indique si existe otra forma de obtener los archivos <em>fasta</em> de los bins generados por <code>vamb</code> sin utilizar el parámetro <code>--minfasta</code>, y explique brevemente cómo se podría hacer.</p>
 <ol start="2" type="1">
-<li><p>Revisa los <em>bins</em> generados mediante al menos una de las herramientas vistas anteriormente (BUSCO, QUAST, CheckM, <em>etc.</em>). Muestre y describa las estadísticas de calidad de los <em>bins</em> generados y concluya sobre la calidad de los mismos.</p></li>
-<li><p>Discuta sobre el número de <em>bins</em> generados a la luz de cada una de las muestras. ¿Qué puede concluir sobre el número y de los <em>bins</em> generados en cada muestra?</p></li>
+<li><p>Revise los <em>bins</em> generados utilizando <em>CheckM</em>. Muestre y describa las estadísticas de calidad de los <em>bins</em> obtenidos y concluya sobre su calidad.</p></li>
+<li><p>Discuta el número de <em>bins</em> generados en relación con cada una de las muestras. ¿Qué puede concluir sobre el número y las características de los <em>bins</em> obtenidos en cada muestra?</p></li>
 </ol>
 </section>
 <section id="ii.-clasificación-anotación-y-visualización-de-los-bins" class="level2">
 <h2 class="anchored" data-anchor-id="ii.-clasificación-anotación-y-visualización-de-los-bins">II. Clasificación, Anotación y Visualización de los <em>bins</em></h2>
-<ol type="1">
+<ol start="4" type="1">
 <li>Para clasificar los <em>bins</em> generados, use la herramienta <a href="https://github.com/Ecogenomics/GTDBTk">GTDB-Tk</a> y el comando <code>classify_wf</code>. Revise la clasificación taxonómica de los <em>bins</em> y describa el lineaje taxonómico de los <em>bins</em> de cada muestra.</li>
 </ol>
 <div class="callout callout-style-default callout-important callout-titled">
@@ -4090,22 +4097,28 @@ Importante
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Para la clasificación de los <em>bins</em> generados, use el ambiente de conda <code>gtdbtk-2.3.2</code>. Si está enviando un trabajo a un cluster, recuerde que debe activar el ambiente de conda antes de correr el comando, para eso utilice <code>source activate gtdbtk-2.3.2</code>.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gtdbtk</span> classify_wf <span class="at">--genome_dir</span> <span class="op">&lt;</span>bins-dir<span class="op">&gt;</span> --out_dir <span class="op">&lt;</span>classified-bins<span class="op">&gt;</span> --skip_ani_screen</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Para la clasificación de los <em>bins</em> generados, use el ambiente de conda <code>gtdbtk-2.3.2</code>. Si está enviando un trabajo a un cluster, recuerde que debe activar el ambiente de conda antes de correr el comando, para eso utilice <code>conda activate gtdbtk-2.3.2</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gtdbtk</span> classify_wf <span class="at">--genome_dir</span> <span class="op">&lt;</span>bins-dir<span class="op">&gt;</span> --out_dir <span class="op">&lt;</span>classified-bins<span class="op">&gt;</span> --skip_ani_screen</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
-<ol start="2" type="1">
+<ol start="5" type="1">
 <li><p>Anote el <em>bin</em> más completo de cada muestra de forma general mediante <code>bakta</code> del mismo modo que anotó los <em>contigs</em> en la práctica anterior. Muestre el resumen de la anotación del <em>bin</em> más completo en cada una de las muestras.</p></li>
-<li><p>Ingrese a <a href="https://proksee.ca">Proksee</a> y visualice el <em>bin</em> más completo de cada muestra. Describa las características y muestre la visualización que obtiene luego de utilizar los parámetros de la interfaz.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p></li>
+<li><p>Como se ha discutido a lo largo del curso, existen múltiples herramientas y enfoques para el análisis de datos genómicos y metagenómicos. Proksee es una plataforma que permite visualizar genomas procarióticos y explorar de manera interactiva sus anotaciones, facilitando la interpretación de la organización genómica y de las características funcionales de los bins o MAGs obtenidos. Ingrese a Proksee y describa las principales características de esta herramienta, así como su posible utilidad para analizar y visualizar los bins generados en esta práctica.</p></li>
 </ol>
-</section>
-<section id="iii.-análisis-especializado-de-los-bins" class="level2">
-<h2 class="anchored" data-anchor-id="iii.-análisis-especializado-de-los-bins">III. Análisis especializado de los <em>bins</em></h2>
-<ol type="1">
-<li><p>Planteé una pregunta de investigación sencilla que pueda ser resuelta mediante el análisis de una anotación especializada (<em>e.g.</em> AMRs, BGCs, CGCs) de los <em>bins</em> generados que permita entender las diferencias muestras de control y caso. Provea una justificación (preámbulo) de la pregunta. Apóyese en el artículo de origen de los metagenomas <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p></li>
-<li><p>Muestre el resumen de la anotación especializada de cada uno de los <em>bins</em> más completos en cada una de las muestras y discuta los resultados a la luz de pregunta de investigación planteada.</p></li>
-</ol>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Precaución</span>Bono
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ingrese a <a href="https://proksee.ca">Proksee</a> y visualice el <em>bin</em> más completo de cada muestra. Describa las características y muestre la visualización que obtiene luego de utilizar los parámetros de la interfaz.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+</div>
+</div>
 
 
 </section>
@@ -4113,7 +4126,6 @@ Importante
 <hr>
 <ol>
 <li id="fn1"><p>Notarás que la anotación de los genomas o <em>bins</em> puede hacerse directamente en Proksee, esto es posible pero recuerde dar la información de las estadísticas de anotación.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Bai, X, et al., 2021<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
